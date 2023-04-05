@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".StudentRegisterFragment">
 
     <include
@@ -16,36 +16,57 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
+    <TextView
+        android:id="@+id/tv_student_hl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_slab"
+        android:text="STUDENT Signup"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/student_register"
+        app:layout_constraintEnd_toStartOf="@+id/student_register"
+        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintStart_toEndOf="@+id/student_register"
+        app:layout_constraintTop_toBottomOf="@+id/student_register"
+        app:layout_constraintVertical_bias="0.914" />
+
     <ScrollView
-        android:layout_width="393dp"
-        android:layout_height="567dp"
+        android:layout_width="349dp"
+        android:layout_height="571dp"
+        android:layout_margin="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:scrollbars="vertical"
-        app:layout_constraintVertical_bias="0.664">
+        app:layout_constraintVertical_bias="1.0">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_margin="10dp">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
 
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tf_stud_email"
                 android:layout_width="match_parent"
                 android:layout_height="67dp">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_stud_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="#9874CE"
+                    android:backgroundTint="@color/purple_200"
                     android:hint="Enter Email Id"
-                    android:textColorHint="#9874CE"
+                    android:textColorHint="@color/purple_200"
                     app:errorEnabled="true"
                     app:helperText="Required"
-                    tools:boxStrokeColor="#9874CE"
+                    tools:boxStrokeColor="@color/purple_200"
                     tools:fontFamily="@font/roboto_slab" />
 
 
@@ -53,18 +74,20 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tf_stud_dob"
                 android:layout_width="match_parent"
                 android:layout_height="67dp">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_stud_dob"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="#9874CE"
+                    android:backgroundTint="@color/purple_200"
                     android:hint="Enter Your DOB"
-                    android:textColorHint="#9874CE"
+                    android:textColorHint="@color/purple_200"
                     app:errorEnabled="true"
                     app:helperText="Required"
-                    tools:boxStrokeColor="#9874CE"
+                    tools:boxStrokeColor="@color/purple_200"
                     tools:fontFamily="@font/roboto_slab" />
 
 
@@ -72,126 +95,140 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tf_stud_education"
                 android:layout_width="match_parent"
                 android:layout_height="67dp">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_stud_education"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="#9874CE"
+                    android:backgroundTint="@color/purple_200"
                     android:hint="Enter your Educational Qualification"
-                    android:textColorHint="#9874CE"
+                    android:textColorHint="@color/purple_200"
                     app:errorEnabled="true"
                     app:helperText="Required"
-                    tools:boxStrokeColor="#9874CE"
+                    tools:boxStrokeColor="@color/purple_200"
                     tools:fontFamily="@font/roboto_slab" />
 
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tf_stud_technology"
                 android:layout_width="match_parent"
                 android:layout_height="67dp">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_stud_technology"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="#9874CE"
+                    android:backgroundTint="@color/purple_200"
                     android:hint="Enter Technology trainings"
-                    android:textColorHint="#9874CE"
+                    android:textColorHint="@color/purple_200"
                     app:errorEnabled="true"
                     app:helperText="Required"
-                    tools:boxStrokeColor="#9874CE"
+                    tools:boxStrokeColor="@color/purple_200"
                     tools:fontFamily="@font/roboto_slab" />
 
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tf_stud_workexp"
                 android:layout_width="match_parent"
                 android:layout_height="67dp">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_stud_workexp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="#9874CE"
+                    android:backgroundTint="@color/purple_200"
                     android:hint="Total Work Experience"
-                    android:textColorHint="#9874CE"
+                    android:textColorHint="@color/purple_200"
                     app:errorEnabled="true"
                     app:helperText="Required"
-                    tools:boxStrokeColor="#9874CE"
+                    tools:boxStrokeColor="@color/purple_200"
                     tools:fontFamily="@font/roboto_slab" />
 
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tf_stud_techchoice"
                 android:layout_width="match_parent"
                 android:layout_height="67dp">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_stud_techchoice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="#9874CE"
+                    android:backgroundTint="@color/purple_200"
                     android:hint="Technology Choice"
-                    android:textColorHint="#9874CE"
+                    android:textColorHint="@color/purple_200"
                     app:errorEnabled="true"
                     app:helperText="Required"
-                    tools:boxStrokeColor="#9874CE"
+                    tools:boxStrokeColor="@color/purple_200"
                     tools:fontFamily="@font/roboto_slab" />
 
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tf_stud_loc"
                 android:layout_width="match_parent"
                 android:layout_height="67dp">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_stud_loc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="#9874CE"
+                    android:backgroundTint="@color/purple_200"
                     android:hint="Examination Location"
-                    android:textColorHint="#9874CE"
+                    android:textColorHint="@color/purple_200"
                     app:errorEnabled="true"
                     app:helperText="Required"
-                    tools:boxStrokeColor="#9874CE"
+                    tools:boxStrokeColor="@color/purple_200"
                     tools:fontFamily="@font/roboto_slab" />
 
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tf_stud_examdate"
                 android:layout_width="match_parent"
                 android:layout_height="67dp">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_stud_examdate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="#9874CE"
+                    android:backgroundTint="@color/purple_200"
                     android:hint="Required Examination Date"
-                    android:textColorHint="#9874CE"
+                    android:textColorHint="@color/purple_200"
                     app:errorEnabled="true"
                     app:helperText="Required"
-                    tools:boxStrokeColor="#9874CE"
+                    tools:boxStrokeColor="@color/purple_200"
                     tools:fontFamily="@font/roboto_slab" />
 
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tf_stud_pswd"
                 android:layout_width="match_parent"
                 android:layout_height="67dp">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_stud_pswd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="#9874CE"
+                    android:backgroundTint="@color/purple_200"
                     android:hint="Password"
-                    android:textColorHint="#9874CE"
+                    android:textColorHint="@color/purple_200"
                     app:errorEnabled="true"
                     app:helperText="Required"
-                    tools:boxStrokeColor="#9874CE"
+                    tools:boxStrokeColor="@color/purple_200"
                     tools:fontFamily="@font/roboto_slab" />
 
 
@@ -205,10 +242,10 @@
                 android:layout_marginTop="40dp"
                 android:layout_marginEnd="106dp"
                 android:layout_marginBottom="131dp"
+                android:background="@color/purple_200"
                 android:text="Sign up"
                 android:textColor="@android:color/white"
-                android:background="@color/purple_200"
-                android:textSize="15sp"/>
+                android:textSize="15sp" />
 
 
         </LinearLayout>
