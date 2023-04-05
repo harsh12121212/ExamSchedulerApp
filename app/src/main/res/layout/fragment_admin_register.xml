@@ -1,11 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".AdminRegisterFragment">
 
+    <include
+        android:id="@+id/admin_register"
+        layout="@layout/basiclayout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ScrollView
+        android:layout_width="393dp"
+        android:layout_height="567dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:scrollbars="vertical"
+        app:layout_constraintVertical_bias="0.664">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="10dp">
 
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="67dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#9874CE"
+                    android:hint="Enter Email Id"
+                    android:textColorHint="#9874CE"
+                    app:errorEnabled="true"
+                    app:helperText="Required"
+                    tools:boxStrokeColor="#9874CE"
+                    tools:fontFamily="@font/roboto_slab" />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="67dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#9874CE"
+                    android:hint="Enter City Name"
+                    android:textColorHint="#9874CE"
+                    app:errorEnabled="true"
+                    app:helperText="Required"
+                    tools:boxStrokeColor="#9874CE"
+                    tools:fontFamily="@font/roboto_slab" />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="67dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#9874CE"
+                    android:hint="Enter Center Name"
+                    android:textColorHint="#9874CE"
+                    app:errorEnabled="true"
+                    app:helperText="Required"
+                    tools:boxStrokeColor="#9874CE"
+                    tools:fontFamily="@font/roboto_slab" />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="67dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#9874CE"
+                    android:hint="1st Slot Capacity"
+                    android:textColorHint="#9874CE"
+                    app:errorEnabled="true"
+                    app:helperText="Required"
+                    tools:boxStrokeColor="#9874CE"
+                    tools:fontFamily="@font/roboto_slab" />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="67dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#9874CE"
+                    android:hint="2nd Slot Capacity"
+                    android:textColorHint="#9874CE"
+                    app:errorEnabled="true"
+                    app:helperText="Required"
+                    tools:boxStrokeColor="#9874CE"
+                    tools:fontFamily="@font/roboto_slab" />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="67dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#9874CE"
+                    android:hint="Password"
+                    android:textColorHint="#9874CE"
+                    app:errorEnabled="true"
+                    app:helperText="Required"
+                    tools:boxStrokeColor="#9874CE"
+                    tools:fontFamily="@font/roboto_slab" />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="180dp"
+                android:layout_height="52dp"
+                android:layout_marginStart="106dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="106dp"
+                android:layout_marginBottom="131dp"
+                android:text="Sign up"
+                android:textColor="@android:color/white"
+                android:background="@color/purple_200"
+                android:textSize="15sp"/>
+
+
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
