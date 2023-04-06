@@ -7,17 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.app.examschedulerapp.databinding.FragmentHomeBinding
+import com.app.examschedulerapp.databinding.FragmentLoginBinding
 
-class HomeFragment : Fragment() {
+class LoginFragment : Fragment() {
 
-    private lateinit var binding: FragmentHomeBinding
+    private lateinit var binding: FragmentLoginBinding
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
+        binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -25,17 +26,9 @@ class HomeFragment : Fragment() {
 
         super.onViewCreated(view, savedInstanceState)
 
-        binding.cvAdmin.setOnClickListener{
-            findNavController().navigate(R.id.action_homeFragment_to_adminRegisterFragment)
-        }
-        binding.cvStudent.setOnClickListener{
-            findNavController().navigate(R.id.action_homeFragment_to_studentRegisterFragment)
-        }
-        binding.tvLogin.setOnClickListener{
-            findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
+        binding.tvRegister.setOnClickListener{
+            findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
         }
 
     }
-
-
 }
