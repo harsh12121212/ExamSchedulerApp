@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "795265606750",
+    "project_id": "examschedulerapp",
+    "storage_bucket": "examschedulerapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:795265606750:android:27ab2f374db972c4ca80cf",
+        "android_client_info": {
+          "package_name": "com.app.examschedulerapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "795265606750-22rh963u9mgddf7bpoem0nd9009dfsk9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBd_z1klWyPHICydMr3M16VxrsWUZCJa_k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "795265606750-22rh963u9mgddf7bpoem0nd9009dfsk9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
