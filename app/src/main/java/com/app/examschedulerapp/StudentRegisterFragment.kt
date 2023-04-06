@@ -20,4 +20,6 @@ class StudentRegisterFragment : Fragment() {
         binding = FragmentStudentRegisterBinding.inflate(inflater, container, false)
         return binding.root
     }
+
+
 }

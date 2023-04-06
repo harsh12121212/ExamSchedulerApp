@@ -1,21 +1,18 @@
 package com.app.examschedulerapp
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
-import com.app.examschedulerapp.databinding.FragmentHomeBinding
 import com.app.examschedulerapp.databinding.FragmentLoginBinding
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
-
 
     //FirebaseAuth
     private lateinit var firebaseAuth: FirebaseAuth
@@ -30,18 +27,7 @@ class LoginFragment : Fragment() {
     ): View? {
         firebaseAuth = FirebaseAuth.getInstance()
 
-        binding.btnSignin.setOnClickListener {
-            val email = binding.etEmail.text.toString()
-            val password = binding.etPassword.text.toString()
-            if (email.isNotEmpty() && password.isNotEmpty()) {
-                firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
-                    if (it.isSuccessful)
-
-                        binding = FragmentLoginBinding.inflate(inflater, container, false)
-
-                }
-            }
-        }
+        binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -49,9 +35,30 @@ class LoginFragment : Fragment() {
 
         super.onViewCreated(view, savedInstanceState)
 
+        binding.btnSignin.setOnClickListener {
+            val email = binding.etEmail.text.toString()
+            val password = binding.etPassword.text.toString()
+            if (email.isNotEmpty() && password.isNotEmpty()) {
+                firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        findNavController().navigate(R.id.action_loginFragment_to_firstFragment)
+                    }else{
+                        showSnackBar("Login failed")
+                    }
+                }
+            }else{
+                    showSnackBar("Please enter some data")
+                }
+            }
+
         binding.tvRegister.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
         }
 
+    }
+
+    private fun showSnackBar(response: String) {
+        val snackbar = Snackbar.make(binding.root, response, Snackbar.LENGTH_LONG)
+        snackbar.show()
     }
 }
