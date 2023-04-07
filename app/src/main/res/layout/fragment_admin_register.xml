@@ -56,6 +56,27 @@
             android:gravity="center"
             android:orientation="vertical">
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tf_admin_name"
+                android:layout_width="match_parent"
+                android:layout_height="67dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_admin_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/purple_200"
+                    android:hint="Enter Name"
+                    android:textColor="@color/purple_200"
+                    android:textColorHint="@color/purple_200"
+                    app:errorEnabled="true"
+                    app:helperText="Required"
+                    tools:boxStrokeColor="@color/purple_200"
+                    tools:fontFamily="@font/roboto_slab" />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tf_admin_email"
