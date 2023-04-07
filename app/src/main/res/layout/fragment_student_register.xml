@@ -23,7 +23,7 @@
         android:fontFamily="@font/roboto_slab"
         android:text="STUDENT Signup"
         android:textColor="@color/white"
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/student_register"
         app:layout_constraintEnd_toStartOf="@+id/student_register"
@@ -32,8 +32,8 @@
         app:layout_constraintVertical_bias="0.906" />
 
     <ScrollView
-        android:layout_width="349dp"
-        android:layout_height="571dp"
+        android:layout_width="357dp"
+        android:layout_height="533dp"
         android:layout_margin="5dp"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
@@ -42,12 +42,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="0.886">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+            android:gravity="center"
             android:orientation="vertical">
 
 
@@ -62,6 +63,7 @@
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/purple_200"
                     android:hint="Enter Email Id"
+                    android:textColor="@color/purple_200"
                     android:textColorHint="@color/purple_200"
                     app:errorEnabled="true"
                     app:helperText="Required"
@@ -83,6 +85,7 @@
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/purple_200"
                     android:hint="Enter Your DOB"
+                    android:textColor="@color/purple_200"
                     android:textColorHint="@color/purple_200"
                     app:errorEnabled="true"
                     app:helperText="Required"
@@ -104,6 +107,7 @@
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/purple_200"
                     android:hint="Enter your Educational Qualification"
+                    android:textColor="@color/purple_200"
                     android:textColorHint="@color/purple_200"
                     app:errorEnabled="true"
                     app:helperText="Required"
@@ -124,6 +128,7 @@
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/purple_200"
                     android:hint="Enter Technology trainings"
+                    android:textColor="@color/purple_200"
                     android:textColorHint="@color/purple_200"
                     app:errorEnabled="true"
                     app:helperText="Required"
@@ -144,6 +149,7 @@
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/purple_200"
                     android:hint="Total Work Experience"
+                    android:textColor="@color/purple_200"
                     android:textColorHint="@color/purple_200"
                     app:errorEnabled="true"
                     app:helperText="Required"
@@ -164,6 +170,7 @@
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/purple_200"
                     android:hint="Technology Choice"
+                    android:textColor="@color/purple_200"
                     android:textColorHint="@color/purple_200"
                     app:errorEnabled="true"
                     app:helperText="Required"
@@ -184,6 +191,7 @@
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/purple_200"
                     android:hint="Examination Location"
+                    android:textColor="@color/purple_200"
                     android:textColorHint="@color/purple_200"
                     app:errorEnabled="true"
                     app:helperText="Required"
@@ -204,6 +212,7 @@
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/purple_200"
                     android:hint="Required Examination Date"
+                    android:textColor="@color/purple_200"
                     android:textColorHint="@color/purple_200"
                     app:errorEnabled="true"
                     app:helperText="Required"
@@ -224,6 +233,7 @@
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/purple_200"
                     android:hint="Password"
+                    android:textColor="@color/purple_200"
                     android:textColorHint="@color/purple_200"
                     app:errorEnabled="true"
                     app:helperText="Required"

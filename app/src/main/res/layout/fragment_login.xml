@@ -34,7 +34,7 @@
         android:fontFamily="@font/roboto_slab"
         android:text="Login here"
         android:textColor="#9974CF"
-        android:textSize="34sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/tf_email"
         app:layout_constraintEnd_toEndOf="parent"
