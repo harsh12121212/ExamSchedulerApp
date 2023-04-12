@@ -60,7 +60,7 @@ class AdminRegisterFragment : Fragment() {
             firebaseAuth.createUserWithEmailAndPassword(email, pswd)
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
-                        findNavController().navigate(R.id.action_adminRegisterFragment_to_firstFragment)
+                        findNavController().navigate(R.id.action_adminRegisterFragment_to_adminFragment)
                         showSnackBar("LoggedIn as $email")
                         Log.d("register", "Success runs")
                     } else {

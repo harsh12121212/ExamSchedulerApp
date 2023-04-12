@@ -62,6 +62,7 @@
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/purple_200"
                     android:hint="Enter Name"
+                    android:inputType="textPersonName"
                     android:textColor="@color/purple_200"
                     android:textColorHint="@color/purple_200"
                     app:errorEnabled="true"

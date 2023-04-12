@@ -40,7 +40,7 @@ class AdminFragment : Fragment() {
                             DialogInterface.BUTTON_POSITIVE -> {
                                 user.signOut();
                                 showSnackBar( "Successfully Logging out! ")
-                                findNavController().navigate(R.id.action_firstFragment_to_loginFragment)
+                                findNavController().navigate(R.id.action_adminFragment_to_loginFragment)
                             }
                             DialogInterface.BUTTON_NEGATIVE -> {
                                 dialog.dismiss()
