@@ -2,18 +2,16 @@ package com.app.examschedulerapp
 
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.util.Patterns
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.app.examschedulerapp.data.admin
 import com.app.examschedulerapp.databinding.FragmentAdminRegisterBinding
-import com.app.examschedulerapp.utils.listdata
 import com.app.examschedulerapp.utils.location
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
@@ -21,6 +19,8 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 class AdminRegisterFragment : Fragment() {
+
+    var citylist = arrayOf("Select City","Banglore", "Hyderabad", "Chennai")
 
     private lateinit var binding: FragmentAdminRegisterBinding
     private lateinit var firebaseAuth: FirebaseAuth
@@ -51,8 +51,10 @@ class AdminRegisterFragment : Fragment() {
         firebaseAuth = FirebaseAuth.getInstance()
         dbRef= FirebaseDatabase.getInstance().getReference("Admin")
 
+
         val cityarrayAdapter =
-            activity?.let { ArrayAdapter(it, R.layout.spinnerlayout, location.values(),) }
+            activity?.let { ArrayAdapter(it, R.layout.spinnerlayout, citylist) }
+        binding.etAdminCity.setSelection(0)
         binding.etAdminCity.adapter=cityarrayAdapter
         binding.etAdminCity.onItemSelectedListener=object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {

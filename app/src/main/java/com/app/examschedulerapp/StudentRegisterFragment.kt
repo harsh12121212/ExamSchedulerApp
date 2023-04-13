@@ -28,6 +28,9 @@ const val INVALID_VALUE ="Please enter the data"
 
 class StudentRegisterFragment : Fragment() {
 
+    var citylist = arrayOf("Select City","Banglore", "Hyderabad", "Chennai")
+    var techlist = arrayOf("Select Technology Choice","Kotlin", "Java", "Dart")
+
     private lateinit var binding: FragmentStudentRegisterBinding
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var dbRef: DatabaseReference
@@ -63,7 +66,8 @@ class StudentRegisterFragment : Fragment() {
 
         //Location spinner
         val locarrayAdapter =
-            activity?.let {ArrayAdapter(it, R.layout.spinnerlayout, location.values())}
+            activity?.let {ArrayAdapter(it, R.layout.spinnerlayout, citylist)}
+        binding.etStudLoc.setSelection(0)
         binding.etStudLoc.adapter=locarrayAdapter
         binding.etStudLoc.onItemSelectedListener=object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
@@ -74,7 +78,8 @@ class StudentRegisterFragment : Fragment() {
 
         //Technology choice spinner
         val techarrayAdapter =
-            activity?.let {ArrayAdapter(it, R.layout.spinnerlayout, listdata.values())}
+            activity?.let {ArrayAdapter(it, R.layout.spinnerlayout, techlist)}
+        binding.etStudTechchoice.setSelection(0)
         binding.etStudTechchoice.adapter=techarrayAdapter
         binding.etStudTechchoice.onItemSelectedListener=object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {

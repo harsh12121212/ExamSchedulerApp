@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".FirstFragment">
 
     <include
@@ -14,9 +14,111 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.0" />
 
 
+    <TextView
+        android:id="@+id/tv_admin_hl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/roboto_slab"
+        android:text="Book your exam seat here!"
+        android:textColor="@color/white"
+        android:textSize="21sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/admin_register" />
+
+    <Spinner
+        android:id="@+id/sp_city"
+        android:layout_width="356dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="136dp"
+        android:background="@drawable/box_border"
+        android:dropDownVerticalOffset="67sp"
+        android:padding="3sp"
+        android:spinnerMode="dropdown"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_admin_hl" />
+
+    <Spinner
+        android:id="@+id/sp_center"
+        android:layout_width="352dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/box_border"
+        android:dropDownVerticalOffset="67sp"
+        android:padding="3sp"
+        android:spinnerMode="dropdown"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.457"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sp_city" />
+
+    <Spinner
+        android:id="@+id/sp_slot"
+        android:layout_width="352dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/box_border"
+        android:dropDownVerticalOffset="67sp"
+        android:padding="3sp"
+        android:spinnerMode="dropdown"
+        app:layout_constraintBottom_toTopOf="@+id/tf_stud_examdate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.457"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sp_center" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tf_stud_examdate"
+        android:layout_width="352dp"
+        android:layout_height="72dp"
+        android:layout_marginBottom="28dp"
+        android:textColorHint="@color/purple_200"
+        app:layout_constraintBottom_toTopOf="@+id/btn_searchseat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.525"
+        app:layout_constraintStart_toStartOf="parent"
+        app:startIconDrawable="@drawable/ic_calendar"
+        app:startIconTint="@color/purple_700">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_stud_examdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/purple_200"
+            android:focusable="false"
+            android:hint="Required Examination Date"
+            android:inputType="date"
+            android:textColor="@color/purple_200"
+            android:textSize="15sp"
+            app:errorEnabled="true"
+            app:helperText="Required"
+            tools:boxStrokeColor="@color/purple_200"
+            tools:fontFamily="@font/roboto_slab" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btn_searchseat"
+        android:layout_width="180sp"
+        android:layout_height="52sp"
+        android:layout_marginBottom="124dp"
+        android:background="@color/purple_200"
+        android:text="Search Seat"
+        android:textColor="@android:color/white"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
