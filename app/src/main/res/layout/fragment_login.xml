@@ -18,14 +18,15 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="121dp"
-        android:layout_height="95dp"
+        android:layout_width="78dp"
+        android:layout_height="82dp"
         android:src="@drawable/ic_main"
         app:layout_constraintBottom_toTopOf="@+id/headline_text"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.534"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.913" />
+        app:layout_constraintVertical_bias="0.944" />
 
     <TextView
         android:id="@+id/headline_text"
@@ -34,21 +35,25 @@
         android:fontFamily="@font/roboto_slab"
         android:text="Login here"
         android:textColor="#9974CF"
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/tf_email"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.542"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/admin_register"
-        app:layout_constraintVertical_bias="0.821" />
+        app:layout_constraintVertical_bias="0.712" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tf_email"
         android:layout_width="334dp"
         android:layout_height="70dp"
         tools:boxStrokeColor="@color/purple_200"
-        android:backgroundTint="@color/purple_200"
         android:textColorHint="@color/purple_200"
+        android:layout_marginBottom="10sp"
+        android:background="@drawable/box_border"
+        app:startIconDrawable="@drawable/ic_profile"
+        app:startIconTint="@color/purple_700"
         app:layout_constraintBottom_toTopOf="@+id/admin_register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,11 +64,12 @@
             android:id="@+id/et_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/purple_200"
+            android:background="@android:color/transparent"
             android:hint="Email"
             android:inputType="textWebEmailAddress"
             android:textColorHint="@color/purple_200"
             app:errorEnabled="true"
+            android:textSize="15sp"
             app:helperText="Required"
             tools:boxStrokeColor="@color/purple_200"
             tools:fontFamily="@font/roboto_slab" />
@@ -73,8 +79,11 @@
         android:id="@+id/tf_password"
         android:layout_width="334dp"
         android:layout_height="70dp"
+        android:layout_marginBottom="10sp"
+        android:background="@drawable/box_border"
+        app:startIconDrawable="@drawable/ic_password"
+        app:startIconTint="@color/purple_700"
         tools:boxStrokeColor="@color/purple_200"
-        android:backgroundTint="@color/purple_200"
         android:textColorHint="@color/purple_200"
         app:layout_constraintBottom_toBottomOf="@+id/admin_register"
         app:layout_constraintEnd_toEndOf="parent"
@@ -82,15 +91,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tf_email"
         app:layout_constraintVertical_bias="0.061"
-        app:passwordToggleEnabled="true">
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/purple_700">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/purple_200"
             android:hint="Password"
+            android:background="@android:color/transparent"
             android:inputType="textPassword"
+            android:textSize="15sp"
             android:textColor="@color/purple_200"
             app:errorEnabled="true"
             app:helperText="Required"
@@ -119,13 +130,13 @@
         android:layout_height="wrap_content"
         android:text="Don't have an account? "
         android:textColor="#9974CF"
-        android:textSize="21sp"
+        android:textSize="17sp"
         app:layout_constraintBottom_toTopOf="@+id/admin_register"
         app:layout_constraintEnd_toStartOf="@+id/tv_register"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/admin_register"
         app:layout_constraintTop_toBottomOf="@+id/admin_register"
-        app:layout_constraintVertical_bias="0.138" />
+        app:layout_constraintVertical_bias="0.167" />
 
     <TextView
         android:id="@+id/tv_register"
@@ -135,14 +146,14 @@
         android:text="Register here"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         android:textColor="#9974CF"
-        android:textSize="21sp"
+        android:textSize="17sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/admin_register"
         app:layout_constraintEnd_toStartOf="@+id/admin_register"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/tv_txt"
         app:layout_constraintTop_toBottomOf="@+id/admin_register"
-        app:layout_constraintVertical_bias="0.137" />
+        app:layout_constraintVertical_bias="0.167" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
