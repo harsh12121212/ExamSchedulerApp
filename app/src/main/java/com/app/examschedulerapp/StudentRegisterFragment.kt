@@ -14,8 +14,6 @@ import android.widget.ArrayAdapter
 import androidx.navigation.fragment.findNavController
 import com.app.examschedulerapp.data.student
 import com.app.examschedulerapp.databinding.FragmentStudentRegisterBinding
-import com.app.examschedulerapp.utils.listdata
-import com.app.examschedulerapp.utils.location
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -24,7 +22,6 @@ import java.util.*
 
 const val PASSWORD_LENGTH_ERROR = "password must at least 6 characters long"
 const val INVALID_DATA ="Please enter valid data"
-const val INVALID_VALUE ="Please enter the data"
 
 class StudentRegisterFragment : Fragment() {
 
@@ -203,17 +200,6 @@ class StudentRegisterFragment : Fragment() {
 
             dbRef.child(name).setValue(studentData)
                 .addOnCompleteListener {
-                    // To clear the entry
-//                    binding.etStudName.editableText.clear()
-//                    binding.etStudEmail.editableText.clear()
-//                    binding.etStudDob.editableText.clear()
-//                    binding.etStudEducation.editableText.clear()
-//                    binding.etStudTechnology.editableText.clear()
-//                    binding.etStudWorkexp.editableText.clear()
-//                    binding.etStudTechchoice.editableText.clear()
-//                    binding.etStudLoc.editableText.clear()
-//                    binding.etStudExamdate.editableText.clear()
-//                    binding.etStudPswd.editableText.clear()
                     showSnackBar("Account created successfully")
                 }.addOnFailureListener { err ->
                     showSnackBar("Error${err.message}")

@@ -2,21 +2,24 @@ package com.app.examschedulerapp
 
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
+import android.widget.Toast.makeText
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.app.examschedulerapp.data.admin
 import com.app.examschedulerapp.databinding.FragmentAdminRegisterBinding
-import com.app.examschedulerapp.utils.location
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class AdminRegisterFragment : Fragment() {
 
@@ -34,6 +37,7 @@ class AdminRegisterFragment : Fragment() {
     private var password=""
     private var type = String()
     private var uid=""
+    private var firebasedb = Firebase.firestore
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -78,6 +82,11 @@ class AdminRegisterFragment : Fragment() {
         password=binding.etAdminPswd.text.toString().trim()
         type = "ADMIN"
         uid= FirebaseAuth.getInstance().currentUser?.uid.toString()
+        val userMap = hashMapOf(
+            "Centercity" to city,
+            "ACenter" to centre
+        )
+
 
         if (TextUtils.isEmpty(name)) {
             binding.etAdminName.error = INVALID_DATA
@@ -89,18 +98,23 @@ class AdminRegisterFragment : Fragment() {
         } else {
             //data is valid
             firebaseLogin(email, password)
+            firebasedb.collection("Centre").document(city).set(userMap)
+                .addOnCompleteListener{
+                    makeText(activity, "Data is saved", Toast.LENGTH_LONG).show()
+                }
         }
     }
+
 
     private fun firebaseLogin(email: String, password: String) {
         firebaseAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener {
                 if (it.isSuccessful) {
                     findNavController().navigate(R.id.action_adminRegisterFragment_to_adminFragment)
-                    showSnackBar("LoggedIn as $email")
+                    makeText(activity, "LoggedIn as $email", Toast.LENGTH_LONG).show()
                     saveData()
                 } else {
-                    showSnackBar("Login failed due to ${it.exception.toString()}")
+                    makeText(activity, "Login failed due to ${it.exception.toString()}", Toast.LENGTH_LONG).show()
                 }
             }
     }
@@ -126,16 +140,11 @@ class AdminRegisterFragment : Fragment() {
 
             dbRef.child(name).setValue(adminData)
                 .addOnCompleteListener {
-                    showSnackBar("Account created successfully")
+                    makeText(activity, "Account created successfully", Toast.LENGTH_LONG).show()
                 }.addOnFailureListener { err ->
-                    showSnackBar("Error${err.message}")
+                    makeText(activity, "Error${err.message}", Toast.LENGTH_LONG).show()
                 }
         }
-    }
-
-    private fun showSnackBar(response: String) {
-        val snackbar = Snackbar.make(binding.root, response, Snackbar.LENGTH_LONG)
-        snackbar.show()
     }
 
 }
