@@ -127,7 +127,6 @@ class StudentRegisterFragment : Fragment() {
         date=binding.etStudExamdate.text.toString().trim()
         password=binding.etStudPswd.text.toString().trim()
         type = "STUDENT"
-        uid= FirebaseAuth.getInstance().currentUser?.uid.toString()
 
         if (TextUtils.isEmpty(name)) {
             binding.etStudName.error = INVALID_DATA
@@ -158,6 +157,8 @@ class StudentRegisterFragment : Fragment() {
     }
 
     private fun saveData() {
+
+        uid= FirebaseAuth.getInstance().currentUser?.uid.toString()
 
         if(name.isEmpty()) {
             binding.etStudName.error = "Please enter name"
@@ -197,8 +198,7 @@ class StudentRegisterFragment : Fragment() {
                 type,
                 uid
             )
-
-            dbRef.child(name).setValue(studentData)
+            dbRef.child(uid).setValue(studentData)
                 .addOnCompleteListener {
                     showSnackBar("Account created successfully")
                 }.addOnFailureListener { err ->

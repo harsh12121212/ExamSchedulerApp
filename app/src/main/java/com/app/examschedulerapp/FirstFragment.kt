@@ -104,16 +104,17 @@ class FirstFragment : Fragment() {
     }
 
     private fun saveData() {
+
         stud_city=binding.spCity.selectedItem.toString().trim()
         stud_centre=binding.spCenter.selectedItem.toString().trim()
         stud_slot=binding.spSlot.selectedItem.toString().trim()
         stud_examdate=binding.etStudExamdate.text.toString().trim()
         dbRef = FirebaseDatabase.getInstance().getReference("Student")
-        var userId = FirebaseAuth.getInstance().currentUser?.displayName
+        var userId = FirebaseAuth.getInstance().currentUser?.uid
 
         val exmdata = examdata(stud_city, stud_centre, stud_slot, stud_examdate)
         if (userId != null) {
-            dbRef.child(userId!!).child(stud_centre).setValue(exmdata)
+            dbRef.child(userId).child(stud_centre).setValue(exmdata)
                 .addOnCompleteListener {
                     showSnackBar("Data is saved")
                 }.addOnFailureListener { err ->

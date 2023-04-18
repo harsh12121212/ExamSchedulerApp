@@ -22,8 +22,12 @@ class AdminFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentAdminBinding.inflate(inflater, container, false)
         setHasOptionsMenu(true)
+
+        user = FirebaseAuth.getInstance()
+
         return binding.root
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.main_menu, menu)
@@ -38,7 +42,7 @@ class AdminFragment : Fragment() {
                     DialogInterface.OnClickListener { dialog, which ->
                         when (which) {
                             DialogInterface.BUTTON_POSITIVE -> {
-                                user.signOut();
+                                user.signOut()
                                 showSnackBar( "Successfully Logging out! ")
                                 findNavController().navigate(R.id.action_adminFragment_to_loginFragment)
                             }

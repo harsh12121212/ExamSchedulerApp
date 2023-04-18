@@ -80,13 +80,12 @@ class AdminRegisterFragment : Fragment() {
         firstslot=binding.etAdminSlotone.text.toString().trim()
         secondslot=binding.etAdminSlottwo.text.toString().trim()
         password=binding.etAdminPswd.text.toString().trim()
+
         type = "ADMIN"
-        uid= FirebaseAuth.getInstance().currentUser?.uid.toString()
         val userMap = hashMapOf(
             "Centercity" to city,
             "ACenter" to centre
         )
-
 
         if (TextUtils.isEmpty(name)) {
             binding.etAdminName.error = INVALID_DATA
@@ -98,14 +97,12 @@ class AdminRegisterFragment : Fragment() {
         } else {
             //data is valid
             firebaseLogin(email, password)
-            firebasedb.collection("Centre").document(city).set(userMap)
+            firebasedb.collection("Centre").document(centre).set(userMap)
                 .addOnCompleteListener{
                     makeText(activity, "Data is saved", Toast.LENGTH_LONG).show()
                 }
         }
     }
-
-
     private fun firebaseLogin(email: String, password: String) {
         firebaseAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener {
@@ -120,6 +117,7 @@ class AdminRegisterFragment : Fragment() {
     }
 
     private fun saveData() {
+        uid= FirebaseAuth.getInstance().currentUser?.uid.toString()
 
         if(name.isEmpty()) {
             binding.etAdminName.error = "Please enter name"
