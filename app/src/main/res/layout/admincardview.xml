@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="261dp"
+        android:padding="5sp">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="78dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/cv_icon" />
+
+        <TextView
+            android:id="@+id/cv_studname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/roboto_slab"
+            android:text="Jane Doe"
+            android:textColor="@color/purple_200"
+            android:textSize="21sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/imageView2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/cv_studemail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_slab"
+            android:text="janedoe@gmail.com"
+            android:textColor="#AD8DDC"
+            android:textSize="15sp"
+            tools:layout_editor_absoluteX="123dp"
+            tools:layout_editor_absoluteY="50dp" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="325dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="24dp"
+            android:background="@color/purple_700"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.065"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+        <TextView
+            android:id="@+id/tv_centre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Selected Centre"
+            android:textColor="#AD8DDC"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="41dp"
+            tools:layout_editor_absoluteY="117dp" />
+
+        <TextView
+            android:id="@+id/cv_centre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ABC classes"
+            android:textColor="#AD8DDC"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="187dp" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
