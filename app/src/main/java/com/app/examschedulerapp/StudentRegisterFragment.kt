@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.app.examschedulerapp.data.student
 import com.app.examschedulerapp.databinding.FragmentStudentRegisterBinding
@@ -147,10 +148,10 @@ class StudentRegisterFragment : Fragment() {
             .addOnCompleteListener {
                 if (it.isSuccessful) {
                     findNavController().navigate(R.id.action_studentRegisterFragment_to_firstFragment)
-                    showSnackBar("LoggedIn as $email")
+                    Toast.makeText(activity, "LoggedIn as $email", Toast.LENGTH_SHORT).show()
                     saveData()
                 } else {
-                    showSnackBar("Login failed due to ${it.exception.toString()}")
+                    Toast.makeText(activity, "Login failed due to ${it.exception.toString()}", Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -200,14 +201,10 @@ class StudentRegisterFragment : Fragment() {
             )
             dbRef.child(uid).setValue(studentData)
                 .addOnCompleteListener {
-                    showSnackBar("Account created successfully")
+                    Toast.makeText(activity, "Account created successfully", Toast.LENGTH_SHORT).show()
                 }.addOnFailureListener { err ->
-                    showSnackBar("Error${err.message}")
+                    Toast.makeText(activity, "Error${err.message}", Toast.LENGTH_SHORT).show()
                 }
         }
-    }
-    private fun showSnackBar(response: String) {
-        val snackbar = Snackbar.make(binding.root, response, Snackbar.LENGTH_LONG)
-        snackbar.show()
     }
 }

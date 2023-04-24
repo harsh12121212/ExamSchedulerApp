@@ -41,13 +41,13 @@
         android:layout_marginEnd="5sp"
         android:layout_marginBottom="5dp"
         android:padding="5sp"
-        tools:listitem="@layout/admincardview"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.485"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.86" />
+        app:layout_constraintVertical_bias="0.938"
+        tools:listitem="@layout/admincardview" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
