@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "795265606750",
+    "firebase_url": "https://examschedulerapp-default-rtdb.firebaseio.com",
     "project_id": "examschedulerapp",
     "storage_bucket": "examschedulerapp.appspot.com"
   },

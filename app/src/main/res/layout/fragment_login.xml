@@ -48,28 +48,29 @@
         android:id="@+id/tf_email"
         android:layout_width="334dp"
         android:layout_height="70dp"
-        tools:boxStrokeColor="@color/purple_200"
-        android:textColorHint="@color/purple_200"
         android:layout_marginBottom="10sp"
-        app:startIconDrawable="@drawable/ic_profile"
-        app:startIconTint="@color/purple_700"
+        android:textColorHint="@color/purple_200"
         app:layout_constraintBottom_toTopOf="@+id/admin_register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/admin_register"
-        app:layout_constraintVertical_bias="0.5">
+        app:layout_constraintVertical_bias="0.5"
+        app:startIconDrawable="@drawable/ic_profile"
+        app:startIconTint="@color/purple_700"
+        tools:boxStrokeColor="@color/purple_200">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email"
+            android:imeOptions="actionNext"
             android:inputType="textWebEmailAddress"
-            android:textColorHint="@color/purple_200"
-            app:errorEnabled="true"
-            android:textSize="15sp"
-            app:helperText="Required"
             android:textColor="@color/purple_700"
+            android:textColorHint="@color/purple_200"
+            android:textSize="15sp"
+            app:errorEnabled="true"
+            app:helperText="Required"
             tools:boxStrokeColor="@color/purple_200"
             tools:fontFamily="@font/roboto_slab" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -79,9 +80,6 @@
         android:layout_width="334dp"
         android:layout_height="70dp"
         android:layout_marginBottom="10sp"
-        app:startIconDrawable="@drawable/ic_password"
-        app:startIconTint="@color/purple_700"
-        tools:boxStrokeColor="@color/purple_200"
         android:textColorHint="@color/purple_200"
         app:layout_constraintBottom_toBottomOf="@+id/admin_register"
         app:layout_constraintEnd_toEndOf="parent"
@@ -90,16 +88,20 @@
         app:layout_constraintTop_toBottomOf="@+id/tf_email"
         app:layout_constraintVertical_bias="0.061"
         app:passwordToggleEnabled="true"
-        app:passwordToggleTint="@color/purple_700">
+        app:passwordToggleTint="@color/purple_700"
+        app:startIconDrawable="@drawable/ic_password"
+        app:startIconTint="@color/purple_700"
+        tools:boxStrokeColor="@color/purple_200">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
+            android:imeOptions="actionDone"
             android:inputType="textPassword"
-            android:textSize="15sp"
             android:textColor="@color/purple_200"
+            android:textSize="15sp"
             app:errorEnabled="true"
             app:helperText="Required"
             tools:boxStrokeColor="@color/purple_200"
@@ -152,5 +154,14 @@
         app:layout_constraintTop_toBottomOf="@+id/admin_register"
         app:layout_constraintVertical_bias="0.167" />
 
+    <ProgressBar
+        android:id="@+id/progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

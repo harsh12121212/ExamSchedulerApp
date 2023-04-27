@@ -9,7 +9,7 @@
         android:id="@+id/studentRegisterFragment"
         android:name="com.app.examschedulerapp.StudentRegisterFragment"
         android:label="fragment_student_register"
-        tools:layout="@layout/fragment_student_register" >
+        tools:layout="@layout/fragment_student_register">
         <action
             android:id="@+id/action_studentRegisterFragment_to_firstFragment"
             app:destination="@id/firstFragment" />
@@ -18,7 +18,7 @@
         android:id="@+id/adminRegisterFragment"
         android:name="com.app.examschedulerapp.AdminRegisterFragment"
         android:label="fragment_admin_register"
-        tools:layout="@layout/fragment_admin_register" >
+        tools:layout="@layout/fragment_admin_register">
         <action
             android:id="@+id/action_adminRegisterFragment_to_adminFragment"
             app:destination="@id/adminFragment" />
@@ -27,7 +27,7 @@
         android:id="@+id/homeFragment"
         android:name="com.app.examschedulerapp.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_studentRegisterFragment"
             app:destination="@id/studentRegisterFragment" />
@@ -36,28 +36,32 @@
             app:destination="@id/adminRegisterFragment" />
         <action
             android:id="@+id/action_homeFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.app.examschedulerapp.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/nav" />
         <action
             android:id="@+id/action_loginFragment_to_firstFragment"
-            app:destination="@id/firstFragment" />
+            app:destination="@id/firstFragment"
+            app:popUpTo="@id/nav" />
         <action
             android:id="@+id/action_loginFragment_to_adminFragment"
-            app:destination="@id/adminFragment" />
+            app:destination="@id/adminFragment"
+            app:popUpTo="@id/nav" />
     </fragment>
     <fragment
         android:id="@+id/firstFragment"
         android:name="com.app.examschedulerapp.FirstFragment"
         android:label="fragment_first"
-        tools:layout="@layout/fragment_first" >
+        tools:layout="@layout/fragment_first">
         <action
             android:id="@+id/action_firstFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -66,7 +70,7 @@
         android:id="@+id/adminFragment"
         android:name="com.app.examschedulerapp.AdminFragment"
         android:label="fragment_admin"
-        tools:layout="@layout/fragment_admin" >
+        tools:layout="@layout/fragment_admin">
         <action
             android:id="@+id/action_adminFragment_to_loginFragment"
             app:destination="@id/loginFragment" />

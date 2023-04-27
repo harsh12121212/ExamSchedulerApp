@@ -123,8 +123,8 @@
                     android:id="@+id/et_stud_dob"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:focusable="false"
                     android:backgroundTint="@color/purple_200"
+                    android:focusable="false"
                     android:hint="Enter Your DOB"
                     android:inputType="date|datetime"
                     android:textColor="@color/purple_200"
@@ -255,8 +255,8 @@
                     android:id="@+id/et_stud_examdate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:focusable="false"
                     android:backgroundTint="@color/purple_200"
+                    android:focusable="false"
                     android:hint="Required Examination Date"
                     android:inputType="date"
                     android:textColor="@color/purple_200"
@@ -315,5 +315,14 @@
         </LinearLayout>
     </ScrollView>
 
+    <ProgressBar
+        android:id="@+id/progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

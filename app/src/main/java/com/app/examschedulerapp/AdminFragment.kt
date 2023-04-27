@@ -2,6 +2,7 @@ package com.app.examschedulerapp
 
 import android.content.DialogInterface
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -9,6 +10,8 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.app.examschedulerapp.data.Centre
+import com.app.examschedulerapp.data.DBConstants
 import com.app.examschedulerapp.data.examdata
 import com.app.examschedulerapp.data.student
 import com.app.examschedulerapp.databinding.FragmentAdminBinding
@@ -20,8 +23,7 @@ class AdminFragment : Fragment() {
 
     private lateinit var binding: FragmentAdminBinding
     private lateinit var user: FirebaseAuth
-    val database : FirebaseDatabase = FirebaseDatabase.getInstance()
-    val myReference : DatabaseReference = database.getReference("Student")
+    var list: ArrayList<examdata> = ArrayList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,30 +40,43 @@ class AdminFragment : Fragment() {
     }
 
     fun retrieveDataFromDatabase() {
-        myReference.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
 
-                for (eachUser in snapshot.children) {
-                    val user = eachUser.getValue(student::class.java)
-                    val exam = eachUser.getValue(examdata::class.java)
 
-                    if (user != null) {
-                        println("Name : ${user.name}")
-                        println("Email : ${user.email}")
-                        println("****************************")
+        binding.progressbar.visibility = View.VISIBLE
+        FirebaseDatabase.getInstance().getReference(
+            DBConstants.APPLICATION
+        ).addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(p0: DataSnapshot) {
+                binding.progressbar.visibility = View.GONE
+                try {
+                    list.clear()
+                    p0.children.forEach { it1 ->
+                        it1.getValue(examdata::class.java)?.let {
+                            list.add(it)
+                            Log.e("TAG", "onDataChange: " + it.toString())
+                        }
+//                        it1.children.forEach {
+//                            Log.e("TAG", "onDataChange: "+it )
+//                        }
+
                     }
+                    showSnackBar("data loaded")
+                    // TODO: setups recyclver view here with list data
+                } catch (e: Exception) {
+                    e.printStackTrace()
                 }
             }
 
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+            override fun onCancelled(p0: DatabaseError) {
+
             }
+
         })
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            R.id.profile ->{
+        when (item.itemId) {
+            R.id.profile -> {
             }
             R.id.logout -> {
                 val dialogClickListener =
@@ -69,7 +84,7 @@ class AdminFragment : Fragment() {
                         when (which) {
                             DialogInterface.BUTTON_POSITIVE -> {
                                 user.signOut()
-                                showSnackBar( "Successfully Logging out! ")
+                                showSnackBar("Successfully Logging out! ")
                                 findNavController().navigate(R.id.action_adminFragment_to_loginFragment)
                             }
                             DialogInterface.BUTTON_NEGATIVE -> {

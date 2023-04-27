@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.app.examschedulerapp.databinding.FragmentHomeBinding
+import com.google.firebase.auth.FirebaseAuth
 
 class HomeFragment : Fragment() {
 
@@ -25,13 +26,16 @@ class HomeFragment : Fragment() {
 
         super.onViewCreated(view, savedInstanceState)
 
-        binding.cvAdmin.setOnClickListener{
+        if (FirebaseAuth.getInstance().currentUser != null) {
+            FirebaseAuth.getInstance().signOut()
+        }
+        binding.cvAdmin.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_adminRegisterFragment)
         }
-        binding.cvStudent.setOnClickListener{
+        binding.cvStudent.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_studentRegisterFragment)
         }
-        binding.tvLogin.setOnClickListener{
+        binding.tvLogin.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
         }
 
