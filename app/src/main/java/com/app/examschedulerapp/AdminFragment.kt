@@ -10,10 +10,8 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.app.examschedulerapp.data.Centre
-import com.app.examschedulerapp.data.DBConstants
-import com.app.examschedulerapp.data.examdata
-import com.app.examschedulerapp.data.student
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.app.examschedulerapp.data.*
 import com.app.examschedulerapp.databinding.FragmentAdminBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
@@ -24,6 +22,9 @@ class AdminFragment : Fragment() {
     private lateinit var binding: FragmentAdminBinding
     private lateinit var user: FirebaseAuth
     var list: ArrayList<examdata> = ArrayList()
+
+//    val userList: ArrayList<examdata>
+    lateinit var userAdapter: UserAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,7 +65,14 @@ class AdminFragment : Fragment() {
                     // TODO: setups recyclver view here with list data
                 } catch (e: Exception) {
                     e.printStackTrace()
+
+                    list.add(examdata())
                 }
+
+                userAdapter=UserAdapter(this@AdminFragment,list)
+
+                binding.rvData.layoutManager=LinearLayoutManager(activity)
+                binding.rvData.adapter=userAdapter
             }
 
             override fun onCancelled(p0: DatabaseError) {
