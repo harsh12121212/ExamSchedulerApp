@@ -59,18 +59,18 @@
     </fragment>
     <fragment
         android:id="@+id/firstFragment"
-        android:name="com.app.examschedulerapp.FirstFragment"
+        android:name="com.app.examschedulerapp.StudentExamSeatBookingFragment"
         android:label="fragment_first"
-        tools:layout="@layout/fragment_first">
+        tools:layout="@layout/student_exam_seat_booking">
         <action
             android:id="@+id/action_firstFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/adminFragment"
-        android:name="com.app.examschedulerapp.AdminFragment"
+        android:name="com.app.examschedulerapp.AdminDashboardFragment"
         android:label="fragment_admin"
-        tools:layout="@layout/fragment_admin">
+        tools:layout="@layout/admin_dashboard">
         <action
             android:id="@+id/action_adminFragment_to_loginFragment"
             app:destination="@id/loginFragment" />

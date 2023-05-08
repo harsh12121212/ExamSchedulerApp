@@ -28,8 +28,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/roboto_slab"
-            android:text="Jane Doe"
             android:padding="5sp"
+            android:text="Jane Doe"
             android:textColor="@color/purple_200"
             android:textSize="21sp"
             android:textStyle="bold"
@@ -39,16 +39,19 @@
 
         <TextView
             android:id="@+id/cv_studemail"
-            android:layout_width="192dp"
-            android:layout_height="22dp"
+            android:layout_width="281dp"
+            android:layout_height="29dp"
             android:fontFamily="@font/roboto_slab"
-            android:text="janedoe@gmail.com"
             android:padding="2sp"
+            android:text="janedoe@gmail.com"
             android:textColor="#AD8DDC"
             android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/imageView2"
+            app:layout_constraintStart_toStartOf="parent"
             tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="120dp"
-            tools:layout_editor_absoluteY="64dp" />
+            tools:layout_editor_absoluteY="63dp" />
 
         <View
             android:id="@+id/view"
@@ -67,9 +70,9 @@
             android:layout_height="27dp"
             android:layout_marginStart="35dp"
             android:layout_marginBottom="24dp"
+            android:padding="2sp"
             android:text="Selected Centre :"
             android:textColor="#AD8DDC"
-            android:padding="2sp"
             android:textSize="17sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/button"
@@ -102,8 +105,8 @@
             android:layout_height="27dp"
             android:layout_marginStart="35dp"
             android:layout_marginTop="12dp"
-            android:text="Selected City :"
             android:padding="2sp"
+            android:text="Selected City :"
             android:textColor="#AD8DDC"
             android:textSize="17sp"
             android:textStyle="bold"
@@ -134,14 +137,14 @@
             android:layout_marginStart="50dp"
             android:layout_marginBottom="8dp"
             android:background="@color/purple_200"
-            android:text="Accept"
             android:padding="2sp"
-            tools:fontFamily="@font/roboto_slab"
+            android:text="Accept"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/button3"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
+            tools:fontFamily="@font/roboto_slab"
             tools:ignore="MissingConstraints" />
 
         <Button
@@ -151,16 +154,23 @@
             android:layout_marginEnd="50dp"
             android:layout_marginBottom="8dp"
             android:background="@color/purple_200"
-            android:text="Decline"
-            tools:fontFamily="@font/roboto_slab"
-            android:textColor="@color/white"
             android:padding="2sp"
+            android:text="Decline"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            tools:fontFamily="@font/roboto_slab"
             tools:ignore="MissingConstraints" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="20dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"

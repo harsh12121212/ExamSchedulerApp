@@ -4,11 +4,11 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.app.examschedulerapp.AdminFragment
+import com.app.examschedulerapp.AdminDashboardFragment
 import com.app.examschedulerapp.databinding.AdmincardviewBinding
 
 class UserAdapter(
-    var context: AdminFragment,
+    var context: AdminDashboardFragment,
     var list: ArrayList<examdata>): RecyclerView.Adapter<UserAdapter.UserViewHolder>(){
 
     inner class UserViewHolder(val adapterBinding :AdmincardviewBinding)

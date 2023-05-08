@@ -52,7 +52,7 @@ class AdminRegisterFragment : Fragment() {
         databaseReference = FirebaseDatabase.getInstance().getReference(DBConstants.USERS)
 
         val cityarrayAdapter = activity?.let { ArrayAdapter(it, R.layout.spinnerlayout, citylist) }
-        binding.etAdminCity.setSelection(0)
+              binding.etAdminCity.setSelection(0)
         binding.etAdminCity.adapter = cityarrayAdapter
         binding.etAdminCity.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {

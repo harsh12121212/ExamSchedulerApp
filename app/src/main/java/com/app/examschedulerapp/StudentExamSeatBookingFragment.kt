@@ -3,7 +3,6 @@ package com.app.examschedulerapp
 import android.app.DatePickerDialog
 import android.content.DialogInterface
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -15,7 +14,7 @@ import com.app.examschedulerapp.data.DBConstants
 import com.app.examschedulerapp.data.DBConstants.APPLICATION
 import com.app.examschedulerapp.data.LoggedInUser
 import com.app.examschedulerapp.data.examdata
-import com.app.examschedulerapp.databinding.FragmentFirstBinding
+import com.app.examschedulerapp.databinding.StudentExamSeatBookingBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -26,9 +25,9 @@ import com.google.firebase.database.ValueEventListener
 import java.util.*
 import kotlin.collections.ArrayList
 
-class FirstFragment : Fragment() {
+class StudentExamSeatBookingFragment : Fragment() {
 
-    private lateinit var binding: FragmentFirstBinding
+    private lateinit var binding: StudentExamSeatBookingBinding
     private lateinit var user: FirebaseAuth
 
     private lateinit var dbRef: DatabaseReference
@@ -42,7 +41,7 @@ class FirstFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentFirstBinding.inflate(inflater, container, false)
+        binding = StudentExamSeatBookingBinding.inflate(inflater, container, false)
         user = FirebaseAuth.getInstance()
         setHasOptionsMenu(true)
 

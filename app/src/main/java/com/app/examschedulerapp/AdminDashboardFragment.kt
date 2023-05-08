@@ -12,20 +12,17 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.examschedulerapp.data.*
-import com.app.examschedulerapp.databinding.FragmentAdminBinding
+import com.app.examschedulerapp.databinding.AdminDashboardBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
-class AdminFragment : Fragment() {
+class AdminDashboardFragment : Fragment() {
 
-    private lateinit var binding: FragmentAdminBinding
+    private lateinit var binding: AdminDashboardBinding
     private lateinit var user: FirebaseAuth
     var list: ArrayList<examdata> = ArrayList()
 
-//    val userList: ArrayList<examdata>
-//    harshada
-//    hhh
     lateinit var userAdapter: UserAdapter
 
     override fun onCreateView(
@@ -33,7 +30,7 @@ class AdminFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentAdminBinding.inflate(inflater, container, false)
+        binding = AdminDashboardBinding.inflate(inflater, container, false)
         setHasOptionsMenu(true)
 
         user = FirebaseAuth.getInstance()
@@ -58,23 +55,20 @@ class AdminFragment : Fragment() {
                             list.add(it)
                             Log.e("TAG", "onDataChange: " + it.toString())
                         }
-//                        it1.children.forEach {
-//                            Log.e("TAG", "onDataChange: "+it )
-//                        }
-
+                        Log.e("TAG", "onDataChange: " + list.size)
+                        userAdapter=UserAdapter(this@AdminDashboardFragment,list)
+                binding.rvData.layoutManager=LinearLayoutManager(activity)
+                binding.rvData.adapter=userAdapter
                     }
                     showSnackBar("data loaded")
                     // TODO: setups recyclver view here with list data
                 } catch (e: Exception) {
                     e.printStackTrace()
 
-                    list.add(examdata())
+
                 }
 
-                userAdapter=UserAdapter(this@AdminFragment,list)
 
-                binding.rvData.layoutManager=LinearLayoutManager(activity)
-                binding.rvData.adapter=userAdapter
             }
 
             override fun onCancelled(p0: DatabaseError) {
