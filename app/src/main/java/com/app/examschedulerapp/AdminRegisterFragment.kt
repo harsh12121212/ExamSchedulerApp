@@ -77,9 +77,7 @@ class AdminRegisterFragment : Fragment() {
         password = binding.etAdminPswd.text.toString().trim()
 
         type = ADMIN
-//        val userMap = hashMapOf(
-//            "Centercity" to city, "ACenter" to centre
-//        )
+
 
         if (TextUtils.isEmpty(name)) {
             binding.etAdminName.error = INVALID_DATA
@@ -98,10 +96,6 @@ class AdminRegisterFragment : Fragment() {
             firebaseCreateAccount(email, password)
         }
 
-//            firebasedb.collection("Centre").document(centre).set(userMap)
-//                .addOnCompleteListener{
-//                    makeText(activity, "Data is saved", Toast.LENGTH_LONG).show()
-//                }
     }
 
     private fun firebaseCreateAccount(email: String, password: String) {

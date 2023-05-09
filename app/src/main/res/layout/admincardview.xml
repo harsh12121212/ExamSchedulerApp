@@ -9,7 +9,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="253dp"
-        android:padding="5sp">
+        android:padding="5sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_centre"
+        app:layout_constraintTop_toTopOf="@+id/tv_centre">
 
         <ImageView
             android:id="@+id/imageView2"
@@ -39,19 +41,22 @@
 
         <TextView
             android:id="@+id/cv_studemail"
-            android:layout_width="281dp"
-            android:layout_height="29dp"
+            android:layout_width="220dp"
+            android:layout_height="26dp"
+            android:layout_marginTop="74dp"
+            android:layout_marginBottom="102dp"
             android:fontFamily="@font/roboto_slab"
             android:padding="2sp"
             android:text="janedoe@gmail.com"
             android:textColor="#AD8DDC"
             android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@+id/button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/imageView2"
             app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteY="63dp" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
 
         <View
             android:id="@+id/view"
@@ -132,10 +137,10 @@
 
         <Button
             android:id="@+id/button"
-            android:layout_width="99dp"
-            android:layout_height="28dp"
+            android:layout_width="94dp"
+            android:layout_height="33dp"
             android:layout_marginStart="50dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="13dp"
             android:background="@color/purple_200"
             android:padding="2sp"
             android:text="Accept"
@@ -144,14 +149,15 @@
             app:layout_constraintEnd_toStartOf="@+id/button3"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cv_studemail"
             tools:fontFamily="@font/roboto_slab"
             tools:ignore="MissingConstraints" />
 
         <Button
             android:id="@+id/button3"
-            android:layout_width="92dp"
-            android:layout_height="28dp"
-            android:layout_marginEnd="50dp"
+            android:layout_width="113dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="80dp"
             android:layout_marginBottom="8dp"
             android:background="@color/purple_200"
             android:padding="2sp"
