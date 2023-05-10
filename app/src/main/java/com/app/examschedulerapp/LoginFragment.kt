@@ -90,9 +90,7 @@ class LoginFragment : Fragment() {
                         } catch (e: Exception) {
                             e.printStackTrace()
                         }
-//                        p0.children.forEach {
-//                            Log.e("TAG", "onDataChange: " + it.getValue(String::class.java))
-//                        }
+
                     }
 
                     override fun onCancelled(p0: DatabaseError) {

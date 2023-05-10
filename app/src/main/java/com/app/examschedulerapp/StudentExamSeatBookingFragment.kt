@@ -62,9 +62,6 @@ class StudentExamSeatBookingFragment : Fragment() {
                     list.clear()
                     p0.children.forEach { it1 ->
                         it1.getValue(Centre::class.java)?.let { list.add(it) }
-//                        it1.children.forEach {
-//                            Log.e("TAG", "onDataChange: "+it )
-//                        }
                     }
                     setCityData()
                 } catch (e: Exception) {
@@ -217,4 +214,6 @@ class StudentExamSeatBookingFragment : Fragment() {
         val snackbar = Snackbar.make(binding.root, response, Snackbar.LENGTH_LONG)
         snackbar.show()
     }
+
+
 }

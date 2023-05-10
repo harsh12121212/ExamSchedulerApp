@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_student_register">
         <action
             android:id="@+id/action_studentRegisterFragment_to_firstFragment"
-            app:destination="@id/firstFragment" />
+            app:destination="@id/StudentExamSeatBooking" />
     </fragment>
     <fragment
         android:id="@+id/adminRegisterFragment"
@@ -21,7 +21,7 @@
         tools:layout="@layout/fragment_admin_register">
         <action
             android:id="@+id/action_adminRegisterFragment_to_adminFragment"
-            app:destination="@id/adminFragment" />
+            app:destination="@id/adminDasboardFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -50,15 +50,15 @@
             app:popUpTo="@id/nav" />
         <action
             android:id="@+id/action_loginFragment_to_firstFragment"
-            app:destination="@id/firstFragment"
+            app:destination="@id/StudentExamSeatBooking"
             app:popUpTo="@id/nav" />
         <action
             android:id="@+id/action_loginFragment_to_adminFragment"
-            app:destination="@id/adminFragment"
+            app:destination="@id/adminDasboardFragment"
             app:popUpTo="@id/nav" />
     </fragment>
     <fragment
-        android:id="@+id/firstFragment"
+        android:id="@+id/StudentExamSeatBooking"
         android:name="com.app.examschedulerapp.StudentExamSeatBookingFragment"
         android:label="fragment_first"
         tools:layout="@layout/student_exam_seat_booking">
@@ -67,7 +67,7 @@
             app:destination="@id/loginFragment" />
     </fragment>
     <fragment
-        android:id="@+id/adminFragment"
+        android:id="@+id/adminDasboardFragment"
         android:name="com.app.examschedulerapp.AdminDashboardFragment"
         android:label="fragment_admin"
         tools:layout="@layout/admin_dashboard">
