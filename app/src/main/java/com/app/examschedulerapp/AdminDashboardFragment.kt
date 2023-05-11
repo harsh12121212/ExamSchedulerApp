@@ -3,10 +3,7 @@ package com.app.examschedulerapp
 import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -40,8 +37,6 @@ class AdminDashboardFragment : Fragment() {
     }
 
     fun retrieveDataFromDatabase() {
-
-
         binding.progressbar.visibility = View.VISIBLE
         FirebaseDatabase.getInstance().getReference(
             DBConstants.APPLICATION
@@ -64,18 +59,15 @@ class AdminDashboardFragment : Fragment() {
                     // TODO: setups recyclver view here with list data
                 } catch (e: Exception) {
                     e.printStackTrace()
-
-
                 }
-
-
             }
-
             override fun onCancelled(p0: DatabaseError) {
-
             }
-
         })
+    }
+//Actionbar menu code starts here
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.main_menu, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -105,7 +97,7 @@ class AdminDashboardFragment : Fragment() {
         }
         return true
     }
-
+//actionbar menu code ends here
     private fun showSnackBar(response: String) {
         val snackbar = Snackbar.make(binding.root, response, Snackbar.LENGTH_LONG)
         snackbar.show()

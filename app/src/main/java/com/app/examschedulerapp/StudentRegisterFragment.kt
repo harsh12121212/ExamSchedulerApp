@@ -1,6 +1,7 @@
 package com.app.examschedulerapp
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Patterns
@@ -197,7 +198,8 @@ class StudentRegisterFragment : Fragment() {
             dbRef.child(it).setValue(studentData).addOnCompleteListener {
                 binding.progressbar.visibility = View.GONE
                 Toast.makeText(activity, "LoggedIn as $email", Toast.LENGTH_SHORT).show()
-                findNavController().navigate(R.id.action_studentRegisterFragment_to_firstFragment)
+                val i = Intent(activity, StudentMainActivity :: class.java )
+                startActivity(i)
             }.addOnFailureListener { err ->
                 Toast.makeText(activity, "Error${err.message}", Toast.LENGTH_LONG).show()
             }

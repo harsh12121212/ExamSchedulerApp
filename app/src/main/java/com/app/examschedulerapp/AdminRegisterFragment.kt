@@ -2,6 +2,7 @@ package com.app.examschedulerapp
 
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
@@ -12,10 +13,12 @@ import android.widget.Toast
 import android.widget.Toast.makeText
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.app.examschedulerapp.data.City
 import com.app.examschedulerapp.data.DBConstants
 import com.app.examschedulerapp.data.DBConstants.ADMIN
 import com.app.examschedulerapp.data.admin
 import com.app.examschedulerapp.databinding.FragmentAdminRegisterBinding
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -49,7 +52,6 @@ class AdminRegisterFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         firebaseAuth = FirebaseAuth.getInstance()
-        databaseReference = FirebaseDatabase.getInstance().getReference(DBConstants.USERS)
 
         val cityarrayAdapter = activity?.let { ArrayAdapter(it, R.layout.spinnerlayout, citylist) }
               binding.etAdminCity.setSelection(0)
@@ -75,7 +77,6 @@ class AdminRegisterFragment : Fragment() {
         firstslot = binding.etAdminSlotone.text.toString().trim()
         secondslot = binding.etAdminSlottwo.text.toString().trim()
         password = binding.etAdminPswd.text.toString().trim()
-
         type = ADMIN
 
 
@@ -116,6 +117,7 @@ class AdminRegisterFragment : Fragment() {
     }
 
     private fun saveData() {
+        databaseReference = FirebaseDatabase.getInstance().getReference(DBConstants.USERS)
         binding.progressbar.visibility = View.VISIBLE
         val adminData = admin(
             name,
@@ -128,8 +130,12 @@ class AdminRegisterFragment : Fragment() {
             type,
             FirebaseAuth.getInstance().currentUser?.uid
         )
-
-
+        val centreData = City(
+            city,
+            centre,
+            firstslot,
+            secondslot,
+        )
 
         FirebaseAuth.getInstance().currentUser?.uid?.let {
             databaseReference.child(it).setValue(adminData).addOnCompleteListener {
@@ -139,7 +145,29 @@ class AdminRegisterFragment : Fragment() {
             }.addOnFailureListener { err ->
                 makeText(activity, "Error${err.message}", Toast.LENGTH_LONG).show()
             }
+            if (city == "Banglore") {
+                FirebaseDatabase.getInstance().getReference("CenterData").child("Banglore").child(centre)
+                    .setValue(centreData).addOnCompleteListener {
+                        Log.d("Centredata", "Data is Saved!!!")
+                    }
+            } else if (city == "Chennai") {
+                FirebaseDatabase.getInstance().getReference("CenterData").child("Chennai").child(centre)
+                    .setValue(centreData).addOnCompleteListener {
+                        Log.d("Centredata", "Data is Saved!!!")
+                    }
+            } else if (city == "Hyderabad") {
+                FirebaseDatabase.getInstance().getReference("CenterData").child("Hyderabad").child(centre)
+                    .setValue(centreData).addOnCompleteListener {
+                        Log.d("Centredata", "Data is Saved!!!")
+                    }
+            } else {
+                showSnackBar("ERROR!!!")
+            }
         }
+    }
+    private fun showSnackBar(response: String) {
+        val snackbar = Snackbar.make(binding.root, response, Snackbar.LENGTH_SHORT)
+        snackbar.show()
     }
 
 }

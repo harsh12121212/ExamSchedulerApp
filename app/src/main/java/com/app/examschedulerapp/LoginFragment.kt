@@ -1,5 +1,6 @@
 package com.app.examschedulerapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -85,7 +86,8 @@ class LoginFragment : Fragment() {
                                 findNavController().navigate(R.id.action_loginFragment_to_adminFragment)
                             } else {
                                 LoggedInUser.student = p0.getValue(student::class.java)!!
-                                findNavController().navigate(R.id.action_loginFragment_to_firstFragment)
+                                val i = Intent(activity, StudentMainActivity :: class.java )
+                                startActivity(i)
                             }
                         } catch (e: Exception) {
                             e.printStackTrace()

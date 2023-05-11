@@ -32,19 +32,18 @@
         app:layout_constraintVertical_bias="0.906" />
 
     <ScrollView
-        android:layout_width="350dp"
-        android:layout_height="550sp"
+        android:layout_width="368dp"
+        android:layout_height="575dp"
         android:layout_margin="5sp"
         android:layout_marginStart="5sp"
         android:layout_marginEnd="5sp"
-        android:layout_marginBottom="5sp"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.863">
+        app:layout_constraintVertical_bias="1.0">
 
         <LinearLayout
             android:layout_width="match_parent"

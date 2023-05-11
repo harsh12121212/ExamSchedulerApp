@@ -17,7 +17,6 @@ class UserAdapter(
     @SuppressLint("SuspiciousIndentation")
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
       val  binding = AdmincardviewBinding.inflate(LayoutInflater.from(parent.context),parent,false)
-
         return UserViewHolder(binding)
     }
 
