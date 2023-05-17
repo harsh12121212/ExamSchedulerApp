@@ -3,24 +3,25 @@ package com.app.examschedulerapp
 import android.app.DatePickerDialog
 import android.content.DialogInterface
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.app.examschedulerapp.data.*
+import com.app.examschedulerapp.data.City
+import com.app.examschedulerapp.data.DBConstants
 import com.app.examschedulerapp.data.DBConstants.APPLICATION
+import com.app.examschedulerapp.data.LoggedInUser
+import com.app.examschedulerapp.data.examdata
 import com.app.examschedulerapp.databinding.StudentExamSeatBookingBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import java.util.*
-import kotlin.collections.ArrayList
+
 
 class StudentExamSeatBookingFragment : Fragment() {
 
@@ -28,12 +29,17 @@ class StudentExamSeatBookingFragment : Fragment() {
     private lateinit var user: FirebaseAuth
 
     var slotlist = arrayOf("Select Slot", "Slot 1", "Slot 2")
+    var citylist = arrayOf("Select City", "Banglore", "Hyderabad", "Chennai")
 
     private lateinit var dbRef: DatabaseReference
     private var stud_city = ""
     private var stud_centre = ""
     private var stud_slot = ""
     private var stud_examdate = ""
+    private var countid = 0
+    val banglorecentres: MutableList<String> = ArrayList()
+    val hyderabadcentres: MutableList<String> = ArrayList()
+    val chennaicentres: MutableList<String> = ArrayList()
     val list = ArrayList<City>()
 
     override fun onCreateView(
@@ -50,28 +56,6 @@ class StudentExamSeatBookingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
-
-        binding.progressbar.visibility = View.VISIBLE
-        FirebaseDatabase.getInstance().getReference(
-            DBConstants.CITY
-        ).addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(p0: DataSnapshot) {
-                binding.progressbar.visibility = View.GONE
-                try {
-                    list.clear()
-                    p0.children.forEach { it1 ->
-                        it1.child("centre").getValue(City::class.java)?.let { list.add(it) }
-                    }
-                    setCityData()
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
-            }
-
-            override fun onCancelled(p0: DatabaseError) {
-
-            }
-        })
 
         // Exam date  Calender
         val c = Calendar.getInstance()
@@ -94,6 +78,52 @@ class StudentExamSeatBookingFragment : Fragment() {
             saveData()
         }
 
+        //code for spinners start here
+        FirebaseDatabase.getInstance().getReference("CenterData").child("Banglore")
+            .addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(p0: DataSnapshot) {
+                for (ds in p0.children) {
+                    val key = ds.getKey()
+                    if (key != null) {
+                        banglorecentres.add(key)
+                    }
+                    Log.d("examform","Centre name : $key")
+                }
+            }
+            override fun onCancelled(p0: DatabaseError) {
+            }
+        })
+
+        FirebaseDatabase.getInstance().getReference("CenterData").child("Hyderabad")
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(p0: DataSnapshot) {
+                    for (ds in p0.children) {
+                        val key = ds.getKey()
+                        if (key != null) {
+                            hyderabadcentres.add(key)
+                        }
+                        Log.d("examform","Centre name : $key")
+                    }
+                }
+                override fun onCancelled(p0: DatabaseError) {
+                }
+            })
+
+        FirebaseDatabase.getInstance().getReference("CenterData").child("Chennai")
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(p0: DataSnapshot) {
+                    for (ds in p0.children) {
+                        val key = ds.getKey()
+                        if (key != null) {
+                            chennaicentres.add(key)
+                        }
+                        Log.d("examform","Centre name : $key")
+                    }
+                }
+                override fun onCancelled(p0: DatabaseError) {
+                }
+            })
+
         val slotarrayAdapter = activity?.let { ArrayAdapter(it, R.layout.spinnerlayout, slotlist) }
         binding.spSlot.setSelection(0)
         binding.spSlot.adapter = slotarrayAdapter
@@ -102,39 +132,26 @@ class StudentExamSeatBookingFragment : Fragment() {
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
+                showSnackBar("Select slot ")
             }
         }
-    }
 
-    private fun setCityData() {
-        //Location spinner
-        val cityList = kotlin.collections.ArrayList<String>()
-        list.forEach { cityList.add(it.Cityname!!) }
-        val cityArrayAdapter = activity?.let { ArrayAdapter(it, R.layout.spinnerlayout, cityList) }
-        binding.spCity.adapter = cityArrayAdapter
+        val cityarrayAdapter = activity?.let { ArrayAdapter(it, R.layout.spinnerlayout, citylist) }
+        binding.spCity.setSelection(0)
+        binding.spCity.adapter = cityarrayAdapter
         binding.spCity.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                setCentreData(p2)
+                when (p2) {
+                    1 -> setCentreData(banglorecentres)
+                    2 -> setCentreData(hyderabadcentres)
+                    3 -> setCentreData(chennaicentres)
+                }
             }
             override fun onNothingSelected(p0: AdapterView<*>?) {
+                showSnackBar("Select city ")
             }
         }
-    }
-
-    private fun setCentreData(pos: Int) {
-        //Centre spinner
-        val centreList = kotlin.collections.ArrayList<String>()
-        list.forEach { centreList.add(it.centre!!) }
-        val centrearrayAdapter =
-            activity?.let { ArrayAdapter(it, R.layout.spinnerlayout, centreList) }
-        binding.spCenter.adapter = centrearrayAdapter
-        binding.spCenter.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-
-            }
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-            }
-        }
+        //code for spinners start here
     }
 
     private fun saveData() {
@@ -145,7 +162,6 @@ class StudentExamSeatBookingFragment : Fragment() {
         stud_centre = binding.spCenter.selectedItem.toString().trim()
         stud_slot = binding.spSlot.selectedItem.toString().trim()
         stud_examdate = binding.etStudExamdate.text.toString().trim()
-
 
         if (stud_examdate.isEmpty()) {
             showSnackBar("Enter date please")
@@ -162,7 +178,8 @@ class StudentExamSeatBookingFragment : Fragment() {
                         stud_examdate,
                         studentName = LoggedInUser.student.name.orEmpty(),
                         studentEmailId = LoggedInUser.student.email.orEmpty(),
-                        studentId = LoggedInUser.student.uid.orEmpty()
+                        studentId = LoggedInUser.student.uid.orEmpty(),
+                        countid = countid + 1
                     )
                 ).addOnCompleteListener {
                     binding.progressbar.visibility = View.GONE
@@ -172,6 +189,19 @@ class StudentExamSeatBookingFragment : Fragment() {
                     binding.progressbar.visibility = View.GONE
                     showSnackBar("Error${err.message}")
                 }
+            }
+        }
+    }
+
+    private fun setCentreData(listname: MutableList<String>) {
+        //Centre spinner
+        val centerarrayAdapter = activity?.let { ArrayAdapter(it, R.layout.spinnerlayout, listname) }
+        binding.spCenter.setSelection(0)
+        binding.spCenter.adapter = centerarrayAdapter
+        binding.spCenter.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+            }
+            override fun onNothingSelected(p0: AdapterView<*>?) {
             }
         }
     }

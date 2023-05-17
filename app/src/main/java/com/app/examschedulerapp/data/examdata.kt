@@ -8,7 +8,8 @@ data class examdata(
     var status: String = "NA",  // NA = not approved A = Approved,
     var studentName: String = "",
     var studentEmailId: String = "",
-    var studentId: String = ""
+    var studentId: String = "",
+    var countid: Int = 0
 ) {
     constructor() : this("", "", "", "", "NA", "", "", "")
 }
