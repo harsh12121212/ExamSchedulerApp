@@ -92,7 +92,7 @@ class UserAdapter(
         val database = FirebaseDatabase.getInstance().reference.child(DBConstants.APPLICATION)
 
         val query = database.orderByChild("sf_centre").equalTo(item.sf_centre)
-
+//
         query.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 var success = false
