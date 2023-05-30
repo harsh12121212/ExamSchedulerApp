@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/admincv"
-    android:layout_width="match_parent"
+    app:cardCornerRadius="10sp"
+    android:layout_margin="10sp"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,39 +25,39 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/cv_icon" />
 
+
         <TextView
             android:id="@+id/cv_studname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="24dp"
             android:fontFamily="@font/roboto_slab"
             android:padding="5sp"
             android:text="Jane Doe"
             android:textColor="@color/purple_200"
             android:textSize="21sp"
             android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/imageView2"
             app:layout_constraintTop_toTopOf="parent" />
 
-
         <TextView
             android:id="@+id/cv_studemail"
-            android:layout_width="220dp"
-            android:layout_height="26dp"
-            android:layout_marginTop="74dp"
-            android:layout_marginBottom="102dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
             android:fontFamily="@font/roboto_slab"
             android:padding="2sp"
             android:text="janedoe@gmail.com"
             android:textColor="#AD8DDC"
             android:textSize="15sp"
-            app:layout_constraintBottom_toTopOf="@+id/button"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/imageView2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cv_studname"
             tools:ignore="MissingConstraints" />
 
         <View
@@ -73,42 +75,39 @@
             android:id="@+id/tv_city"
             android:layout_width="146dp"
             android:layout_height="27dp"
-            android:layout_marginStart="35dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="5dp"
             android:padding="2sp"
             android:text="Selected Centre :"
             android:textColor="#AD8DDC"
             android:textSize="17sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_centre"
-            app:layout_constraintVertical_bias="1.0"
             tools:fontFamily="@font/roboto_slab" />
 
         <TextView
             android:id="@+id/dt_city"
-            android:layout_width="146dp"
-            android:layout_height="27dp"
-            android:layout_marginStart="7dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginBottom="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="106dp"
             android:padding="2sp"
             android:text="Bangalore"
             android:textColor="#AD8DDC"
             android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/dt_centre"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/tv_centre"
             app:layout_constraintTop_toBottomOf="@+id/view"
-            app:layout_constraintVertical_bias="0.705"
             tools:fontFamily="@font/roboto_slab" />
 
         <TextView
             android:id="@+id/tv_centre"
             android:layout_width="146dp"
             android:layout_height="27dp"
-            android:layout_marginStart="35dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="12dp"
             android:padding="2sp"
             android:text="Selected City :"
@@ -121,22 +120,23 @@
 
         <TextView
             android:id="@+id/dt_centre"
-            android:layout_width="146dp"
-            android:layout_height="27dp"
-            android:layout_marginStart="7dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginBottom="24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="84dp"
             android:padding="2sp"
             android:text="ABC Classes"
             android:textColor="#AD8DDC"
             android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/button3"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/tv_city"
+            app:layout_constraintTop_toBottomOf="@+id/dt_city"
             tools:fontFamily="@font/roboto_slab" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/acceptbutton"
             android:layout_width="94dp"
             android:layout_height="33dp"
             android:layout_marginStart="50dp"
@@ -145,42 +145,52 @@
             android:padding="2sp"
             android:text="Accept"
             android:textColor="@color/white"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/button3"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintEnd_toStartOf="@+id/declinebutton"
+            app:layout_constraintHorizontal_bias="0.376"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cv_studemail"
+            app:layout_constraintVertical_bias="0.963"
             tools:fontFamily="@font/roboto_slab"
             tools:ignore="MissingConstraints" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/declinebutton"
             android:layout_width="113dp"
             android:layout_height="35dp"
-            android:layout_marginEnd="80dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="16dp"
             android:background="@color/purple_200"
             android:padding="2sp"
             android:text="Decline"
             android:textColor="@color/white"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.758"
+            app:layout_constraintStart_toStartOf="parent"
             tools:fontFamily="@font/roboto_slab"
             tools:ignore="MissingConstraints" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline"
+        <TextView
+            android:id="@+id/cv_studexamstatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="20dp" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="20dp" />
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/roboto_slab"
+            android:padding="2sp"
+            android:text="STATUS"
+            android:textAllCaps="true"
+            android:textColor="#AD8DDC"
+            android:textSize="20sp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view"
+            app:layout_constraintVertical_bias="1.0"
+            tools:ignore="MissingConstraints" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

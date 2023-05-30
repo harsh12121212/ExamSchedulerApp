@@ -8,11 +8,16 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.app.examschedulerapp.data.*
+import com.app.examschedulerapp.adapters.UserAdapter
+import com.app.examschedulerapp.data.DBConstants
+import com.app.examschedulerapp.data.examdata
 import com.app.examschedulerapp.databinding.AdminDashboardBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class AdminDashboardFragment : Fragment() {
 
@@ -31,41 +36,44 @@ class AdminDashboardFragment : Fragment() {
         setHasOptionsMenu(true)
 
         user = FirebaseAuth.getInstance()
+        userAdapter = UserAdapter(this, list) // Initialize the adapter
+        binding.rvData.layoutManager = LinearLayoutManager(activity)
+        binding.rvData.adapter = userAdapter
         retrieveDataFromDatabase()
 
         return binding.root
     }
 
     fun retrieveDataFromDatabase() {
+
         binding.progressbar.visibility = View.VISIBLE
-        FirebaseDatabase.getInstance().getReference(
-            DBConstants.APPLICATION
-        ).addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(p0: DataSnapshot) {
-                binding.progressbar.visibility = View.GONE
-                try {
-                    list.clear()
-                    p0.children.forEach { it1 ->
-                        it1.getValue(examdata::class.java)?.let {
-                            list.add(it)
-                            Log.e("TAG", "onDataChange: " + it.toString())
+        FirebaseDatabase.getInstance().getReference(DBConstants.APPLICATION)
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(p0: DataSnapshot) {
+                    binding.progressbar.visibility = View.GONE
+                    try {
+                        list.clear()
+                        p0.children.forEach { it1 ->
+                            it1.getValue(examdata::class.java)?.let {
+                                list.add(it)
+                                Log.e("TAG", "onDataChange: " + it.toString())
+                            }
+                            Log.e("TAG", "onDataChange: " + list.size)
+                            userAdapter = UserAdapter(this@AdminDashboardFragment, list)
+                            binding.rvData.layoutManager = LinearLayoutManager(activity)
+                            binding.rvData.adapter = userAdapter
                         }
-                        Log.e("TAG", "onDataChange: " + list.size)
-                        userAdapter=UserAdapter(this@AdminDashboardFragment,list)
-                binding.rvData.layoutManager=LinearLayoutManager(activity)
-                binding.rvData.adapter=userAdapter
+                    } catch (e: Exception) {
+                        e.printStackTrace()
                     }
-                    showSnackBar("data loaded")
-                    // TODO: setups recyclver view here with list data
-                } catch (e: Exception) {
-                    e.printStackTrace()
                 }
-            }
-            override fun onCancelled(p0: DatabaseError) {
-            }
-        })
+
+                override fun onCancelled(p0: DatabaseError) {
+                }
+            })
     }
-//Actionbar menu code starts here
+
+    //Actionbar menu code starts here
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.main_menu, menu)
     }
@@ -97,8 +105,9 @@ class AdminDashboardFragment : Fragment() {
         }
         return true
     }
-//actionbar menu code ends here
-    private fun showSnackBar(response: String) {
+
+    //actionbar menu code ends here
+    fun showSnackBar(response: String) {
         val snackbar = Snackbar.make(binding.root, response, Snackbar.LENGTH_LONG)
         snackbar.show()
     }

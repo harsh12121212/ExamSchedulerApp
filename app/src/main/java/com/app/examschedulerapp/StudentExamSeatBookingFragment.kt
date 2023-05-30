@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -29,18 +28,18 @@ class StudentExamSeatBookingFragment : Fragment() {
     private lateinit var user: FirebaseAuth
 
     var slotlist = arrayOf("Select Slot", "Slot 1", "Slot 2")
-    var citylist = arrayOf("Select City", "Banglore", "Hyderabad", "Chennai")
+    var citylist = arrayOf("Select City", "Banglore", "Hyderabad", "Chennai","Pune")
 
     private lateinit var dbRef: DatabaseReference
     private var stud_city = ""
     private var stud_centre = ""
     private var stud_slot = ""
     private var stud_examdate = ""
+    private var selectedCity: String = ""
     private var countid = 0
     val banglorecentres: MutableList<String> = ArrayList()
     val hyderabadcentres: MutableList<String> = ArrayList()
     val chennaicentres: MutableList<String> = ArrayList()
-    val list = ArrayList<City>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -146,51 +145,14 @@ class StudentExamSeatBookingFragment : Fragment() {
                     2 -> setCentreData(hyderabadcentres)
                     3 -> setCentreData(chennaicentres)
                 }
+                selectedCity = citylist[p2]
+
             }
             override fun onNothingSelected(p0: AdapterView<*>?) {
                 showSnackBar("Select city ")
             }
         }
         //code for spinners start here
-    }
-
-    private fun saveData() {
-        dbRef = FirebaseDatabase.getInstance().getReference(DBConstants.APPLICATION)
-        val currentuser = FirebaseAuth.getInstance().currentUser?.uid
-
-        stud_city = binding.spCity.selectedItem.toString().trim()
-        stud_centre = binding.spCenter.selectedItem.toString().trim()
-        stud_slot = binding.spSlot.selectedItem.toString().trim()
-        stud_examdate = binding.etStudExamdate.text.toString().trim()
-
-        if (stud_examdate.isEmpty()) {
-            showSnackBar("Enter date please")
-        }else {
-            binding.progressbar.visibility = View.VISIBLE
-            dbRef = FirebaseDatabase.getInstance().getReference(APPLICATION)
-
-            FirebaseAuth.getInstance().currentUser?.uid?.let { uid ->
-                dbRef.child("$uid$stud_centre").setValue(
-                    examdata(
-                        stud_city,
-                        stud_centre,
-                        stud_slot,
-                        stud_examdate,
-                        studentName = LoggedInUser.student.name.orEmpty(),
-                        studentEmailId = LoggedInUser.student.email.orEmpty(),
-                        studentId = LoggedInUser.student.uid.orEmpty(),
-                        countid = countid + 1
-                    )
-                ).addOnCompleteListener {
-                    binding.progressbar.visibility = View.GONE
-                    showSnackBar("Application submitted")
-                    this.fragmentManager?.popBackStack()
-                }.addOnFailureListener { err ->
-                    binding.progressbar.visibility = View.GONE
-                    showSnackBar("Error${err.message}")
-                }
-            }
-        }
     }
 
     private fun setCentreData(listname: MutableList<String>) {
@@ -205,6 +167,80 @@ class StudentExamSeatBookingFragment : Fragment() {
             }
         }
     }
+
+    private fun saveData() {
+        dbRef = FirebaseDatabase.getInstance().getReference(DBConstants.APPLICATION)
+        val currentuser = FirebaseAuth.getInstance().currentUser?.uid
+
+        dbRef = FirebaseDatabase.getInstance().getReference(APPLICATION)
+        dbRef.orderByChild("studentId").equalTo(LoggedInUser.student.uid)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    countid = dataSnapshot.childrenCount.toInt()
+                    if (countid >= 2) {
+                        showSnackBar("You have already booked a seat twice.")
+                    } else {
+                        checkCityAvailability()
+                    }
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    // Handle error
+                }
+            })
+    }
+
+    private fun checkCityAvailability() {
+        dbRef.orderByChild("sf_city").equalTo(selectedCity)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        showSnackBar("You have already submitted set booking for this City")
+                    } else {
+                        saveSeatData()
+                    }
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    // Handle error
+                }
+            })
+    }
+
+    private fun saveSeatData() {
+        stud_city = binding.spCity.selectedItem.toString().trim()
+        stud_centre = binding.spCenter.selectedItem.toString().trim()
+        stud_slot = binding.spSlot.selectedItem.toString().trim()
+        stud_examdate = binding.etStudExamdate.text.toString().trim()
+
+        if (stud_examdate.isEmpty()) {
+            showSnackBar("Enter date please")
+        } else {
+            binding.progressbar.visibility = View.VISIBLE
+            dbRef.push().setValue(
+                examdata(
+                    stud_city,
+                    stud_centre,
+                    stud_slot,
+                    stud_examdate,
+                    studentName = LoggedInUser.student.name.orEmpty(),
+                    studentEmailId = LoggedInUser.student.email.orEmpty(),
+                    studentId = LoggedInUser.student.uid.orEmpty(),
+                    countid = countid + 1
+                )
+            ).addOnCompleteListener {
+                binding.progressbar.visibility = View.GONE
+                showSnackBar("Application submitted")
+                this.fragmentManager?.popBackStack()
+            }.addOnFailureListener { err ->
+                binding.progressbar.visibility = View.GONE
+                showSnackBar("Error${err.message}")
+            }
+        }
+    }
+
+
+
 //action bar menu code starts here
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.main_menu, menu)

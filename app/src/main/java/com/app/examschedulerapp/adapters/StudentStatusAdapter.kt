@@ -1,9 +1,10 @@
-package com.app.examschedulerapp.data
+package com.app.examschedulerapp.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.app.examschedulerapp.StudentStatusFragment
+import com.app.examschedulerapp.data.examdata
 import com.app.examschedulerapp.databinding.StudentcardviewBinding
 
 class StudentStatusAdapter (
@@ -13,7 +14,7 @@ class StudentStatusAdapter (
     inner class UserViewHolder(val adapterBinding : StudentcardviewBinding)
             : RecyclerView.ViewHolder(adapterBinding.root){}
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StudentStatusAdapter.UserViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val  binding = StudentcardviewBinding.inflate(LayoutInflater.from(parent.context),parent,false)
 
         return UserViewHolder(binding)
@@ -25,6 +26,7 @@ class StudentStatusAdapter (
         holder.adapterBinding.dtStudCentre.text=list[position].sf_centre
         holder.adapterBinding.dtStudDate.text=list[position].sf_examdate
         holder.adapterBinding.tvStudemail.text=list[position].studentEmailId
+        holder.adapterBinding.tvStudStatus.text=list[position].status
     }
 
     override fun getItemCount(): Int {

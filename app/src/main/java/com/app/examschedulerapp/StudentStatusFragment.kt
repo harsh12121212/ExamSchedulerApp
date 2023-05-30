@@ -8,6 +8,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.app.examschedulerapp.adapters.StudentStatusAdapter
 import com.app.examschedulerapp.data.*
 import com.app.examschedulerapp.databinding.FragmentStudentStatusBinding
 import com.google.android.material.snackbar.Snackbar
@@ -28,7 +29,7 @@ class StudentStatusFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentStudentStatusBinding.inflate(inflater, container, false)
-
+        setHasOptionsMenu(true)
         displaydata()
 
         return binding.root
@@ -51,7 +52,6 @@ class StudentStatusFragment : Fragment() {
                         userAdapter = StudentStatusAdapter(this@StudentStatusFragment, list)
                         binding.rvData.layoutManager = LinearLayoutManager(activity)
                         binding.rvData.adapter = userAdapter
-                        showSnackBar("data loaded")
                     }
                 } else{
                     showSnackBar("Data is not found")
@@ -96,7 +96,7 @@ class StudentStatusFragment : Fragment() {
         return true
     }
 //action bar menu code ends here
-    private fun showSnackBar(response: String) {
+   fun showSnackBar(response: String) {
     val snackbar = Snackbar.make(binding.root, response, Snackbar.LENGTH_LONG)
     snackbar.show()
     }
