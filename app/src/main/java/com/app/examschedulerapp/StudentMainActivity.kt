@@ -24,6 +24,7 @@ class StudentMainActivity : AppCompatActivity() {
             when (id) {
                 R.id.stud_seatbook -> replaceFragment(StudentExamSeatBookingFragment())
                 R.id.stud_status -> replaceFragment(StudentStatusFragment())
+                R.id.stud_profile -> replaceFragment(StudentProfileFragment())
                 else -> false
             }
             true

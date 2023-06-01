@@ -65,6 +65,9 @@
         <action
             android:id="@+id/action_firstFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_StudentExamSeatBooking_to_studentProfileFragment"
+            app:destination="@id/studentProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/adminDasboardFragment"
@@ -75,4 +78,9 @@
             android:id="@+id/action_adminFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/studentProfileFragment"
+        android:name="com.app.examschedulerapp.StudentProfileFragment"
+        android:label="fragment_student_profile"
+        tools:layout="@layout/fragment_student_profile" />
 </navigation>

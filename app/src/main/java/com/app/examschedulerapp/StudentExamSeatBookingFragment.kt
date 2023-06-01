@@ -28,7 +28,7 @@ class StudentExamSeatBookingFragment : Fragment() {
     private lateinit var user: FirebaseAuth
 
     var slotlist = arrayOf("Select Slot", "Slot 1", "Slot 2")
-    var citylist = arrayOf("Select City", "Banglore", "Hyderabad", "Chennai","Pune")
+    var citylist = arrayOf("Select City", "Banglore", "Hyderabad", "Chennai")
 
     private lateinit var dbRef: DatabaseReference
     private var stud_city = ""
@@ -152,7 +152,7 @@ class StudentExamSeatBookingFragment : Fragment() {
                 showSnackBar("Select city ")
             }
         }
-        //code for spinners start here
+
     }
 
     private fun setCentreData(listname: MutableList<String>) {
@@ -167,6 +167,7 @@ class StudentExamSeatBookingFragment : Fragment() {
             }
         }
     }
+    //code for spinners start here
 
     private fun saveData() {
         dbRef = FirebaseDatabase.getInstance().getReference(DBConstants.APPLICATION)
@@ -239,8 +240,6 @@ class StudentExamSeatBookingFragment : Fragment() {
         }
     }
 
-
-
 //action bar menu code starts here
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.main_menu, menu)
@@ -248,8 +247,6 @@ class StudentExamSeatBookingFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.profile -> {
-            }
             R.id.logout -> {
                 val dialogClickListener = DialogInterface.OnClickListener { dialog, which ->
                     when (which) {

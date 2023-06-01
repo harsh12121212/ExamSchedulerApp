@@ -72,8 +72,6 @@ class StudentStatusFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.profile -> {
-            }
             R.id.logout -> {
                 val dialogClickListener = DialogInterface.OnClickListener { dialog, which ->
                     when (which) {
