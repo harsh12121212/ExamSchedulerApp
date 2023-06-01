@@ -18,8 +18,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="121dp"
-        android:layout_height="95dp"
+        android:layout_width="78dp"
+        android:layout_height="82dp"
         android:src="@drawable/ic_main"
         app:layout_constraintBottom_toTopOf="@+id/welcome_text"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,7 +35,7 @@
         android:fontFamily="@font/roboto_slab"
         android:text="Welcome!"
         android:textColor="#9974CF"
-        android:textSize="34sp"
+        android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/cv_student"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,8 +44,8 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_admin"
-        android:layout_width="155dp"
-        android:layout_height="192dp"
+        android:layout_width="146dp"
+        android:layout_height="190dp"
         android:layout_margin="10dp"
         android:layout_marginStart="16dp"
         android:clickable="true"
@@ -53,15 +53,15 @@
         app:cardElevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/cv_student"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.522"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.584">
+        app:layout_constraintVertical_bias="0.576">
 
         <ImageView
             android:id="@+id/img_admin"
-            android:layout_width="wrap_content"
-            android:layout_height="150dp"
+            android:layout_width="127dp"
+            android:layout_height="139dp"
             android:layout_margin="10dp"
             android:src="@drawable/ic_admin" />
 
@@ -75,29 +75,29 @@
             android:fontFamily="@font/caladea"
             android:text="Admin"
             android:textColor="@color/black"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_student"
-        android:layout_width="155dp"
-        android:layout_height="192dp"
+        android:layout_width="146dp"
+        android:layout_height="189dp"
         android:layout_margin="10dp"
         android:clickable="true"
         app:cardCornerRadius="20dp"
         app:cardElevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.839"
+        app:layout_constraintHorizontal_bias="0.89"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.582">
+        app:layout_constraintVertical_bias="0.577">
 
         <ImageView
             android:id="@+id/img_student"
-            android:layout_width="wrap_content"
-            android:layout_height="143dp"
+            android:layout_width="125dp"
+            android:layout_height="142dp"
             android:layout_margin="10dp"
             android:src="@drawable/ic_student" />
 
@@ -111,7 +111,7 @@
             android:fontFamily="@font/caladea"
             android:text="Student"
             android:textColor="@color/black"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
     </androidx.cardview.widget.CardView>
@@ -123,30 +123,30 @@
         android:layout_marginTop="56dp"
         android:text="Already have an account? "
         android:textColor="#9974CF"
-        android:textSize="21sp"
+        android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tv_login"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cv_admin"
-        app:layout_constraintVertical_bias="0.163" />
+        app:layout_constraintVertical_bias="0.214" />
 
     <TextView
         android:id="@+id/tv_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
-        android:layout_marginEnd="68dp"
+        android:layout_marginEnd="96dp"
         android:clickable="true"
         android:text="Login!"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         android:textColor="#9974CF"
-        android:textSize="21sp"
+        android:textSize="17sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cv_student"
-        app:layout_constraintVertical_bias="0.174" />
+        app:layout_constraintVertical_bias="0.225" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

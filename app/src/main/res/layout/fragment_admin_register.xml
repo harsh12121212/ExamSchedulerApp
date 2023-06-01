@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -22,11 +21,11 @@
         android:id="@+id/tv_admin_hl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="24sp"
         android:fontFamily="@font/roboto_slab"
         android:text="ADMIN Signup"
         android:textColor="@color/white"
-        android:textSize="25sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/scrollView2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,39 +35,43 @@
 
     <ScrollView
         android:id="@+id/scrollView2"
-        android:layout_width="378dp"
-        android:layout_height="546dp"
-        android:layout_margin="5dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:padding="15dp"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.521"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.859">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="10dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10sp"
             android:gravity="center"
             android:orientation="vertical">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tf_admin_name"
                 android:layout_width="match_parent"
-                android:layout_height="67dp">
+                android:layout_height="60sp"
+                android:layout_marginBottom="10sp"
+
+                android:textColorHint="@color/purple_200"
+                app:startIconDrawable="@drawable/ic_profile"
+                app:startIconTint="@color/purple_700">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_admin_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+
                     android:backgroundTint="@color/purple_200"
                     android:hint="Enter Name"
+                    android:inputType="textPersonName"
                     android:textColor="@color/purple_200"
-                    android:textColorHint="@color/purple_200"
+                    android:textSize="15sp"
                     app:errorEnabled="true"
                     app:helperText="Required"
                     tools:boxStrokeColor="@color/purple_200"
@@ -81,16 +84,23 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tf_admin_email"
                 android:layout_width="match_parent"
-                android:layout_height="67dp">
+                android:layout_height="60sp"
+                android:layout_marginBottom="10sp"
+
+                android:textColorHint="@color/purple_200"
+                app:startIconDrawable="@drawable/ic_email"
+                app:startIconTint="@color/purple_700">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_admin_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+
                     android:backgroundTint="@color/purple_200"
                     android:hint="Enter Email Id"
+                    android:inputType="textEmailAddress"
                     android:textColor="@color/purple_200"
-                    android:textColorHint="@color/purple_200"
+                    android:textSize="15sp"
                     app:errorEnabled="true"
                     app:helperText="Required"
                     tools:boxStrokeColor="@color/purple_200"
@@ -100,41 +110,36 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tf_admin_city"
+            <Spinner
+                android:id="@+id/et_admin_city"
                 android:layout_width="match_parent"
-                android:layout_height="67dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_admin_city"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/purple_200"
-                    android:hint="Enter City Name"
-                    android:textColor="@color/purple_200"
-                    android:textColorHint="@color/purple_200"
-                    app:errorEnabled="true"
-                    app:helperText="Required"
-                    tools:boxStrokeColor="@color/purple_200"
-                    tools:fontFamily="@font/roboto_slab" />
-
-
-            </com.google.android.material.textfield.TextInputLayout>
-
+                android:layout_height="67sp"
+                android:layout_marginBottom="10sp"
+                android:background="@drawable/box_border"
+                android:dropDownVerticalOffset="67sp"
+                android:padding="3sp"
+                android:spinnerMode="dropdown" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tf_admin_centre"
                 android:layout_width="match_parent"
-                android:layout_height="67dp">
+                android:layout_height="60sp"
+                android:layout_marginBottom="10sp"
+
+                android:textColorHint="@color/purple_200"
+                app:startIconDrawable="@drawable/ic_centre"
+                app:startIconTint="@color/purple_700">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_admin_centre"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+
                     android:backgroundTint="@color/purple_200"
                     android:hint="Enter Center Name"
+                    android:inputType="text"
                     android:textColor="@color/purple_200"
-                    android:textColorHint="@color/purple_200"
+                    android:textSize="15sp"
                     app:errorEnabled="true"
                     app:helperText="Required"
                     tools:boxStrokeColor="@color/purple_200"
@@ -146,16 +151,23 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tf_admin_slotone"
                 android:layout_width="match_parent"
-                android:layout_height="67dp">
+                android:layout_height="60sp"
+                android:layout_marginBottom="10sp"
+
+                android:textColorHint="@color/purple_200"
+                app:startIconDrawable="@drawable/ic_capacity"
+                app:startIconTint="@color/purple_700">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_admin_slotone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+
                     android:backgroundTint="@color/purple_200"
                     android:hint="1st Slot Capacity"
+                    android:inputType="number"
                     android:textColor="@color/purple_200"
-                    android:textColorHint="@color/purple_200"
+                    android:textSize="15sp"
                     app:errorEnabled="true"
                     app:helperText="Required"
                     tools:boxStrokeColor="@color/purple_200"
@@ -167,16 +179,23 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tf_admin_slottwo"
                 android:layout_width="match_parent"
-                android:layout_height="67dp">
+                android:layout_height="60sp"
+                android:layout_marginBottom="10sp"
+
+                android:textColorHint="@color/purple_200"
+                app:startIconDrawable="@drawable/ic_capacity"
+                app:startIconTint="@color/purple_700">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_admin_slottwo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+
                     android:backgroundTint="@color/purple_200"
                     android:hint="2nd Slot Capacity"
+                    android:inputType="number"
                     android:textColor="@color/purple_200"
-                    android:textColorHint="@color/purple_200"
+                    android:textSize="15sp"
                     app:errorEnabled="true"
                     app:helperText="Required"
                     tools:boxStrokeColor="@color/purple_200"
@@ -188,16 +207,25 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tf_admin_pswd"
                 android:layout_width="match_parent"
-                android:layout_height="67dp">
+                android:layout_height="60sp"
+                android:layout_marginBottom="10sp"
+
+                android:textColorHint="@color/purple_200"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/purple_700"
+                app:startIconDrawable="@drawable/ic_password"
+                app:startIconTint="@color/purple_700">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_admin_pswd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+
                     android:backgroundTint="@color/purple_200"
                     android:hint="Password"
+                    android:inputType="textPassword"
                     android:textColor="@color/purple_200"
-                    android:textColorHint="@color/purple_200"
+                    android:textSize="15sp"
                     app:errorEnabled="true"
                     app:helperText="Required"
                     tools:boxStrokeColor="@color/purple_200"
@@ -209,9 +237,9 @@
 
             <Button
                 android:id="@+id/btn_signin"
-                android:layout_width="180dp"
-                android:layout_height="52dp"
-                android:layout_marginTop="17dp"
+                android:layout_width="180sp"
+                android:layout_height="52sp"
+                android:layout_marginTop="17sp"
                 android:background="@color/purple_200"
                 android:text="Sign up"
                 android:textColor="@android:color/white"
@@ -225,5 +253,15 @@
 
         </LinearLayout>
     </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

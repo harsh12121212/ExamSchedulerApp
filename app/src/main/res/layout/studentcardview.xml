@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="3sp"
+    app:cardCornerRadius="10sp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_centre"
+        app:layout_constraintTop_toTopOf="@+id/tv_centre">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="78dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="42dp"
+            android:layout_marginTop="39dp"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/view"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/cv_icon" />
+
+
+        <TextView
+            android:id="@+id/tv_studname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="164dp"
+            android:fontFamily="@font/roboto_slab"
+            android:padding="5sp"
+            android:text="Jane Doe"
+            android:textColor="@color/purple_200"
+            android:textSize="21sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/imageView2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_studemail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="135dp"
+            android:fontFamily="@font/roboto_slab"
+            android:padding="2sp"
+            android:text="janedoe@gmail.com"
+            android:textColor="#AD8DDC"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@+id/view"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_studname"
+            app:layout_constraintVertical_bias="0.055"
+            tools:ignore="MissingConstraints" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="325dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="116dp"
+            android:background="@color/purple_700"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/title_centre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="10dp"
+            android:padding="2sp"
+            android:text="Selected Centre :"
+            android:textColor="#AD8DDC"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_city"
+            tools:fontFamily="@font/roboto_slab" />
+
+        <TextView
+            android:id="@+id/dt_stud_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="91dp"
+            android:padding="2sp"
+            android:text="Bangalore"
+            android:textColor="#AD8DDC"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/title_city"
+            app:layout_constraintTop_toBottomOf="@+id/view"
+            tools:fontFamily="@font/roboto_slab" />
+
+        <TextView
+            android:id="@+id/title_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="24dp"
+            android:padding="2sp"
+            android:text="Selected City :"
+            android:textColor="#AD8DDC"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view"
+            tools:fontFamily="@font/roboto_slab" />
+
+        <TextView
+            android:id="@+id/dt_stud_centre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="70dp"
+            android:padding="2sp"
+            android:text="ABC Classes"
+            android:textColor="#AD8DDC"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/title_centre"
+            app:layout_constraintTop_toBottomOf="@+id/dt_stud_city"
+            tools:fontFamily="@font/roboto_slab" />
+
+        <TextView
+            android:id="@+id/title_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="11dp"
+            android:padding="2sp"
+            android:text="Examination date :"
+            android:textColor="#AD8DDC"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/tv_stud_status"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_centre"
+            tools:fontFamily="@font/roboto_slab" />
+
+        <TextView
+            android:id="@+id/dt_stud_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="52dp"
+            android:padding="2sp"
+            android:text="11-05-2023"
+            android:textColor="#AD8DDC"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/title_date"
+            app:layout_constraintTop_toBottomOf="@+id/dt_stud_centre"
+            tools:fontFamily="@font/roboto_slab" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="20dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="199dp" />
+
+        <TextView
+            android:id="@+id/tv_stud_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="123dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="137dp"
+            android:layout_marginBottom="5dp"
+            android:padding="2sp"
+            android:text="Pending"
+            android:textAllCaps="true"
+            android:textColor="#AD8DDC"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.594"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dt_stud_date"
+            app:layout_constraintVertical_bias="0.0"
+            tools:fontFamily="@font/roboto_slab" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

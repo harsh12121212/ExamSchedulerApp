@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/admincv"
+    app:cardCornerRadius="10sp"
+    android:layout_margin="10sp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="253dp"
+        android:padding="5sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_centre"
+        app:layout_constraintTop_toTopOf="@+id/tv_centre">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="78dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/cv_icon" />
+
+
+        <TextView
+            android:id="@+id/cv_studname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/roboto_slab"
+            android:padding="5sp"
+            android:text="Jane Doe"
+            android:textColor="@color/purple_200"
+            android:textSize="21sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/imageView2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/cv_studemail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/roboto_slab"
+            android:padding="2sp"
+            android:text="janedoe@gmail.com"
+            android:textColor="#AD8DDC"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/imageView2"
+            app:layout_constraintTop_toBottomOf="@+id/cv_studname"
+            tools:ignore="MissingConstraints" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="325dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/purple_700"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.43"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+        <TextView
+            android:id="@+id/tv_city"
+            android:layout_width="146dp"
+            android:layout_height="27dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="5dp"
+            android:padding="2sp"
+            android:text="Selected Centre :"
+            android:textColor="#AD8DDC"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_centre"
+            tools:fontFamily="@font/roboto_slab" />
+
+        <TextView
+            android:id="@+id/dt_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="106dp"
+            android:padding="2sp"
+            android:text="Bangalore"
+            android:textColor="#AD8DDC"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/tv_centre"
+            app:layout_constraintTop_toBottomOf="@+id/view"
+            tools:fontFamily="@font/roboto_slab" />
+
+        <TextView
+            android:id="@+id/tv_centre"
+            android:layout_width="146dp"
+            android:layout_height="27dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="12dp"
+            android:padding="2sp"
+            android:text="Selected City :"
+            android:textColor="#AD8DDC"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view"
+            tools:fontFamily="@font/roboto_slab" />
+
+        <TextView
+            android:id="@+id/dt_centre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="84dp"
+            android:padding="2sp"
+            android:text="ABC Classes"
+            android:textColor="#AD8DDC"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/tv_city"
+            app:layout_constraintTop_toBottomOf="@+id/dt_city"
+            tools:fontFamily="@font/roboto_slab" />
+
+        <Button
+            android:id="@+id/acceptbutton"
+            android:layout_width="94dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginBottom="13dp"
+            android:background="@color/purple_200"
+            android:padding="2sp"
+            android:text="Accept"
+            android:textColor="@color/white"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/declinebutton"
+            app:layout_constraintHorizontal_bias="0.376"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cv_studemail"
+            app:layout_constraintVertical_bias="0.963"
+            tools:fontFamily="@font/roboto_slab"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/declinebutton"
+            android:layout_width="113dp"
+            android:layout_height="35dp"
+            android:layout_marginBottom="16dp"
+            android:background="@color/purple_200"
+            android:padding="2sp"
+            android:text="Decline"
+            android:textColor="@color/white"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.758"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:fontFamily="@font/roboto_slab"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/cv_studexamstatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/roboto_slab"
+            android:padding="2sp"
+            android:text="STATUS"
+            android:textAllCaps="true"
+            android:textColor="#AD8DDC"
+            android:textSize="20sp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view"
+            app:layout_constraintVertical_bias="1.0"
+            tools:ignore="MissingConstraints" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
