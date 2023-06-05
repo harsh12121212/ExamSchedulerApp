@@ -63,7 +63,7 @@
             android:layout_width="127dp"
             android:layout_height="139dp"
             android:layout_margin="10dp"
-            android:src="@drawable/ic_admin" />
+            android:src="@drawable/ic_adminprofile" />
 
         <TextView
             android:layout_width="wrap_content"

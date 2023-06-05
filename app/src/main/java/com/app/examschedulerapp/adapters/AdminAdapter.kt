@@ -4,27 +4,19 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.RecyclerView
-import com.app.examschedulerapp.AdminDashboardFragment
-import com.app.examschedulerapp.R
+import com.app.examschedulerapp.AdminAllrequestsFragment
 import com.app.examschedulerapp.data.DBConstants
 import com.app.examschedulerapp.data.examdata
 import com.app.examschedulerapp.databinding.AdmincardviewBinding
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class UserAdapter(
-    var context: AdminDashboardFragment,
-    var list: ArrayList<examdata>): RecyclerView.Adapter<UserAdapter.UserViewHolder>(){
+class AdminAdapter(
+    var context: AdminAllrequestsFragment,
+    var list: ArrayList<examdata>): RecyclerView.Adapter<AdminAdapter.UserViewHolder>(){
 
     inner class UserViewHolder(val adapterBinding :AdmincardviewBinding)
         :RecyclerView.ViewHolder(adapterBinding.root){}

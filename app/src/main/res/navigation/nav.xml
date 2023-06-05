@@ -71,9 +71,9 @@
     </fragment>
     <fragment
         android:id="@+id/adminDasboardFragment"
-        android:name="com.app.examschedulerapp.AdminDashboardFragment"
+        android:name="com.app.examschedulerapp.AdminAllrequestsFragment"
         android:label="fragment_admin"
-        tools:layout="@layout/admin_dashboard">
+        tools:layout="@layout/admin_allrequest_fragment">
         <action
             android:id="@+id/action_adminFragment_to_loginFragment"
             app:destination="@id/loginFragment" />

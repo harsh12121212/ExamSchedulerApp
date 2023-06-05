@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     tools:context=".StudentProfileFragment">
-
 
     <include
         android:id="@+id/ly_studentprofile"
@@ -22,8 +21,9 @@
         android:id="@+id/profileImgStudent"
         android:layout_width="164dp"
         android:layout_height="134dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="92dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_studentprofile_heading"
         app:srcCompat="@drawable/ic_student" />
@@ -32,14 +32,12 @@
         android:id="@+id/tv_studentprofile_heading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="36dp"
         android:fontFamily="@font/roboto_slab"
         android:text="Profile Details"
         android:textColor="@color/white"
         android:textSize="21sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/ly_studentprofile" />
 
@@ -47,15 +45,12 @@
         android:id="@+id/tv_studentprofile_Studentname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="24dp"
         android:fontFamily="@font/roboto_slab"
         android:text="Student Name"
         android:textColor="@color/purple_200"
-        android:textSize="21sp"
-        android:textStyle="bold"
+        android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.297"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profileImgStudent" />
 
@@ -63,15 +58,13 @@
         android:id="@+id/tv_studentprofile_Studentemail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/roboto_slab"
         android:text="Student Email"
         android:textColor="@color/purple_200"
-        android:textSize="21sp"
-        android:textStyle="bold"
+        android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.296"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_studentprofile_Studentname" />
 
@@ -79,15 +72,13 @@
         android:id="@+id/tv_studentprofile_Studentdob"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/roboto_slab"
         android:text="Student DOB"
         android:textColor="@color/purple_200"
-        android:textSize="21sp"
-        android:textStyle="bold"
+        android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.28"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_studentprofile_Studentemail" />
 
@@ -95,14 +86,13 @@
         android:id="@+id/tv_studentprofile_Studenteducation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/roboto_slab"
         android:text="Educational Qualification"
         android:textColor="@color/purple_200"
-        android:textSize="21sp"
-        android:textStyle="bold"
+        android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_studentprofile_Studentdob" />
 
@@ -110,15 +100,13 @@
         android:id="@+id/tv_studentprofile_Studenttechnologytraining"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/roboto_slab"
         android:text="Technology Trainings"
         android:textColor="@color/purple_200"
-        android:textSize="21sp"
-        android:textStyle="bold"
+        android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.41"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_studentprofile_Studenteducation" />
 
@@ -126,15 +114,13 @@
         android:id="@+id/tv_studentprofile_Studentworkexp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/roboto_slab"
         android:text="Work Experience"
         android:textColor="@color/purple_200"
-        android:textSize="21sp"
-        android:textStyle="bold"
+        android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.331"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_studentprofile_Studenttechnologytraining" />
 
@@ -142,15 +128,13 @@
         android:id="@+id/tv_studentprofile_Studenttechchoice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/roboto_slab"
         android:text="Technology Choosen : "
         android:textColor="@color/purple_200"
-        android:textSize="21sp"
-        android:textStyle="bold"
+        android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.421"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_studentprofile_Studentworkexp" />
 
@@ -158,19 +142,16 @@
         android:id="@+id/tv_studentprofile_Studentcity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/roboto_slab"
         android:text="City"
         android:textColor="@color/purple_200"
-        android:textSize="21sp"
-        android:textStyle="bold"
+        android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.215"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_studentprofile_Studenttechchoice"
-        app:layout_constraintVertical_bias="0.048" />
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -35,13 +35,13 @@ class StudentProfileFragment : Fragment() {
                 val student=dataSnapshot.getValue(student::class.java)
 
                 binding.tvStudentprofileStudentname.text ="Name : "+ student!!.name
-                binding.tvStudentprofileStudentemail.text ="Email : "+ student!!.email
-                binding.tvStudentprofileStudentdob.text ="Birthdate : "+ student!!.dob
+                binding.tvStudentprofileStudentemail.text ="Email : "+ student.email
+                binding.tvStudentprofileStudentdob.text ="Birthdate : "+ student.dob
                 binding.tvStudentprofileStudenteducation.text ="Education : "+ student!!.education
-                binding.tvStudentprofileStudenttechnologytraining.text ="Technical Trainings : "+ student!!.technology
-                binding.tvStudentprofileStudentworkexp.text ="Work Experince : "+ student!!.exp +"years"
-                binding.tvStudentprofileStudenttechchoice.text ="Technology Choosen : "+ student!!.techchoice
-                binding.tvStudentprofileStudentcity.text ="Preferred City of Exam : "+ student!!.loc
+                binding.tvStudentprofileStudenttechnologytraining.text ="Technical Trainings : "+ student.technology
+                binding.tvStudentprofileStudentworkexp.text ="Work Experince : "+ student.exp +"years"
+                binding.tvStudentprofileStudenttechchoice.text ="Technology Choosen : "+ student.techchoice
+                binding.tvStudentprofileStudentcity.text ="Preferred City of Exam : "+ student.loc
 
             }
             override fun onCancelled(error: DatabaseError){

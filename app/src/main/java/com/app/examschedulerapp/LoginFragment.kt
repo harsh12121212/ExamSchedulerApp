@@ -83,7 +83,8 @@ class LoginFragment : Fragment() {
                             val admin = p0.getValue(admin::class.java)
                             if (admin?.type == ADMIN) {
                                 LoggedInUser.admin = admin
-                                findNavController().navigate(R.id.action_loginFragment_to_adminFragment)
+                                val i = Intent(activity, AdminMainActivity :: class.java )
+                                startActivity(i)
                             } else {
                                 LoggedInUser.student = p0.getValue(student::class.java)!!
                                 val i = Intent(activity, StudentMainActivity :: class.java )
