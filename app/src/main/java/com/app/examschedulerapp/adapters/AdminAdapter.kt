@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.app.examschedulerapp.AdminAllrequestsFragment
+import com.app.examschedulerapp.AdminPendingRequestsFragment
 import com.app.examschedulerapp.data.DBConstants
 import com.app.examschedulerapp.data.examdata
 import com.app.examschedulerapp.databinding.AdmincardviewBinding
@@ -15,7 +15,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
 class AdminAdapter(
-    var context: AdminAllrequestsFragment,
+    var context: AdminPendingRequestsFragment,
     var list: ArrayList<examdata>): RecyclerView.Adapter<AdminAdapter.UserViewHolder>(){
 
     inner class UserViewHolder(val adapterBinding :AdmincardviewBinding)
@@ -32,7 +32,7 @@ class AdminAdapter(
 
         val acceptButton = holder.adapterBinding.acceptbutton
         val declineButton = holder.adapterBinding.declinebutton
-        val statusText = holder.adapterBinding.cvStudexamstatus
+//        val statusText = holder.adapterBinding.cvStudexamstatus
 
         holder.adapterBinding.cvStudname.text=currentItem.studentName
         holder.adapterBinding.dtCity.text=currentItem.sf_city
@@ -41,14 +41,14 @@ class AdminAdapter(
 
         acceptButton.visibility = View.VISIBLE
         declineButton.visibility = View.VISIBLE
-        statusText.visibility = View.INVISIBLE
+//        statusText.visibility = View.INVISIBLE
 
         // Set initial visibility based on the status
         if (currentItem.status == "Accepted" || currentItem.status == "Declined") {
             acceptButton.visibility = View.INVISIBLE
             declineButton.visibility = View.INVISIBLE
-            statusText.text = currentItem.status
-            statusText.visibility = View.VISIBLE
+//            statusText.text = currentItem.status
+//            statusText.visibility = View.VISIBLE
         }
 
         // Set click listener for the accept button
@@ -57,8 +57,8 @@ class AdminAdapter(
                 if (success) {
                     acceptButton.visibility = View.INVISIBLE
                     declineButton.visibility = View.INVISIBLE
-                    statusText.text = "Accepted"
-                    statusText.visibility = View.VISIBLE
+//                    statusText.text = "Accepted"
+//                    statusText.visibility = View.VISIBLE
                 } else {
                     context.showSnackBar("Failed to update status")
                 }
@@ -71,8 +71,8 @@ class AdminAdapter(
                 if (success) {
                     acceptButton.visibility = View.INVISIBLE
                     declineButton.visibility = View.INVISIBLE
-                    statusText.text = "Declined"
-                    statusText.visibility = View.VISIBLE
+//                    statusText.text = "Declined"
+//                    statusText.visibility = View.VISIBLE
                 } else {
                     context.showSnackBar("Failed to update status")
                 }
