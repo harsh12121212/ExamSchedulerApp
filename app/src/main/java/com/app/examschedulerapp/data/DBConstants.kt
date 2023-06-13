@@ -5,5 +5,6 @@ object DBConstants {
     const val STUDENT = "STUDENT"
     const val ADMIN = "ADMIN"
     const val CITY = "City"
-    const val APPLICATION = "APPLICATION"
+    const val APPLICATION = "ALLREQUESTS"
+    const val ADMINREQUESTS = "ADMINREQUESTS"
 }

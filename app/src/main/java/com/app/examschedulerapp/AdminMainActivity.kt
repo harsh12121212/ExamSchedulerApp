@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import com.app.examschedulerapp.databinding.ActivityAdminMainBinding
 
 class AdminMainActivity : AppCompatActivity() {
-
     lateinit var binding: ActivityAdminMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -36,7 +36,7 @@ class StudentExamSeatBookingFragment : Fragment() {
     private var stud_slot = ""
     private var stud_examdate = ""
     private var selectedCity: String = ""
-    private var countid = 0
+    private var countid = 1
     val banglorecentres: MutableList<String> = ArrayList()
     val hyderabadcentres: MutableList<String> = ArrayList()
     val chennaicentres: MutableList<String> = ArrayList()
@@ -170,17 +170,18 @@ class StudentExamSeatBookingFragment : Fragment() {
     //code for spinners start here
 
     private fun saveData() {
-        dbRef = FirebaseDatabase.getInstance().getReference(DBConstants.APPLICATION)
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        val selectedCity = binding.spCity.selectedItem.toString().trim()
 
-        dbRef = FirebaseDatabase.getInstance().getReference(APPLICATION)
-        dbRef.orderByChild("studentId").equalTo(LoggedInUser.student.uid)
+        dbRef = FirebaseDatabase.getInstance().getReference(DBConstants.APPLICATION)
+        dbRef.orderByChild("studentId").equalTo(currentUser?.uid)
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    countid = dataSnapshot.childrenCount.toInt()
-                    if (countid >= 2) {
+                    countid = dataSnapshot.childrenCount.toInt() + 1 // Update countid with the number of children
+                    if (countid > 2) {
                         showSnackBar("You have already booked a seat twice.")
                     } else {
-                        checkCityAvailability()
+                        checkCityAvailability(selectedCity)
                     }
                 }
 
@@ -190,12 +191,26 @@ class StudentExamSeatBookingFragment : Fragment() {
             })
     }
 
-    private fun checkCityAvailability() {
+    private fun checkCityAvailability(selectedCity : String) {
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        val selectedCity = binding.spCity.selectedItem.toString().trim()
+
         dbRef.orderByChild("sf_city").equalTo(selectedCity)
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    if (dataSnapshot.exists()) {
-                        showSnackBar("You have already submitted set booking for this City")
+                    var hasSubmittedBookingForCity = false
+
+                    // Check if the current user has already submitted a booking for the selected city
+                    for (snapshot in dataSnapshot.children) {
+                        val booking = snapshot.getValue(examdata::class.java)
+                        if (booking?.studentEmailId == currentUser?.email) {
+                            hasSubmittedBookingForCity = true
+                            break
+                        }
+                    }
+
+                    if (hasSubmittedBookingForCity) {
+                        showSnackBar("You have already submitted a booking for this city")
                     } else {
                         saveSeatData()
                     }
@@ -217,6 +232,7 @@ class StudentExamSeatBookingFragment : Fragment() {
             showSnackBar("Enter date please")
         } else {
             binding.progressbar.visibility = View.VISIBLE
+
             dbRef.push().setValue(
                 examdata(
                     stud_city,
@@ -226,7 +242,7 @@ class StudentExamSeatBookingFragment : Fragment() {
                     studentName = LoggedInUser.student.name.orEmpty(),
                     studentEmailId = LoggedInUser.student.email.orEmpty(),
                     studentId = LoggedInUser.student.uid.orEmpty(),
-                    countid = countid + 1
+                    countid = countid++
                 )
             ).addOnCompleteListener {
                 binding.progressbar.visibility = View.GONE
@@ -238,37 +254,6 @@ class StudentExamSeatBookingFragment : Fragment() {
             }
         }
     }
-
-//action bar menu code starts here
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.main_menu, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.logout -> {
-                val dialogClickListener = DialogInterface.OnClickListener { dialog, which ->
-                    when (which) {
-                        DialogInterface.BUTTON_POSITIVE -> {
-                            user.signOut();
-                            showSnackBar("Successfully Logging out! ")
-                            findNavController().navigate(R.id.action_firstFragment_to_loginFragment)
-                        }
-                        DialogInterface.BUTTON_NEGATIVE -> {
-                            dialog.dismiss()
-                        }
-                    }
-                }
-//                harsh
-                val builder: AlertDialog.Builder = AlertDialog.Builder(requireActivity())
-                builder.setMessage("Do you want to Logout?")
-                    .setPositiveButton("Yes", dialogClickListener)
-                    .setNegativeButton("No", dialogClickListener).show()
-            }
-        }
-        return true
-    }
-//action bar menu code ends here
 
     private fun showSnackBar(response: String) {
         val snackbar = Snackbar.make(binding.root, response, Snackbar.LENGTH_LONG)

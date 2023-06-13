@@ -1,14 +1,11 @@
 package com.app.examschedulerapp
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.app.examschedulerapp.adapters.AdminAdapter
+import com.app.examschedulerapp.adapters.AdminPendingRequestsAdapter
 import com.app.examschedulerapp.data.DBConstants
 import com.app.examschedulerapp.data.examdata
 import com.app.examschedulerapp.databinding.FragmentAdminPendingrequestBinding
@@ -25,7 +22,7 @@ class AdminPendingRequestsFragment : Fragment() {
     private lateinit var user: FirebaseAuth
     var list: ArrayList<examdata> = ArrayList()
 
-    lateinit var AdminAdapter: AdminAdapter
+    lateinit var AdminPendingRequestsAdapter: AdminPendingRequestsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,19 +30,17 @@ class AdminPendingRequestsFragment : Fragment() {
     ): View? {
 
         binding = FragmentAdminPendingrequestBinding.inflate(inflater, container, false)
-        setHasOptionsMenu(true)
 
         user = FirebaseAuth.getInstance()
-        AdminAdapter = AdminAdapter(this, list) // Initialize the adapter
+        AdminPendingRequestsAdapter = AdminPendingRequestsAdapter(this, list) // Initialize the adapter
         binding.rvData.layoutManager = LinearLayoutManager(activity)
-        binding.rvData.adapter = AdminAdapter
+        binding.rvData.adapter = AdminPendingRequestsAdapter
         retrieveDataFromDatabase()
 
         return binding.root
     }
 
     fun retrieveDataFromDatabase() {
-
         binding.progressbar.visibility = View.VISIBLE
         FirebaseDatabase.getInstance().getReference(DBConstants.APPLICATION)
             .addValueEventListener(object : ValueEventListener {
@@ -59,9 +54,9 @@ class AdminPendingRequestsFragment : Fragment() {
                                 Log.e("TAG", "onDataChange: " + it.toString())
                             }
                             Log.e("TAG", "onDataChange: " + list.size)
-                            AdminAdapter = AdminAdapter(this@AdminPendingRequestsFragment, list)
+                            AdminPendingRequestsAdapter = AdminPendingRequestsAdapter(this@AdminPendingRequestsFragment, list)
                             binding.rvData.layoutManager = LinearLayoutManager(activity)
-                            binding.rvData.adapter = AdminAdapter
+                            binding.rvData.adapter = AdminPendingRequestsAdapter
                         }
                     } catch (e: Exception) {
                         e.printStackTrace()
@@ -78,33 +73,3 @@ class AdminPendingRequestsFragment : Fragment() {
         snackbar.show()
     }
 }
-
-//override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-//    inflater.inflate(R.menu.main_menu, menu)
-//}
-//
-//override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//    when (item.itemId) {
-//        R.id.logout -> {
-//            val dialogClickListener =
-//                DialogInterface.OnClickListener { dialog, which ->
-//                    when (which) {
-//                        DialogInterface.BUTTON_POSITIVE -> {
-//                            user.signOut()
-//                            showSnackBar("Successfully Logging out! ")
-//                            findNavController().navigate(R.id.action_adminFragment_to_loginFragment)
-//                        }
-//                        DialogInterface.BUTTON_NEGATIVE -> {
-//                            dialog.dismiss()
-//                        }
-//                    }
-//                }
-//            val builder: AlertDialog.Builder = AlertDialog.Builder(requireActivity())
-//            builder.setMessage("Do you want to Logout?")
-//                .setPositiveButton("Yes", dialogClickListener)
-//                .setNegativeButton("No", dialogClickListener)
-//                .show()
-//        }
-//    }
-//    return true
-//}

@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/admincv"
-    app:cardCornerRadius="10sp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:layout_margin="10sp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    app:cardCornerRadius="10sp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:padding="5sp"
         app:layout_constraintBottom_toTopOf="@+id/tv_centre"
         app:layout_constraintTop_toTopOf="@+id/tv_centre">
@@ -21,7 +20,7 @@
             android:layout_width="78sp"
             android:layout_height="64sp"
             android:layout_marginStart="28dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/cv_icon" />
@@ -31,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="24sp"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/roboto_slab"
             android:padding="5sp"
             android:text="Jane Doe"
@@ -72,106 +71,71 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
         <TextView
-            android:id="@+id/tv_city"
+            android:id="@+id/adminallreq_tv_city"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5sp"
-            android:padding="2sp"
-            android:text="Selected Centre :"
-            android:textColor="#AD8DDC"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_centre"
-            tools:fontFamily="@font/roboto_slab" />
-
-        <TextView
-            android:id="@+id/dt_city"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_marginTop="12sp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
             android:padding="2sp"
             android:text="Bangalore"
             android:textColor="#AD8DDC"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/tv_centre"
-            app:layout_constraintTop_toBottomOf="@+id/view"
-            tools:fontFamily="@font/roboto_slab" />
-
-        <TextView
-            android:id="@+id/tv_centre"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="12sp"
-            android:padding="2sp"
-            android:text="Selected City :"
-            android:textColor="#AD8DDC"
-            android:textSize="17sp"
-            android:textStyle="bold"
+            app:layout_constraintHorizontal_bias="0.112"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view"
             tools:fontFamily="@font/roboto_slab" />
 
+
         <TextView
-            android:id="@+id/dt_centre"
+            android:id="@+id/adminallreq_tv_centre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_marginTop="5sp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
             android:padding="2sp"
             android:text="ABC Classes"
             android:textColor="#AD8DDC"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/tv_city"
-            app:layout_constraintTop_toBottomOf="@+id/dt_city"
+            app:layout_constraintHorizontal_bias="0.131"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/adminallreq_tv_city"
             tools:fontFamily="@font/roboto_slab" />
 
-        <Button
-            android:id="@+id/acceptbutton"
-            android:layout_width="94sp"
-            android:layout_height="48dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="17dp"
-            android:background="@color/purple_200"
+        <TextView
+            android:id="@+id/adminallreq_tv_slot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
             android:padding="2sp"
-            android:text="Accept"
-            android:textColor="@color/white"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/declinebutton"
-            app:layout_constraintHorizontal_bias="0.651"
+            android:text="Slot A"
+            android:textColor="#AD8DDC"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.113"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_city"
-            app:layout_constraintVertical_bias="0.0"
-            tools:fontFamily="@font/roboto_slab"
-            tools:ignore="MissingConstraints" />
+            app:layout_constraintTop_toBottomOf="@+id/adminallreq_tv_centre"
+            tools:fontFamily="@font/roboto_slab" />
 
-        <Button
-            android:id="@+id/declinebutton"
-            android:layout_width="94sp"
-            android:layout_height="48dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="60dp"
-            android:layout_marginBottom="17dp"
-            android:background="@color/purple_200"
+        <TextView
+            android:id="@+id/adminallreq_tv_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:padding="2sp"
-            android:text="Decline"
-            android:textColor="@color/white"
-            android:visibility="visible"
+            android:text="STATUS"
+            android:textAllCaps="true"
+            android:textColor="#AD8DDC"
+            android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dt_centre"
-            app:layout_constraintVertical_bias="0.333"
-            tools:fontFamily="@font/roboto_slab"
-            tools:ignore="MissingConstraints" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/adminallreq_tv_slot"
+            tools:fontFamily="@font/roboto_slab" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

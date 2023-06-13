@@ -10,6 +10,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.app.examschedulerapp.adapters.AdminDashboardPageAdapter
 import com.app.examschedulerapp.databinding.FragmentAdminDashboardBinding
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 class AdminDashboardFragment : Fragment() {
 
@@ -27,31 +28,20 @@ class AdminDashboardFragment : Fragment() {
         tabLayout = binding.admindashboardTabLayout
         viewPager2 = binding.admindashboardViewpager2
 
-        adapter =
-            AdminDashboardPageAdapter((activity as FragmentActivity).supportFragmentManager, lifecycle)
+        // Creating the adapter
+        adapter = AdminDashboardPageAdapter((activity as FragmentActivity).supportFragmentManager, lifecycle)
 
         tabLayout.addTab(tabLayout.newTab().setText("Pending"))
         tabLayout.addTab(tabLayout.newTab().setText("All"))
-        viewPager2.adapter = adapter
+        viewPager2.adapter = adapter // Setting the adapter to the ViewPager2
 
-        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                if (tab != null) {
-                    viewPager2.currentItem = tab.position
-                }
+        // Set up TabLayout with ViewPager2 using TabLayoutMediator
+        TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
+            when (position) {
+                0 -> tab.text = "Pending"
+                1 -> tab.text = "All"
             }
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-            }
-        })
-        viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-                tabLayout.selectTab(tabLayout.getTabAt(position))
-            }
-        })
+        }.attach()
         return binding.root
     }
 }
