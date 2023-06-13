@@ -1,12 +1,9 @@
 package com.app.examschedulerapp
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.examschedulerapp.adapters.StudentStatusAdapter
 import com.app.examschedulerapp.data.*
@@ -18,7 +15,6 @@ import com.google.firebase.database.*
 class StudentStatusFragment : Fragment() {
 
     lateinit var binding: FragmentStudentStatusBinding
-    private lateinit var user: FirebaseAuth
     var list: ArrayList<examdata> = ArrayList()
     lateinit var userAdapter: StudentStatusAdapter
     private lateinit var databaseReference: DatabaseReference
@@ -29,7 +25,6 @@ class StudentStatusFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentStudentStatusBinding.inflate(inflater, container, false)
-        setHasOptionsMenu(true)
         displaydata()
 
         return binding.root
@@ -46,54 +41,39 @@ class StudentStatusFragment : Fragment() {
                     p0.children.forEach { it1 ->
                         it1.getValue(examdata::class.java)?.let {
                             list.add(it)
+                        }
+                        userAdapter.notifyDataSetChanged()
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {}
+        })
+
+        // Initialize userAdapter here
+        userAdapter = StudentStatusAdapter(this, list)
+        binding.rvData.layoutManager = LinearLayoutManager(activity)
+        binding.rvData.adapter = userAdapter
+
+
+        // Fetching data from the ADMINREQUESTS table as well
+        val adminRequestsReference = FirebaseDatabase.getInstance().getReference(DBConstants.ADMINREQUESTS)
+        adminRequestsReference.orderByChild("studentId").equalTo(currentuser).addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    dataSnapshot.children.forEach { snapshot ->
+                        snapshot.getValue(examdata::class.java)?.let {
+                            list.add(it)
                             Log.e("TAG", "onDataChange: " + it.toString())
                         }
-                        Log.e("TAG", "onDataChange: " + list.size)
-                        userAdapter = StudentStatusAdapter(this@StudentStatusFragment, list)
-                        binding.rvData.layoutManager = LinearLayoutManager(activity)
-                        binding.rvData.adapter = userAdapter
                     }
-                } else{
-                    showSnackBar("Data is not found")
+                    userAdapter.notifyDataSetChanged()
                 }
             }
 
-            override fun onCancelled(error: DatabaseError) {
-
-            }
+            override fun onCancelled(error: DatabaseError) {}
         })
     }
-
-
-    //action bar menu code starts here
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.main_menu, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.logout -> {
-                val dialogClickListener = DialogInterface.OnClickListener { dialog, which ->
-                    when (which) {
-                        DialogInterface.BUTTON_POSITIVE -> {
-                            user.signOut()
-                            showSnackBar("Successfully Logging out! ")
-                            findNavController().navigate(R.id.action_firstFragment_to_loginFragment)
-                        }
-                        DialogInterface.BUTTON_NEGATIVE -> {
-                            dialog.dismiss()
-                        }
-                    }
-                }
-                val builder: AlertDialog.Builder = AlertDialog.Builder(requireActivity())
-                builder.setMessage("Do you want to Logout?")
-                    .setPositiveButton("Yes", dialogClickListener)
-                    .setNegativeButton("No", dialogClickListener).show()
-            }
-        }
-        return true
-    }
-//action bar menu code ends here
    fun showSnackBar(response: String) {
     val snackbar = Snackbar.make(binding.root, response, Snackbar.LENGTH_LONG)
     snackbar.show()

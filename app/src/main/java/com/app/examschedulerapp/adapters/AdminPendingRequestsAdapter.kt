@@ -27,37 +27,69 @@ class AdminPendingRequestsAdapter(
         val currentUser = FirebaseAuth.getInstance().currentUser
         val usersRef = FirebaseDatabase.getInstance().reference.child(DBConstants.USERS)
         currentUser?.uid?.let { uid ->
-            usersRef.child(uid).child("centre").addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    currentUserCentre = dataSnapshot.value as? String
-                    Log.d("AdminChecking","Outside the check - $currentUserCentre")
-                    notifyDataSetChanged() // Refresh the adapter after getting the user's centre
-                }
+            usersRef.child(uid).child("centre")
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        currentUserCentre = dataSnapshot.value as? String
+                        notifyDataSetChanged() // Refresh the adapter after getting the user's centre
+                    }
 
-                override fun onCancelled(databaseError: DatabaseError) {
+                    override fun onCancelled(databaseError: DatabaseError) {
 
-                }
-            })
+                    }
+                })
         }
     }
 
     inner class UserViewHolder(val adapterBinding: CvAdminpendingrequestBinding) :
-        RecyclerView.ViewHolder(adapterBinding.root)
+        RecyclerView.ViewHolder(adapterBinding.root) {
+
+        init {
+            adapterBinding.acceptbutton.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val currentItem = list[position]
+                    updateStatus(currentItem, "Accepted") { success ->
+                        if (success) {
+                            context.showSnackBar("The request is accepted")
+                        } else {
+                            context.showSnackBar("Failed to update status")
+                        }
+                    }
+                }
+            }
+
+            adapterBinding.declinebutton.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val currentItem = list[position]
+                    updateStatus(currentItem, "Declined") { success ->
+                        if (success) {
+                            context.showSnackBar("The request is declined")
+                        } else {
+                            context.showSnackBar("Failed to update status")
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val binding =
-            CvAdminpendingrequestBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            CvAdminpendingrequestBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
         return UserViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         val currentItem = list[position]
 
-        Log.d("AdminChecking","Inside the if $currentUserCentre")
-        Log.d("AdminChecking", "Inside the if ${currentItem.sf_centre}")
-
         // Check if the centre in the current item matches the current user's centre
-        if (currentItem.sf_centre!= currentUserCentre) {
+        if (currentItem.sf_centre != currentUserCentre) {
             holder.itemView.visibility = View.GONE
             holder.itemView.layoutParams = RecyclerView.LayoutParams(0, 0)
             return
@@ -67,41 +99,42 @@ class AdminPendingRequestsAdapter(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
             )
-        }
 
-        val acceptButton = holder.adapterBinding.acceptbutton
-        val declineButton = holder.adapterBinding.declinebutton
+            val acceptButton = holder.adapterBinding.acceptbutton
+            val declineButton = holder.adapterBinding.declinebutton
 
-        holder.adapterBinding.cvStudname.text = currentItem.studentName
-        holder.adapterBinding.cvStudemail.text = currentItem.studentEmailId
-        holder.adapterBinding.dtCity.text = "Selected City : "+ currentItem.sf_city
-        holder.adapterBinding.dtCentre.text =  "Selected Center : "+currentItem.sf_centre
-        holder.adapterBinding.dtSlot.text =  "Selected Slot : "+currentItem.sf_slot
+            holder.adapterBinding.cvStudname.text = currentItem.studentName
+            holder.adapterBinding.cvStudemail.text = currentItem.studentEmailId
+            holder.adapterBinding.dtCity.text = "Selected City : " + currentItem.sf_city
+            holder.adapterBinding.dtCentre.text = "Selected Center : " + currentItem.sf_centre
+            holder.adapterBinding.dtSlot.text = "Selected Slot : " + currentItem.sf_slot
 
-        // Set click listener for the accept button
-        acceptButton.setOnClickListener {
-            updateStatus(currentItem, "Accepted") { success ->
-                if (success) {
-                    context.showSnackBar("The request is accepted")
-                } else {
-                    context.showSnackBar("Failed to update status")
+            // Set click listener for the accept button
+            acceptButton.setOnClickListener {
+                updateStatus(currentItem, "Accepted") { success ->
+                    if (success) {
+                        context.showSnackBar("The request is accepted")
+                    } else {
+                        context.showSnackBar("Failed to update status")
+                    }
                 }
             }
-        }
 
-        // Set click listener for the decline button
-        declineButton.setOnClickListener {
-            updateStatus(currentItem, "Declined") { success ->
-                if (success) {
-                    context.showSnackBar("The request is declined")
-                } else {
-                    context.showSnackBar("Failed to update status")
+            // Set click listener for the decline button
+            declineButton.setOnClickListener {
+                updateStatus(currentItem, "Declined") { success ->
+                    if (success) {
+                        context.showSnackBar("The request is declined")
+                    } else {
+                        context.showSnackBar("Failed to update status")
+                    }
                 }
             }
         }
     }
-
-    private fun updateStatus(item: examdata, status: String, callback: (Boolean) -> Unit) {
+    private fun updateStatus(item: examdata,
+                             status: String,
+                             callback: (Boolean) -> Unit) {
         val applicationRef = FirebaseDatabase.getInstance().reference.child(DBConstants.APPLICATION)
         val adminRequestsRef = FirebaseDatabase.getInstance().reference.child(DBConstants.ADMINREQUESTS)
 
@@ -110,13 +143,21 @@ class AdminPendingRequestsAdapter(
         query.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 var success = false
+
                 for (snapshot in dataSnapshot.children) {
                     val data = snapshot.getValue(examdata::class.java)
 
-                    // Updating the status and save it in the ADMINREQUESTS table
-                    data?.let { examData ->
-                        examData.status = status
-                        adminRequestsRef.push().setValue(examData)
+                    if (data != null && data.sf_city == item.sf_city && data.sf_slot == item.sf_slot) {
+
+                        // Updating the status and save it in the ADMINREQUESTS table
+                        data.status = status
+
+                        // Set countid to 0 when the status is "Declined"
+                        if (status == "Declined") {
+                            data.countid = 0
+                        }
+
+                        adminRequestsRef.push().setValue(data)
                             .addOnSuccessListener {
                                 success = true
                                 // Remove the data from the APPLICATION table
@@ -133,8 +174,10 @@ class AdminPendingRequestsAdapter(
                                 callback.invoke(success)
                                 context.showSnackBar("Failed to save data")
                             }
+                        break // Exit the loop after updating the status for the matched item
                     }
                 }
+
                 if (!dataSnapshot.hasChildren()) {
                     callback.invoke(success)
                 }
