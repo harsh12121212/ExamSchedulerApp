@@ -1,18 +1,15 @@
 package com.app.examschedulerapp
 
 import android.app.DatePickerDialog
-import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import com.app.examschedulerapp.data.City
 import com.app.examschedulerapp.data.DBConstants
-import com.app.examschedulerapp.data.DBConstants.APPLICATION
 import com.app.examschedulerapp.data.LoggedInUser
 import com.app.examschedulerapp.data.examdata
 import com.app.examschedulerapp.databinding.StudentExamSeatBookingBinding
@@ -31,6 +28,7 @@ class StudentExamSeatBookingFragment : Fragment() {
     var citylist = arrayOf("Select City", "Banglore", "Hyderabad", "Chennai")
 
     private lateinit var dbRef: DatabaseReference
+    private lateinit var adminRef: DatabaseReference
     private var stud_city = ""
     private var stud_centre = ""
     private var stud_slot = ""
@@ -44,7 +42,6 @@ class StudentExamSeatBookingFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding = StudentExamSeatBookingBinding.inflate(inflater, container, false)
         user = FirebaseAuth.getInstance()
         setHasOptionsMenu(true)
@@ -80,18 +77,19 @@ class StudentExamSeatBookingFragment : Fragment() {
         //code for spinners start here
         FirebaseDatabase.getInstance().getReference("CenterData").child("Banglore")
             .addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(p0: DataSnapshot) {
-                for (ds in p0.children) {
-                    val key = ds.getKey()
-                    if (key != null) {
-                        banglorecentres.add(key)
+                override fun onDataChange(p0: DataSnapshot) {
+                    for (ds in p0.children) {
+                        val key = ds.getKey()
+                        if (key != null) {
+                            banglorecentres.add(key)
+                        }
+                        Log.d("examform", "Centre name : $key")
                     }
-                    Log.d("examform","Centre name : $key")
                 }
-            }
-            override fun onCancelled(p0: DatabaseError) {
-            }
-        })
+
+                override fun onCancelled(p0: DatabaseError) {
+                }
+            })
 
         FirebaseDatabase.getInstance().getReference("CenterData").child("Hyderabad")
             .addValueEventListener(object : ValueEventListener {
@@ -101,9 +99,10 @@ class StudentExamSeatBookingFragment : Fragment() {
                         if (key != null) {
                             hyderabadcentres.add(key)
                         }
-                        Log.d("examform","Centre name : $key")
+                        Log.d("examform", "Centre name : $key")
                     }
                 }
+
                 override fun onCancelled(p0: DatabaseError) {
                 }
             })
@@ -116,9 +115,10 @@ class StudentExamSeatBookingFragment : Fragment() {
                         if (key != null) {
                             chennaicentres.add(key)
                         }
-                        Log.d("examform","Centre name : $key")
+                        Log.d("examform", "Centre name : $key")
                     }
                 }
+
                 override fun onCancelled(p0: DatabaseError) {
                 }
             })
@@ -148,6 +148,7 @@ class StudentExamSeatBookingFragment : Fragment() {
                 selectedCity = citylist[p2]
 
             }
+
             override fun onNothingSelected(p0: AdapterView<*>?) {
                 showSnackBar("Select city ")
             }
@@ -157,41 +158,55 @@ class StudentExamSeatBookingFragment : Fragment() {
 
     private fun setCentreData(listname: MutableList<String>) {
         //Centre spinner
-        val centerarrayAdapter = activity?.let { ArrayAdapter(it, R.layout.spinnerlayout, listname) }
+        val centerarrayAdapter =
+            activity?.let { ArrayAdapter(it, R.layout.spinnerlayout, listname) }
         binding.spCenter.setSelection(0)
         binding.spCenter.adapter = centerarrayAdapter
         binding.spCenter.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
             }
+
             override fun onNothingSelected(p0: AdapterView<*>?) {
             }
         }
     }
-    //code for spinners start here
 
     private fun saveData() {
         val currentUser = FirebaseAuth.getInstance().currentUser
         val selectedCity = binding.spCity.selectedItem.toString().trim()
 
         dbRef = FirebaseDatabase.getInstance().getReference(DBConstants.APPLICATION)
+        adminRef = FirebaseDatabase.getInstance().getReference(DBConstants.ADMINREQUESTS)
+
         dbRef.orderByChild("studentId").equalTo(currentUser?.uid)
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    countid = dataSnapshot.childrenCount.toInt() + 1 // Update countid with the number of children
+                    countid =
+                        dataSnapshot.childrenCount.toInt() + 1 // Update countid with the number of children
                     if (countid > 2) {
                         showSnackBar("You have already booked a seat twice.")
                     } else {
-                        checkCityAvailability(selectedCity)
+                        // Check count id in ADMINREQUESTS table
+                        adminRef.orderByChild("studentId").equalTo(currentUser?.uid)
+                            .addListenerForSingleValueEvent(object : ValueEventListener {
+                                override fun onDataChange(adminSnapshot: DataSnapshot) {
+                                    val adminCountId = adminSnapshot.childrenCount.toInt()
+                                    if (adminCountId > 2) {
+                                        showSnackBar("You have already booked a seat twice.")
+                                    } else {
+                                        checkCityAvailability(selectedCity)
+                                    }
+                                }
+                                override fun onCancelled(databaseError: DatabaseError) {}
+                            })
                     }
                 }
 
-                override fun onCancelled(databaseError: DatabaseError) {
-                    // Handle error
-                }
+                override fun onCancelled(databaseError: DatabaseError) {}
             })
     }
 
-    private fun checkCityAvailability(selectedCity : String) {
+    private fun checkCityAvailability(selectedCity: String) {
         val currentUser = FirebaseAuth.getInstance().currentUser
         val selectedCity = binding.spCity.selectedItem.toString().trim()
 
@@ -208,7 +223,6 @@ class StudentExamSeatBookingFragment : Fragment() {
                             break
                         }
                     }
-
                     if (hasSubmittedBookingForCity) {
                         showSnackBar("You have already submitted a booking for this city")
                     } else {
@@ -216,9 +230,7 @@ class StudentExamSeatBookingFragment : Fragment() {
                     }
                 }
 
-                override fun onCancelled(databaseError: DatabaseError) {
-                    // Handle error
-                }
+                override fun onCancelled(databaseError: DatabaseError) {}
             })
     }
 

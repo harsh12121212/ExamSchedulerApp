@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.examschedulerapp.adapters.StudentStatusAdapter
 import com.app.examschedulerapp.data.*
 import com.app.examschedulerapp.databinding.FragmentStudentStatusBinding
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
@@ -19,14 +18,12 @@ class StudentStatusFragment : Fragment() {
     lateinit var userAdapter: StudentStatusAdapter
     private lateinit var databaseReference: DatabaseReference
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentStudentStatusBinding.inflate(inflater, container, false)
         displaydata()
-
         return binding.root
     }
 
@@ -55,7 +52,6 @@ class StudentStatusFragment : Fragment() {
         binding.rvData.layoutManager = LinearLayoutManager(activity)
         binding.rvData.adapter = userAdapter
 
-
         // Fetching data from the ADMINREQUESTS table as well
         val adminRequestsReference = FirebaseDatabase.getInstance().getReference(DBConstants.ADMINREQUESTS)
         adminRequestsReference.orderByChild("studentId").equalTo(currentuser).addListenerForSingleValueEvent(object : ValueEventListener {
@@ -73,9 +69,5 @@ class StudentStatusFragment : Fragment() {
 
             override fun onCancelled(error: DatabaseError) {}
         })
-    }
-   fun showSnackBar(response: String) {
-    val snackbar = Snackbar.make(binding.root, response, Snackbar.LENGTH_LONG)
-    snackbar.show()
     }
 }
