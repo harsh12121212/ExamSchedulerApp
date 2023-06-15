@@ -17,7 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.384"
         app:layout_constraintStart_toStartOf="parent"
-        tools:listitem="@layout/admincardview" />
+        tools:listitem="@layout/cv_admin_pendingrequests" />
 
     <ProgressBar
         android:id="@+id/progressbar"

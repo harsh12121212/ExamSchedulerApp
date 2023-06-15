@@ -1,12 +1,9 @@
 package com.app.examschedulerapp
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.examschedulerapp.adapters.StudentStatusAdapter
 import com.app.examschedulerapp.data.*
@@ -53,8 +50,6 @@ class StudentStatusFragment : Fragment() {
                         binding.rvData.layoutManager = LinearLayoutManager(activity)
                         binding.rvData.adapter = userAdapter
                     }
-                } else{
-                    showSnackBar("Data is not found")
                 }
             }
 
@@ -64,36 +59,6 @@ class StudentStatusFragment : Fragment() {
         })
     }
 
-
-    //action bar menu code starts here
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.main_menu, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.logout -> {
-                val dialogClickListener = DialogInterface.OnClickListener { dialog, which ->
-                    when (which) {
-                        DialogInterface.BUTTON_POSITIVE -> {
-                            user.signOut()
-                            showSnackBar("Successfully Logging out! ")
-                            findNavController().navigate(R.id.action_firstFragment_to_loginFragment)
-                        }
-                        DialogInterface.BUTTON_NEGATIVE -> {
-                            dialog.dismiss()
-                        }
-                    }
-                }
-                val builder: AlertDialog.Builder = AlertDialog.Builder(requireActivity())
-                builder.setMessage("Do you want to Logout?")
-                    .setPositiveButton("Yes", dialogClickListener)
-                    .setNegativeButton("No", dialogClickListener).show()
-            }
-        }
-        return true
-    }
-//action bar menu code ends here
    fun showSnackBar(response: String) {
     val snackbar = Snackbar.make(binding.root, response, Snackbar.LENGTH_LONG)
     snackbar.show()

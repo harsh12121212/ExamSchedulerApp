@@ -2,14 +2,15 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:id="@+id/admincv"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="3sp"
+    android:layout_margin="10sp"
     app:cardCornerRadius="10sp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:padding="5sp"
         app:layout_constraintBottom_toTopOf="@+id/tv_centre"
         app:layout_constraintTop_toTopOf="@+id/tv_centre">
@@ -17,23 +18,20 @@
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="78dp"
-            android:layout_height="64dp"
-            android:layout_marginStart="16dp"
+            android:layout_width="78sp"
+            android:layout_height="64sp"
+            android:layout_marginStart="28dp"
             android:layout_marginTop="10dp"
-            app:layout_constraintBottom_toTopOf="@+id/view"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.2"
             app:srcCompat="@drawable/cv_icon" />
 
         <TextView
-            android:id="@+id/tv_studname"
+            android:id="@+id/cv_studname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="1640dp"
             android:fontFamily="@font/roboto_slab"
             android:padding="5sp"
             android:text="Jane Doe"
@@ -46,109 +44,119 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_studemail"
+            android:id="@+id/cv_studemail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="5sp"
             android:fontFamily="@font/roboto_slab"
             android:padding="2sp"
             android:text="janedoe@gmail.com"
             android:textColor="#AD8DDC"
             android:textSize="15sp"
-            app:layout_constraintBottom_toTopOf="@+id/view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/imageView2"
-            app:layout_constraintTop_toBottomOf="@+id/tv_studname"
-            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintTop_toBottomOf="@+id/cv_studname"
             tools:ignore="MissingConstraints" />
 
         <View
             android:id="@+id/view"
-            android:layout_width="325dp"
-            android:layout_height="2dp"
-            android:layout_marginTop="104dp"
+            android:layout_width="match_parent"
+            android:layout_height="2sp"
+            android:layout_marginTop="20sp"
             android:background="@color/purple_700"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.43"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
         <TextView
-            android:id="@+id/dt_stud_city"
+            android:id="@+id/dt_city"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
             android:padding="2sp"
             android:text="Bangalore"
             android:textColor="#AD8DDC"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.112"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view"
             tools:fontFamily="@font/roboto_slab" />
 
+
         <TextView
-            android:id="@+id/dt_stud_centre"
+            android:id="@+id/dt_centre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
             android:padding="2sp"
             android:text="ABC Classes"
             android:textColor="#AD8DDC"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.131"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dt_stud_city"
+            app:layout_constraintTop_toBottomOf="@+id/dt_city"
             tools:fontFamily="@font/roboto_slab" />
 
         <TextView
-            android:id="@+id/dt_stud_date"
+            android:id="@+id/dt_slot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
             android:padding="2sp"
-            android:text="11-05-2023"
+            android:text="Slot A"
             android:textColor="#AD8DDC"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.113"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dt_stud_centre"
+            app:layout_constraintTop_toBottomOf="@+id/dt_centre"
             tools:fontFamily="@font/roboto_slab" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="20dp" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="199dp" />
-
-        <TextView
-            android:id="@+id/tv_stud_status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="5dp"
+        <Button
+            android:id="@+id/acceptbutton"
+            android:layout_width="94sp"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/purple_200"
             android:padding="2sp"
-            android:text="Pending"
-            android:textAllCaps="true"
-            android:textColor="#AD8DDC"
-            android:textSize="16sp"
-            android:textStyle="bold"
+            android:text="Accept"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/declinebutton"
+            app:layout_constraintHorizontal_bias="0.353"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dt_slot"
+            app:layout_constraintVertical_bias="1.0"
+            tools:fontFamily="@font/roboto_slab"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/declinebutton"
+            android:layout_width="94sp"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/purple_200"
+            android:padding="2sp"
+            android:text="Decline"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dt_stud_date"
+            app:layout_constraintTop_toBottomOf="@+id/dt_slot"
             app:layout_constraintVertical_bias="0.0"
-            tools:fontFamily="@font/roboto_slab" />
+            tools:fontFamily="@font/roboto_slab"
+            tools:ignore="MissingConstraints" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

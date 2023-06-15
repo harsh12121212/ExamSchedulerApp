@@ -170,7 +170,7 @@ class StudentExamSeatBookingFragment : Fragment() {
     //code for spinners start here
 
     private fun saveData() {
-        dbRef = FirebaseDatabase.getInstance().getReference(DBConstants.APPLICATION)
+        dbRef = FirebaseDatabase.getInstance().getReference(APPLICATION)
 
         dbRef = FirebaseDatabase.getInstance().getReference(APPLICATION)
         dbRef.orderByChild("studentId").equalTo(LoggedInUser.student.uid)
@@ -191,20 +191,32 @@ class StudentExamSeatBookingFragment : Fragment() {
     }
 
     private fun checkCityAvailability() {
-        dbRef.orderByChild("sf_city").equalTo(selectedCity)
-            .addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    if (dataSnapshot.exists()) {
-                        showSnackBar("You have already submitted set booking for this City")
-                    } else {
-                        saveSeatData()
+        val currentUser = user.currentUser
+        if (currentUser != null) {
+            val userId = currentUser.uid
+            dbRef.orderByChild("studentId").equalTo(userId)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        var cityAlreadySubmitted = false
+                        for (snapshot in dataSnapshot.children) {
+                            val examData = snapshot.getValue(examdata::class.java)
+                            if (examData?.sf_city == selectedCity) {
+                                cityAlreadySubmitted = true
+                                break
+                            }
+                        }
+                        if (cityAlreadySubmitted) {
+                            showSnackBar("You have already submitted seat booking for this City")
+                        } else {
+                            saveSeatData()
+                        }
                     }
-                }
 
-                override fun onCancelled(databaseError: DatabaseError) {
-                    // Handle error
-                }
-            })
+                    override fun onCancelled(databaseError: DatabaseError) {
+                        // Handle error
+                    }
+                })
+        }
     }
 
     private fun saveSeatData() {
@@ -238,37 +250,6 @@ class StudentExamSeatBookingFragment : Fragment() {
             }
         }
     }
-
-//action bar menu code starts here
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.main_menu, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.logout -> {
-                val dialogClickListener = DialogInterface.OnClickListener { dialog, which ->
-                    when (which) {
-                        DialogInterface.BUTTON_POSITIVE -> {
-                            user.signOut();
-                            showSnackBar("Successfully Logging out! ")
-                            findNavController().navigate(R.id.action_firstFragment_to_loginFragment)
-                        }
-                        DialogInterface.BUTTON_NEGATIVE -> {
-                            dialog.dismiss()
-                        }
-                    }
-                }
-//                harsh
-                val builder: AlertDialog.Builder = AlertDialog.Builder(requireActivity())
-                builder.setMessage("Do you want to Logout?")
-                    .setPositiveButton("Yes", dialogClickListener)
-                    .setNegativeButton("No", dialogClickListener).show()
-            }
-        }
-        return true
-    }
-//action bar menu code ends here
 
     private fun showSnackBar(response: String) {
         val snackbar = Snackbar.make(binding.root, response, Snackbar.LENGTH_LONG)

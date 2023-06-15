@@ -22,10 +22,10 @@ class StudentStatusAdapter (
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         holder.adapterBinding.tvStudname.text=list[position].studentName
-        holder.adapterBinding.dtStudCity.text=list[position].sf_city
-        holder.adapterBinding.dtStudCentre.text=list[position].sf_centre
-        holder.adapterBinding.dtStudDate.text=list[position].sf_examdate
         holder.adapterBinding.tvStudemail.text=list[position].studentEmailId
+        holder.adapterBinding.dtStudCity.text="Selected City : "+list[position].sf_city
+        holder.adapterBinding.dtStudCentre.text="Selected Center : "+list[position].sf_centre
+        holder.adapterBinding.dtStudDate.text="Selected Date : "+list[position].sf_examdate
         holder.adapterBinding.tvStudStatus.text=list[position].status
     }
 
