@@ -167,8 +167,7 @@ class StudentExamSeatBookingFragment : Fragment() {
             }
         }
     }
-    //code for spinners start here
-
+    
     private fun saveData() {
         dbRef = FirebaseDatabase.getInstance().getReference(APPLICATION)
 
@@ -179,6 +178,32 @@ class StudentExamSeatBookingFragment : Fragment() {
                     countid = dataSnapshot.childrenCount.toInt()
                     if (countid >= 2) {
                         showSnackBar("You have already booked a seat twice.")
+                    } else {
+                        checkRequestStatus()
+                    }
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    // Handle error
+                }
+            })
+    }
+
+    private fun checkRequestStatus() {
+        dbRef.orderByChild("studentId").equalTo(LoggedInUser.student.uid)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    var requestDeclined = false
+                    for (snapshot in dataSnapshot.children) {
+                        val examData = snapshot.getValue(examdata::class.java)
+                        if (examData?.status == "declined") {
+                            requestDeclined = true
+                            break
+                        }
+                    }
+                    if (requestDeclined) {
+                        countid = 0 // Reset the countid
+                        checkCityAvailability()
                     } else {
                         checkCityAvailability()
                     }
