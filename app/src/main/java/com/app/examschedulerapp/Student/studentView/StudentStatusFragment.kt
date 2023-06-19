@@ -1,10 +1,11 @@
-package com.app.examschedulerapp
+package com.app.examschedulerapp.Student.studentView
 
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.app.examschedulerapp.Student.studentModel.examdata
 import com.app.examschedulerapp.adapters.StudentStatusAdapter
 import com.app.examschedulerapp.data.*
 import com.app.examschedulerapp.databinding.FragmentStudentStatusBinding
@@ -26,7 +27,6 @@ class StudentStatusFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentStudentStatusBinding.inflate(inflater, container, false)
-        setHasOptionsMenu(true)
         displaydata()
 
         return binding.root

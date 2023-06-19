@@ -4,9 +4,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.app.examschedulerapp.AdminPendingRequestsFragment
+import com.app.examschedulerapp.Admin.AdminPendingRequestsFragment
 import com.app.examschedulerapp.data.DBConstants
-import com.app.examschedulerapp.data.examdata
+import com.app.examschedulerapp.Student.studentModel.examdata
 import com.app.examschedulerapp.databinding.CvAdminPendingrequestsBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot

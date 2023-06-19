@@ -1,17 +1,14 @@
-package com.app.examschedulerapp
+package com.app.examschedulerapp.Student.studentView
 
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.app.examschedulerapp.data.student
+import com.app.examschedulerapp.Student.studentModel.student
 import com.app.examschedulerapp.databinding.FragmentStudentProfileBinding
-import com.app.examschedulerapp.databinding.FragmentStudentRegisterBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import com.google.firebase.database.R
 
 class StudentProfileFragment : Fragment() {
 

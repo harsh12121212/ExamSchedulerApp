@@ -1,4 +1,4 @@
-package com.app.examschedulerapp
+package com.app.examschedulerapp.Admin
 
 import android.os.Bundle
 import android.util.Log
@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.examschedulerapp.adapters.AdminPendingRequestsAdapter
 import com.app.examschedulerapp.data.DBConstants
-import com.app.examschedulerapp.data.examdata
+import com.app.examschedulerapp.Student.studentModel.examdata
 import com.app.examschedulerapp.databinding.FragmentAdminPendingrequestBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
@@ -31,7 +31,6 @@ class AdminPendingRequestsFragment : Fragment() {
     ): View? {
 
         binding = FragmentAdminPendingrequestBinding.inflate(inflater, container, false)
-        setHasOptionsMenu(true)
 
         user = FirebaseAuth.getInstance()
         AdminPendingRequestsAdapter = AdminPendingRequestsAdapter(this, list) // Initialize the adapter

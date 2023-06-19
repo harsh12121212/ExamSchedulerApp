@@ -1,4 +1,4 @@
-package com.app.examschedulerapp
+package com.app.examschedulerapp.Admin
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.examschedulerapp.adapters.AdminAllRequestsAdapter
 import com.app.examschedulerapp.data.DBConstants
-import com.app.examschedulerapp.data.examdata
+import com.app.examschedulerapp.Student.studentModel.examdata
 import com.app.examschedulerapp.databinding.FragmentAdminAllRequestsBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot

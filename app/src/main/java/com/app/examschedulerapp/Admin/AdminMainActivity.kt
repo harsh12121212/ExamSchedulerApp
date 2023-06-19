@@ -1,37 +1,35 @@
-package com.app.examschedulerapp
+package com.app.examschedulerapp.Admin
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.app.examschedulerapp.databinding.ActivityStudentMainBinding
-import com.google.firebase.auth.FirebaseAuth
+import com.app.examschedulerapp.MainActivity
+import com.app.examschedulerapp.R
+import com.app.examschedulerapp.databinding.ActivityAdminMainBinding
 
-class StudentMainActivity : AppCompatActivity() {
+class AdminMainActivity : AppCompatActivity() {
 
-    lateinit var binding : ActivityStudentMainBinding
-    private lateinit var user: FirebaseAuth
+    lateinit var binding: ActivityAdminMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityStudentMainBinding.inflate(layoutInflater)
-        user = FirebaseAuth.getInstance()
+        binding = ActivityAdminMainBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
 
-        val bnv = binding.btmnvCust
-        replaceFragment(StudentExamSeatBookingFragment())
+        val bnv = binding.btmnvAdmin
+        replaceFragment(AdminDashboardFragment())
 
         bnv.setOnItemSelectedListener {
             val id = it.itemId
             when (id) {
-                R.id.stud_seatbook -> replaceFragment(StudentExamSeatBookingFragment())
-                R.id.stud_status -> replaceFragment(StudentStatusFragment())
-                R.id.stud_profile -> replaceFragment(StudentProfileFragment())
+                R.id.admin_dashboard -> replaceFragment(AdminDashboardFragment())
+                R.id.admin_profile -> replaceFragment(AdminProfileFragment())
                 else -> false
             }
             true
@@ -58,7 +56,8 @@ class StudentMainActivity : AppCompatActivity() {
 
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fl_cust, fragment)
+        fragmentTransaction.replace(R.id.fl_admin, fragment)
         fragmentTransaction.commit()
+
     }
 }

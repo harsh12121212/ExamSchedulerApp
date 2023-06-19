@@ -3,8 +3,8 @@ package com.app.examschedulerapp.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.app.examschedulerapp.StudentStatusFragment
-import com.app.examschedulerapp.data.examdata
+import com.app.examschedulerapp.Student.studentView.StudentStatusFragment
+import com.app.examschedulerapp.Student.studentModel.examdata
 import com.app.examschedulerapp.databinding.StudentcardviewBinding
 
 class StudentStatusAdapter (

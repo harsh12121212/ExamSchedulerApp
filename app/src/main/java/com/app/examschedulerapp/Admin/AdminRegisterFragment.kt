@@ -1,4 +1,4 @@
-package com.app.examschedulerapp
+package com.app.examschedulerapp.Admin
 
 import android.os.Bundle
 import android.text.TextUtils
@@ -13,6 +13,9 @@ import android.widget.Toast
 import android.widget.Toast.makeText
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.app.examschedulerapp.Student.studentView.INVALID_DATA
+import com.app.examschedulerapp.Student.studentView.PASSWORD_LENGTH_ERROR
+import com.app.examschedulerapp.R
 import com.app.examschedulerapp.data.City
 import com.app.examschedulerapp.data.DBConstants
 import com.app.examschedulerapp.data.DBConstants.ADMIN
