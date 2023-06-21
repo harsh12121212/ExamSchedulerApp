@@ -4,8 +4,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.app.examschedulerapp.Admin.AdminAllRequestsFragment
-import com.app.examschedulerapp.Admin.AdminPendingRequestsFragment
+import com.app.examschedulerapp.Admin.adminView.AdminAllRequestsFragment
+import com.app.examschedulerapp.Admin.adminView.AdminPendingRequestsFragment
 
 class AdminDashboardPageAdapter(
     fragmentManager: FragmentManager,

@@ -2,7 +2,7 @@ package com.app.examschedulerapp.ViewModel
 
 import androidx.lifecycle.ViewModel
 import com.app.examschedulerapp.data.DBConstants
-import com.app.examschedulerapp.data.admin
+import com.app.examschedulerapp.Admin.adminModel.admin
 import com.app.examschedulerapp.Student.studentModel.student
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot

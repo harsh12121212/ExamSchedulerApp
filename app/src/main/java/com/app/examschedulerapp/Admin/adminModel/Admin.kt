@@ -1,4 +1,4 @@
-package com.app.examschedulerapp.data
+package com.app.examschedulerapp.Admin.adminModel
 
 data class admin(var name:String?=null,
                  var email:String?=null,

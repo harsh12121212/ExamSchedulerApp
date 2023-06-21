@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.app.examschedulerapp.Admin.AdminAllRequestsFragment
+import com.app.examschedulerapp.Admin.adminView.AdminAllRequestsFragment
 import com.app.examschedulerapp.data.DBConstants
 import com.app.examschedulerapp.Student.studentModel.examdata
 import com.app.examschedulerapp.databinding.CvAdminAllrequestBinding

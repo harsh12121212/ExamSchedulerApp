@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.app.examschedulerapp.Admin.AdminMainActivity
+import com.app.examschedulerapp.Admin.adminView.AdminMainActivity
 import com.app.examschedulerapp.Student.studentView.StudentMainActivity
 import com.app.examschedulerapp.ViewModel.LoginViewModel
 import com.app.examschedulerapp.data.DBConstants

@@ -1,4 +1,4 @@
-package com.app.examschedulerapp.Admin
+package com.app.examschedulerapp.Admin.adminView
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

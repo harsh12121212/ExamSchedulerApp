@@ -5,45 +5,48 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.app.examschedulerapp.Student.studentModel.student
+import com.app.examschedulerapp.Student.studentViewModel.StudentProfileViewModel
 import com.app.examschedulerapp.databinding.FragmentStudentProfileBinding
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.*
 
 class StudentProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentStudentProfileBinding
-    lateinit var database: DatabaseReference
-    lateinit var auth: FirebaseAuth
+    private lateinit var viewModel: StudentProfileViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentStudentProfileBinding.inflate(inflater, container, false)
-        
-        auth = FirebaseAuth.getInstance()
+        viewModel = ViewModelProvider(this).get(StudentProfileViewModel::class.java)
 
-        database = FirebaseDatabase.getInstance().reference
-        fun currentUserReference(): DatabaseReference = database.child("Users").child(auth.currentUser!!.uid)
-        currentUserReference().addValueEventListener(object: ValueEventListener{
+        viewModel.studentData.observe(viewLifecycleOwner) { student ->
+            bindStudentData(student)
+        }
 
-            override fun onDataChange(dataSnapshot: DataSnapshot){
-                val student=dataSnapshot.getValue(student::class.java)
+        viewModel.fetchStudentData()
 
-                binding.tvStudentprofileStudentname.text ="Name : "+ student!!.name
-                binding.tvStudentprofileStudentemail.text ="Email : "+ student.email
-                binding.tvStudentprofileStudentdob.text ="Birthdate : "+ student.dob
-                binding.tvStudentprofileStudenteducation.text ="Education : "+ student!!.education
-                binding.tvStudentprofileStudenttechnologytraining.text ="Technical Trainings : "+ student.technology
-                binding.tvStudentprofileStudentworkexp.text ="Work Experince : "+ student.exp +"years"
-                binding.tvStudentprofileStudenttechchoice.text ="Technology Choosen : "+ student.techchoice
-                binding.tvStudentprofileStudentcity.text ="Preferred City of Exam : "+ student.loc
+        return binding.root
+    }
 
-            }
-            override fun onCancelled(error: DatabaseError){
-            }
-        })
-    return binding.root
+    private fun bindStudentData(student: student?) {
+        student?.let {
+            binding.tvStudentprofileStudentname.text = "Name: ${student.name}"
+            binding.tvStudentprofileStudentemail.text = "Email: ${student.email}"
+            binding.tvStudentprofileStudentdob.text = "Birthdate: ${student.dob}"
+            binding.tvStudentprofileStudenteducation.text = "Education: ${student.education}"
+            binding.tvStudentprofileStudenttechnologytraining.text = "Technical Trainings: ${student.technology}"
+            binding.tvStudentprofileStudentworkexp.text = "Work Experience: ${student.exp} years"
+            binding.tvStudentprofileStudenttechchoice.text = "Technology Chosen: ${student.techchoice}"
+            binding.tvStudentprofileStudentcity.text = "Preferred City of Exam: ${student.loc}"
+        }
     }
 }
+
+
+
+
+

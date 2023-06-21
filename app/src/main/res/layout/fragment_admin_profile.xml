@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Admin.AdminProfileFragment">
+    tools:context=".Admin.adminView.AdminProfileFragment">
 
     <ImageView
         android:id="@+id/profileImgadmin"
