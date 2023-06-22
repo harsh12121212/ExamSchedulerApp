@@ -2,7 +2,7 @@ package com.app.examschedulerapp.Admin.adminViewModel
 
 import androidx.lifecycle.ViewModel
 import com.app.examschedulerapp.Admin.adminModel.admin
-import com.app.examschedulerapp.data.City
+import com.app.examschedulerapp.Admin.adminModel.City
 import com.app.examschedulerapp.data.DBConstants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference

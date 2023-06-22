@@ -1,4 +1,4 @@
-package com.app.examschedulerapp.Student.studentModel
+package com.app.examschedulerapp.data
 
 data class examdata(
     var sf_city: String? = null,

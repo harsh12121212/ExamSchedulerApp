@@ -1,4 +1,4 @@
-package com.app.examschedulerapp.adapters
+package com.app.examschedulerapp.Student.studentAdapter
 
 import android.content.Context
 import android.view.LayoutInflater

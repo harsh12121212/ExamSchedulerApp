@@ -6,10 +6,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.examschedulerapp.Student.studentViewModel.StudentStatusViewModel
-import com.app.examschedulerapp.adapters.StudentStatusAdapter
-import com.app.examschedulerapp.data.*
+import com.app.examschedulerapp.Student.studentAdapter.StudentStatusAdapter
 import com.app.examschedulerapp.databinding.FragmentStudentStatusBinding
-import com.google.firebase.database.*
 
 class StudentStatusFragment : Fragment() {
 

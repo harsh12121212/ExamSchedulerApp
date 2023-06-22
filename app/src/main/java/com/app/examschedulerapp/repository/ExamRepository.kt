@@ -1,6 +1,6 @@
 package com.app.examschedulerapp.repository
 
-import com.app.examschedulerapp.Student.studentModel.examdata
+import com.app.examschedulerapp.data.examdata
 import com.google.firebase.database.*
 
 /* Handles data operations related to exams, such as fetching, creating, updating,
