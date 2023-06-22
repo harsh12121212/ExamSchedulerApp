@@ -1,36 +1,36 @@
 package com.app.examschedulerapp.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.app.examschedulerapp.Student.studentView.StudentStatusFragment
 import com.app.examschedulerapp.Student.studentModel.examdata
 import com.app.examschedulerapp.databinding.StudentcardviewBinding
 
-class StudentStatusAdapter (
-    var context: StudentStatusFragment,
-    var list: ArrayList<examdata>): RecyclerView.Adapter<StudentStatusAdapter.UserViewHolder>(){
+class StudentStatusAdapter(
+    private val context: Context,
+    private val list: List<examdata>
+) : RecyclerView.Adapter<StudentStatusAdapter.UserViewHolder>() {
 
-    inner class UserViewHolder(val adapterBinding : StudentcardviewBinding)
-            : RecyclerView.ViewHolder(adapterBinding.root){}
+    inner class UserViewHolder(val adapterBinding: StudentcardviewBinding) :
+        RecyclerView.ViewHolder(adapterBinding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
-        val  binding = StudentcardviewBinding.inflate(LayoutInflater.from(parent.context),parent,false)
-
+        val binding = StudentcardviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return UserViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        holder.adapterBinding.tvStudname.text=list[position].studentName
-        holder.adapterBinding.tvStudemail.text=list[position].studentEmailId
-        holder.adapterBinding.dtStudCity.text="Selected City : "+list[position].sf_city
-        holder.adapterBinding.dtStudCentre.text="Selected Center : "+list[position].sf_centre
-        holder.adapterBinding.dtStudDate.text="Selected Date : "+list[position].sf_examdate
-        holder.adapterBinding.tvStudStatus.text=list[position].status
+        val currentItem = list[position]
+        holder.adapterBinding.tvStudname.text = currentItem.studentName
+        holder.adapterBinding.tvStudemail.text = currentItem.studentEmailId
+        holder.adapterBinding.dtStudCity.text = "Selected City: ${currentItem.sf_city}"
+        holder.adapterBinding.dtStudCentre.text = "Selected Center: ${currentItem.sf_centre}"
+        holder.adapterBinding.dtStudDate.text = "Selected Date: ${currentItem.sf_examdate}"
+        holder.adapterBinding.tvStudStatus.text = currentItem.status
     }
 
     override fun getItemCount(): Int {
         return list.size
     }
-
 }

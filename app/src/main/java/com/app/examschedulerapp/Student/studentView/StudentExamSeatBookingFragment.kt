@@ -7,8 +7,10 @@ import android.view.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.app.examschedulerapp.R
 import com.app.examschedulerapp.Student.studentModel.examdata
+import com.app.examschedulerapp.Student.studentViewModel.StudentExamSeatBookingViewModel
 import com.app.examschedulerapp.data.DBConstants.APPLICATION
 import com.app.examschedulerapp.data.LoggedInUser
 import com.app.examschedulerapp.databinding.StudentExamSeatBookingBinding
@@ -22,20 +24,16 @@ class StudentExamSeatBookingFragment : Fragment() {
 
     private lateinit var binding: StudentExamSeatBookingBinding
     private lateinit var user: FirebaseAuth
+    private lateinit var viewModel: StudentExamSeatBookingViewModel
 
     var slotlist = arrayOf("Select Slot", "Slot 1", "Slot 2")
     var citylist = arrayOf("Select City", "Banglore", "Hyderabad", "Chennai")
 
-    private lateinit var dbRef: DatabaseReference
-    private var stud_city = ""
-    private var stud_centre = ""
-    private var stud_slot = ""
-    private var stud_examdate = ""
     private var selectedCity: String = ""
-    private var countid = 0
     val banglorecentres: MutableList<String> = ArrayList()
     val hyderabadcentres: MutableList<String> = ArrayList()
     val chennaicentres: MutableList<String> = ArrayList()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -50,6 +48,9 @@ class StudentExamSeatBookingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
+
+        // Initialize ViewModel
+        viewModel = ViewModelProvider(this)[StudentExamSeatBookingViewModel::class.java]
 
         // Exam date  Calender
         val c = Calendar.getInstance()
@@ -164,113 +165,54 @@ class StudentExamSeatBookingFragment : Fragment() {
     }
 
     private fun saveData() {
-        dbRef = FirebaseDatabase.getInstance().getReference(APPLICATION)
-
-        dbRef = FirebaseDatabase.getInstance().getReference(APPLICATION)
-        dbRef.orderByChild("studentId").equalTo(LoggedInUser.student.uid)
-            .addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    countid = dataSnapshot.childrenCount.toInt()
-                    if (countid >= 2) {
-                        showSnackBar("You have already booked a seat twice.")
-                    } else {
-                        checkRequestStatus()
-                    }
-                }
-
-                override fun onCancelled(databaseError: DatabaseError) {
-                    // Handle error
-                }
-            })
-    }
-
-    private fun checkRequestStatus() {
-        dbRef.orderByChild("studentId").equalTo(LoggedInUser.student.uid)
-            .addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    var requestDeclined = false
-                    for (snapshot in dataSnapshot.children) {
-                        val examData = snapshot.getValue(examdata::class.java)
-                        if (examData?.status == "declined") {
-                            requestDeclined = true
-                            break
-                        }
-                    }
-                    if (requestDeclined) {
-                        countid = 0 // Reset the countid
-                        checkCityAvailability()
-                    } else {
-                        checkCityAvailability()
-                    }
-                }
-
-                override fun onCancelled(databaseError: DatabaseError) {
-                    // Handle error
-                }
-            })
-    }
-
-    private fun checkCityAvailability() {
-        val currentUser = user.currentUser
-        if (currentUser != null) {
-            val userId = currentUser.uid
-            dbRef.orderByChild("studentId").equalTo(userId)
-                .addListenerForSingleValueEvent(object : ValueEventListener {
-                    override fun onDataChange(dataSnapshot: DataSnapshot) {
-                        var cityAlreadySubmitted = false
-                        for (snapshot in dataSnapshot.children) {
-                            val examData = snapshot.getValue(examdata::class.java)
-                            if (examData?.sf_city == selectedCity) {
-                                cityAlreadySubmitted = true
-                                break
-                            }
-                        }
-                        if (cityAlreadySubmitted) {
-                            showSnackBar("You have already submitted seat booking for this City")
-                        } else {
-                            saveSeatData()
-                        }
-                    }
-
-                    override fun onCancelled(databaseError: DatabaseError) {
-                        // Handle error
-                    }
-                })
-        }
-    }
-
-    private fun saveSeatData() {
-        stud_city = binding.spCity.selectedItem.toString().trim()
-        stud_centre = binding.spCenter.selectedItem.toString().trim()
-        stud_slot = binding.spSlot.selectedItem.toString().trim()
-        stud_examdate = binding.etStudExamdate.text.toString().trim()
+        val selectedItemstud_city = binding.spCity.selectedItem
+        val selectedItemstud_centre = binding.spCenter.selectedItem
+        val selectedItemstud_slot= binding.spSlot.selectedItem
+        val stud_city = selectedItemstud_city?.toString()?.trim() ?: ""
+        val stud_centre = selectedItemstud_centre?.toString()?.trim() ?: ""
+        val stud_slot = selectedItemstud_slot?.toString()?.trim() ?: ""
+        val stud_examdate = binding.etStudExamdate?.text?.toString()?.trim() ?: ""
 
         if (stud_examdate.isEmpty()) {
             showSnackBar("Enter date please")
         } else {
-            binding.progressbar.visibility = View.VISIBLE
-            dbRef.push().setValue(
-                examdata(
-                    stud_city,
-                    stud_centre,
-                    stud_slot,
-                    stud_examdate,
-                    studentName = LoggedInUser.student.name.orEmpty(),
-                    studentEmailId = LoggedInUser.student.email.orEmpty(),
-                    studentId = LoggedInUser.student.uid.orEmpty(),
-                    countid = countid + 1
-                )
-            ).addOnCompleteListener {
-                binding.progressbar.visibility = View.GONE
-                showSnackBar("Application submitted")
-                this.fragmentManager?.popBackStack()
-            }.addOnFailureListener { err ->
-                binding.progressbar.visibility = View.GONE
-                showSnackBar("Error${err.message}")
-            }
+            val examData = examdata(
+                stud_city,
+                stud_centre,
+                stud_slot,
+                stud_examdate,
+                studentName = LoggedInUser.student.name.orEmpty(),
+                studentEmailId = LoggedInUser.student.email.orEmpty(),
+                studentId = LoggedInUser.student.uid.orEmpty(),
+                countid = 0
+            )
+
+            viewModel.saveExamData(
+                selectedCity = stud_city,
+                selectedCenter = stud_centre,
+                selectedSlot = stud_slot,
+                selectedExamDate = stud_examdate,
+                onSuccess = {
+                    binding.progressbar.visibility = View.VISIBLE
+                    viewModel.saveSeatData(
+                        examData,
+                        onSuccess = {
+                            binding.progressbar.visibility = View.GONE
+                            showSnackBar("Application submitted")
+                            this.fragmentManager?.popBackStack()
+                        },
+                        onFailure = { errorMessage ->
+                            binding.progressbar.visibility = View.GONE
+                            showSnackBar(errorMessage)
+                        }
+                    )
+                },
+                onFailure = { errorMessage ->
+                    showSnackBar(errorMessage)
+                }
+            )
         }
     }
-
     private fun showSnackBar(response: String) {
         val snackbar = Snackbar.make(binding.root, response, Snackbar.LENGTH_LONG)
         snackbar.show()
