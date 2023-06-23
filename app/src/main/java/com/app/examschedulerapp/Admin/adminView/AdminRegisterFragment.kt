@@ -120,9 +120,4 @@ class AdminRegisterFragment : Fragment() {
             }
         )
     }
-
-    private fun showSnackBar(response: String) {
-        val snackbar = Snackbar.make(binding.root, response, Snackbar.LENGTH_SHORT)
-        snackbar.show()
-    }
 }

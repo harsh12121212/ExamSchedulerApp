@@ -3,14 +3,17 @@ package com.app.examschedulerapp.Student.studentViewModel
 import androidx.lifecycle.ViewModel
 import com.app.examschedulerapp.data.DBConstants
 import com.app.examschedulerapp.Student.studentModel.student
+import com.app.examschedulerapp.repository.UserRepository
+import com.app.examschedulerapp.repository.UserRepositoryInterface
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
-class StudentRegisterViewModel : ViewModel() {
+class StudentRegisterViewModel(private val userRepository: UserRepositoryInterface) : ViewModel() {
+
 
     private val firebaseAuth = FirebaseAuth.getInstance()
-    private val dbRef: DatabaseReference = FirebaseDatabase.getInstance().getReference(DBConstants.USERS)
+    constructor() : this(UserRepository())
 
     /**
      * Creates a new user account with the provided email and password using FirebaseAuth.
@@ -44,10 +47,9 @@ class StudentRegisterViewModel : ViewModel() {
     ) {
         firebaseAuth.currentUser?.uid?.let { uid ->
             studentData.uid = uid // Set the UID
-            dbRef.child(uid).setValue(studentData)
-                .addOnCompleteListener { task ->
-                    onCompleteListener(task.isSuccessful)
-                }
+            userRepository.saveStudentData(studentData, onCompleteListener)
+        } ?: run {
+            onCompleteListener(false)
         }
     }
 }

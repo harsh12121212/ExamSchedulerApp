@@ -1,8 +1,8 @@
 package com.app.examschedulerapp.Student.studentViewModel
 
 import androidx.lifecycle.ViewModel
-import com.app.examschedulerapp.Student.studentModel.examdata
 import com.app.examschedulerapp.data.LoggedInUser
+import com.app.examschedulerapp.data.examdata
 import com.app.examschedulerapp.repository.ExamRepository
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError

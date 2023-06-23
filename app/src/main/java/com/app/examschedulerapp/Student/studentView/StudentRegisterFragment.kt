@@ -16,6 +16,9 @@ import com.app.examschedulerapp.Student.studentViewModel.StudentRegisterViewMode
 import com.app.examschedulerapp.data.DBConstants
 import com.app.examschedulerapp.Student.studentModel.student
 import com.app.examschedulerapp.databinding.FragmentStudentRegisterBinding
+import com.app.examschedulerapp.repository.UserRepository
+import com.app.examschedulerapp.repository.UserRepositoryInterface
+import com.google.firebase.auth.FirebaseAuth
 import java.util.*
 
 const val PASSWORD_LENGTH_ERROR = "password must at least 6 characters long"
@@ -25,6 +28,7 @@ class StudentRegisterFragment : Fragment() {
 
     private lateinit var binding: FragmentStudentRegisterBinding
     private lateinit var viewModel: StudentRegisterViewModel
+    private lateinit var userRepository: UserRepositoryInterface
 
     private val cityList = arrayOf("Select City", "Bangalore", "Hyderabad", "Chennai")
     private val techList = arrayOf("Select Technology Choice", "Kotlin", "Java", "Dart")
@@ -38,7 +42,8 @@ class StudentRegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = StudentRegisterViewModel()
+        userRepository = UserRepository()
+        viewModel = StudentRegisterViewModel(userRepository)
         setupLocationSpinner()
         setupTechnologySpinner()
         setupDatePickers()
@@ -138,7 +143,7 @@ class StudentRegisterFragment : Fragment() {
                 date = date,
                 password = password,
                 type = type,
-                uid = "",
+                uid = ""
             )
 
             viewModel.createUserWithEmailAndPassword(email, password) { isSuccess ->

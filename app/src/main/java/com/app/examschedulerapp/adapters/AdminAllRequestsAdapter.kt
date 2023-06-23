@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.app.examschedulerapp.Admin.adminView.AdminAllRequestsFragment
 import com.app.examschedulerapp.data.DBConstants
-import com.app.examschedulerapp.Student.studentModel.examdata
+import com.app.examschedulerapp.data.examdata
 import com.app.examschedulerapp.databinding.CvAdminAllrequestBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*

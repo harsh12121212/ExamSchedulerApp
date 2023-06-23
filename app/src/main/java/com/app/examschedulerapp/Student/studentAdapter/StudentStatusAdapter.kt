@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.app.examschedulerapp.Student.studentModel.examdata
+import com.app.examschedulerapp.data.examdata
 import com.app.examschedulerapp.databinding.StudentcardviewBinding
 
 class StudentStatusAdapter(

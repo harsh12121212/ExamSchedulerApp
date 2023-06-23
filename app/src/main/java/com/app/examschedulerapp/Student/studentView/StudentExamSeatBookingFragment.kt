@@ -9,10 +9,9 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.app.examschedulerapp.R
-import com.app.examschedulerapp.Student.studentModel.examdata
 import com.app.examschedulerapp.Student.studentViewModel.StudentExamSeatBookingViewModel
-import com.app.examschedulerapp.data.DBConstants.APPLICATION
 import com.app.examschedulerapp.data.LoggedInUser
+import com.app.examschedulerapp.data.examdata
 import com.app.examschedulerapp.databinding.StudentExamSeatBookingBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth

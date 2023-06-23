@@ -5,23 +5,26 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.app.examschedulerapp.Student.studentModel.student
 import com.app.examschedulerapp.Student.studentViewModel.StudentProfileViewModel
 import com.app.examschedulerapp.databinding.FragmentStudentProfileBinding
+import com.app.examschedulerapp.repository.UserRepository
 
 class StudentProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentStudentProfileBinding
     private lateinit var viewModel: StudentProfileViewModel
+    private lateinit var userRepository: UserRepository
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentStudentProfileBinding.inflate(inflater, container, false)
+        userRepository = UserRepository()
         viewModel = ViewModelProvider(this).get(StudentProfileViewModel::class.java)
+        viewModel.setUserRepository(userRepository)
 
         viewModel.studentData.observe(viewLifecycleOwner) { student ->
             bindStudentData(student)
@@ -45,8 +48,3 @@ class StudentProfileFragment : Fragment() {
         }
     }
 }
-
-
-
-
-

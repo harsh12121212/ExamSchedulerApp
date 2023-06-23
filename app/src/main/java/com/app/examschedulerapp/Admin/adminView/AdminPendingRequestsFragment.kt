@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.examschedulerapp.adapters.AdminPendingRequestsAdapter
 import com.app.examschedulerapp.data.DBConstants
-import com.app.examschedulerapp.Student.studentModel.examdata
+import com.app.examschedulerapp.data.examdata
 import com.app.examschedulerapp.databinding.FragmentAdminPendingrequestBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
