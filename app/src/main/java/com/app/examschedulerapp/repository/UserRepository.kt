@@ -27,7 +27,6 @@ class UserRepository : UserRepositoryInterface {
                 val student = dataSnapshot.getValue(student::class.java)
                 studentData.value = student!!
             }
-
             override fun onCancelled(error: DatabaseError) {
                 // Handle error if needed
             }
