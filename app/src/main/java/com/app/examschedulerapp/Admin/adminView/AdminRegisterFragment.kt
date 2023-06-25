@@ -1,5 +1,6 @@
 package com.app.examschedulerapp.Admin.adminView
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Patterns
@@ -13,13 +14,16 @@ import android.widget.Toast.makeText
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.app.examschedulerapp.Admin.adminModel.admin
 import com.app.examschedulerapp.Admin.adminViewModel.AdminRegisterViewModel
 import com.app.examschedulerapp.R
 import com.app.examschedulerapp.Student.studentView.INVALID_DATA
 import com.app.examschedulerapp.Student.studentView.PASSWORD_LENGTH_ERROR
+import com.app.examschedulerapp.Student.studentView.StudentMainActivity
 import com.app.examschedulerapp.data.DBConstants.ADMIN
 import com.app.examschedulerapp.databinding.FragmentAdminRegisterBinding
-import com.google.android.material.snackbar.Snackbar
+import com.app.examschedulerapp.repository.UserRepository
+import com.app.examschedulerapp.repository.UserRepositoryInterface
 
 class AdminRegisterFragment : Fragment() {
     private lateinit var binding: FragmentAdminRegisterBinding
@@ -35,10 +39,9 @@ class AdminRegisterFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         super.onViewCreated(view, savedInstanceState)
 
-        val cityarrayAdapter = activity?.let { ArrayAdapter(it, R.layout.spinnerlayout, citylist) }
+        val cityarrayAdapter = ArrayAdapter(requireActivity(), R.layout.spinnerlayout, citylist)
         binding.etAdminCity.setSelection(0)
         binding.etAdminCity.adapter = cityarrayAdapter
         binding.etAdminCity.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -78,33 +81,28 @@ class AdminRegisterFragment : Fragment() {
             binding.etAdminSlottwo.error = "Please enter the data"
         } else {
             // Data is valid, proceed with account creation
-            firebaseCreateAccount(email, password)
+            viewModel.createUserAccount(email, password,
+                onSuccess = {
+                    Toast.makeText(activity, "LoggedIn as $email", Toast.LENGTH_LONG).show()
+                    saveData(name, email, city, centre, firstslot, secondslot, password, type)
+                },
+                onFailure = { error ->
+                    Toast.makeText(activity, "Login failed due to $error", Toast.LENGTH_LONG).show()
+                }
+            )
         }
     }
 
-    private fun firebaseCreateAccount(email: String, password: String) {
-        binding.progressbar.visibility = View.VISIBLE
-
-        viewModel.firebaseCreateAccount(email, password,
-            onSuccess = {
-                makeText(activity, "LoggedIn as $email", Toast.LENGTH_LONG).show()
-                saveData()
-            },
-            onFailure = {
-                makeText(activity, "Login failed due to $it", Toast.LENGTH_LONG).show()
-            }
-        )
-    }
-
-    private fun saveData() {
-        val name = binding.etAdminName.text.toString().trim()
-        val email = binding.etAdminEmail.text.toString().trim()
-        val city = binding.etAdminCity.selectedItem.toString().trim()
-        val centre = binding.etAdminCentre.text.toString().trim()
-        val firstslot = binding.etAdminSlotone.text.toString().trim()
-        val secondslot = binding.etAdminSlottwo.text.toString().trim()
-        val password = binding.etAdminPswd.text.toString().trim()
-        val type = ADMIN
+    private fun saveData(
+        name: String,
+        email: String,
+        city: String,
+        centre: String,
+        firstslot: String,
+        secondslot: String,
+        password: String,
+        type: String
+    ) {
         val uid = viewModel.firebaseAuth.currentUser?.uid
 
         binding.progressbar.visibility = View.VISIBLE
@@ -113,10 +111,11 @@ class AdminRegisterFragment : Fragment() {
             name, email, city, centre, firstslot, secondslot, password, type, uid,
             onSuccess = {
                 makeText(activity, "Account created successfully", Toast.LENGTH_LONG).show()
-                findNavController().navigate(R.id.action_adminRegisterFragment_to_adminFragment)
+                startActivity(Intent(activity, AdminMainActivity::class.java))
+                activity?.finish()
             },
-            onFailure = {
-                makeText(activity, "Error: $it", Toast.LENGTH_LONG).show()
+            onFailure = { error ->
+                makeText(activity, "Error: $error", Toast.LENGTH_LONG).show()
             }
         )
     }

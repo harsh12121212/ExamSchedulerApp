@@ -1,30 +1,25 @@
 package com.app.examschedulerapp.Admin.adminViewModel
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.app.examschedulerapp.Admin.adminModel.admin
+import com.app.examschedulerapp.repository.UserRepositoryInterface
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.*
 
 class AdminProfileViewModel : ViewModel() {
-    private val _adminData = MutableLiveData<admin>()
-    val adminData: LiveData<admin> = _adminData
+    private lateinit var userRepository: UserRepositoryInterface
+    val adminData: MutableLiveData<admin> = MutableLiveData()
 
-    private val database: DatabaseReference = FirebaseDatabase.getInstance().reference
-    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
-
-    init {
-        currentUserReference().addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val admin = dataSnapshot.getValue(admin::class.java)
-                _adminData.value = admin!!
-            }
-
-            override fun onCancelled(error: DatabaseError) {}
-        })
+    fun setUserRepository(userRepository: UserRepositoryInterface) {
+        this.userRepository = userRepository
     }
 
-    private fun currentUserReference(): DatabaseReference =
-        database.child("Users").child(auth.currentUser!!.uid)
+    fun fetchAdminData() {
+        userRepository.fetchAdminData(getCurrentUserId(), adminData)
+    }
+
+    private fun getCurrentUserId(): String {
+        val firebaseUser = FirebaseAuth.getInstance().currentUser
+        return firebaseUser?.uid ?: ""
+    }
 }

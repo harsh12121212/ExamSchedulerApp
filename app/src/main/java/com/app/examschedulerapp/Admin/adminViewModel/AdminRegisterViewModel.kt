@@ -1,32 +1,24 @@
 package com.app.examschedulerapp.Admin.adminViewModel
 
 import androidx.lifecycle.ViewModel
-import com.app.examschedulerapp.Admin.adminModel.admin
 import com.app.examschedulerapp.Admin.adminModel.City
-import com.app.examschedulerapp.data.DBConstants
+import com.app.examschedulerapp.Admin.adminModel.admin
+import com.app.examschedulerapp.repository.UserRepository
+import com.app.examschedulerapp.repository.UserRepositoryInterface
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 class AdminRegisterViewModel : ViewModel() {
-    internal lateinit var firebaseAuth: FirebaseAuth
-    private lateinit var databaseReference: DatabaseReference
+    internal val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
+    private val userRepository: UserRepositoryInterface = UserRepository()
 
-    fun firebaseCreateAccount(
+    fun createUserAccount(
         email: String,
         password: String,
         onSuccess: () -> Unit,
         onFailure: (String) -> Unit
     ) {
-        firebaseAuth = FirebaseAuth.getInstance()
-        firebaseAuth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener {
-                if (it.isSuccessful) {
-                    onSuccess()
-                } else {
-                    onFailure(it.exception.toString())
-                }
-            }
+        userRepository.createAdmin(email, password, onSuccess, onFailure)
     }
 
     fun saveData(
@@ -42,54 +34,32 @@ class AdminRegisterViewModel : ViewModel() {
         onSuccess: () -> Unit,
         onFailure: (String) -> Unit
     ) {
-        databaseReference = FirebaseDatabase.getInstance().getReference(DBConstants.USERS)
-        val adminData = admin(
-            name,
-            email,
-            city,
-            centre,
-            firstslot,
-            secondslot,
-            password,
-            type,
-            uid
+        userRepository.saveAdminData(
+            name, email, city, centre, firstslot, secondslot, password, type, uid,
+            onSuccess = {
+                saveCentreData(city, centre, firstslot, secondslot, onSuccess, onFailure)
+            },
+            onFailure = onFailure
         )
-        val centreData = City(
-            city,
-            centre,
-            firstslot,
-            secondslot,
-        )
+    }
 
-        uid?.let {
-            databaseReference.child(it).setValue(adminData).addOnCompleteListener {
+    private fun saveCentreData(
+        city: String,
+        centre: String,
+        firstslot: String,
+        secondslot: String,
+        onSuccess: () -> Unit,
+        onFailure: (String) -> Unit
+    ) {
+        val centreData = City(city, centre, firstslot, secondslot)
+
+        val centerRef = FirebaseDatabase.getInstance().getReference("CenterData").child(city)
+        centerRef.child(centre).setValue(centreData)
+            .addOnCompleteListener {
                 onSuccess()
-            }.addOnFailureListener { err ->
-                onFailure("Error: ${err.message}")
             }
-            when (city) {
-                "Banglore" -> {
-                    FirebaseDatabase.getInstance().getReference("CenterData").child("Banglore").child(centre)
-                        .setValue(centreData).addOnCompleteListener {
-                            onSuccess()
-                        }
-                }
-                "Chennai" -> {
-                    FirebaseDatabase.getInstance().getReference("CenterData").child("Chennai").child(centre)
-                        .setValue(centreData).addOnCompleteListener {
-                            onSuccess()
-                        }
-                }
-                "Hyderabad" -> {
-                    FirebaseDatabase.getInstance().getReference("CenterData").child("Hyderabad").child(centre)
-                        .setValue(centreData).addOnCompleteListener {
-                            onSuccess()
-                        }
-                }
-                else -> {
-                    onFailure("ERROR!!!")
-                }
+            .addOnFailureListener { error ->
+                onFailure("Error: ${error.message}")
             }
-        }
     }
 }
