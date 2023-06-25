@@ -18,7 +18,6 @@ class UserRepository : UserRepositoryInterface {
                 onCompleteListener(task.isSuccessful)
             }
     }
-
     override fun fetchStudentData(userId: String, studentData: MutableLiveData<student>) {
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance().reference
