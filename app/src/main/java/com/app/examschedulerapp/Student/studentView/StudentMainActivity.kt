@@ -7,7 +7,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
-import com.app.examschedulerapp.MainActivity
+import com.app.examschedulerapp.view.MainActivity
 import com.app.examschedulerapp.R
 import com.app.examschedulerapp.databinding.ActivityStudentMainBinding
 import com.google.firebase.auth.FirebaseAuth

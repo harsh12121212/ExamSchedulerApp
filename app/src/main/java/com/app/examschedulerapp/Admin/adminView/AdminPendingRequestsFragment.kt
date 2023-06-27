@@ -7,14 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.app.examschedulerapp.adapters.AdminPendingRequestsAdapter
+import com.app.examschedulerapp.Admin.adminAdapters.AdminPendingRequestsAdapter
 import com.app.examschedulerapp.data.DBConstants
 import com.app.examschedulerapp.data.examdata
 import com.app.examschedulerapp.databinding.FragmentAdminPendingrequestBinding
 import com.app.examschedulerapp.repository.ExamRepository
 import com.app.examschedulerapp.repository.ExamRepositoryInterface
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase

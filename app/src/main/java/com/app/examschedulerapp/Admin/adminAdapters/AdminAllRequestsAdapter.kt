@@ -1,4 +1,4 @@
-package com.app.examschedulerapp.adapters
+package com.app.examschedulerapp.Admin.adminAdapters
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,10 +12,9 @@ import com.app.examschedulerapp.databinding.CvAdminAllrequestBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
-class AdminAllRequestsAdapter(
-    var context: AdminAllRequestsFragment,
-    var list: ArrayList<examdata>
-) : RecyclerView.Adapter<AdminAllRequestsAdapter.UserViewHolder>() {
+class AdminAllRequestsAdapter(var context: AdminAllRequestsFragment) :
+    RecyclerView.Adapter<AdminAllRequestsAdapter.UserViewHolder>() {
+    private var exams: List<examdata> = emptyList()
     private var currentUserCentre: String? = null
     private val database: FirebaseDatabase = FirebaseDatabase.getInstance()
 
@@ -50,8 +49,8 @@ class AdminAllRequestsAdapter(
         return UserViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: AdminAllRequestsAdapter.UserViewHolder, position: Int) {
-        val currentItem = list[position]
+    override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
+        val currentItem = exams[position]
         val binding = holder.adapterBinding
 
         Log.d("AdminChecking", "Inside the if $currentUserCentre")
@@ -78,6 +77,11 @@ class AdminAllRequestsAdapter(
     }
 
     override fun getItemCount(): Int {
-        return list.size
+        return exams.size
+    }
+
+    fun setExams(exams: List<examdata>) {
+        this.exams = exams
+        notifyDataSetChanged()
     }
 }

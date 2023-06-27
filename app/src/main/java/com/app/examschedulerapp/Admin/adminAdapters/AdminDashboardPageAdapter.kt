@@ -1,4 +1,4 @@
-package com.app.examschedulerapp.adapters
+package com.app.examschedulerapp.Admin.adminAdapters
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

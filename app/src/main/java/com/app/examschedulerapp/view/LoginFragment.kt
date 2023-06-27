@@ -1,4 +1,4 @@
-package com.app.examschedulerapp
+package com.app.examschedulerapp.view
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.app.examschedulerapp.Admin.adminView.AdminMainActivity
+import com.app.examschedulerapp.R
 import com.app.examschedulerapp.Student.studentView.StudentMainActivity
 import com.app.examschedulerapp.ViewModel.LoginViewModel
 import com.app.examschedulerapp.data.DBConstants

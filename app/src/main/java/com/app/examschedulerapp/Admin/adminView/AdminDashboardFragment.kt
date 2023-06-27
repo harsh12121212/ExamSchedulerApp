@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.widget.ViewPager2
-import com.app.examschedulerapp.adapters.AdminDashboardPageAdapter
+import com.app.examschedulerapp.Admin.adminAdapters.AdminDashboardPageAdapter
 import com.app.examschedulerapp.databinding.FragmentAdminDashboardBinding
 import com.google.android.material.tabs.TabLayout
 

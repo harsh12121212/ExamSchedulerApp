@@ -8,7 +8,7 @@ import com.google.firebase.database.*
 
 /* Handles data operations related to exams, such as fetching, creating, updating,
 and deleting exams from firebase*/
-class  ExamRepository : ExamRepositoryInterface {
+class ExamRepository : ExamRepositoryInterface {
     private val currentUser = FirebaseAuth.getInstance().currentUser?.uid
     private val dbRef: DatabaseReference = FirebaseDatabase.getInstance().getReference("APPLICATION")
 
@@ -95,6 +95,24 @@ class  ExamRepository : ExamRepositoryInterface {
 
             override fun onCancelled(databaseError: DatabaseError) {
                 // Handle onCancelled if needed
+            }
+        })
+    }
+
+    override fun getExams(callback: (List<examdata>) -> Unit) {
+        dbRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val exams: MutableList<examdata> = mutableListOf()
+                for (childSnapshot in snapshot.children) {
+                    childSnapshot.getValue(examdata::class.java)?.let {
+                        exams.add(it)
+                    }
+                }
+                callback(exams)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Handle error
             }
         })
     }

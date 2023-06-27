@@ -1,4 +1,4 @@
-package com.app.examschedulerapp
+package com.app.examschedulerapp.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.app.examschedulerapp.R
 import com.app.examschedulerapp.ViewModel.HomeViewModel
 import com.app.examschedulerapp.databinding.FragmentHomeBinding
-import com.google.firebase.auth.FirebaseAuth
 
 //Fragment to give options of registeration and login to the user
 class HomeFragment : Fragment() {

@@ -11,6 +11,7 @@ interface ExamRepositoryInterface {
     fun getExamData(studentId: String): LiveData<List<examdata>>
     fun getPendingExamData(callback: (List<examdata>) -> Unit)
     fun updateStatus(item: examdata, status: String, callback: (Boolean) -> Unit)
+    fun getExams(callback: (List<examdata>) -> Unit)
 }
 
 
