@@ -1,5 +1,6 @@
 package com.app.examschedulerapp.repository
 
+import androidx.lifecycle.LiveData
 import com.app.examschedulerapp.data.examdata
 
 interface ExamRepositoryInterface {
@@ -7,4 +8,5 @@ interface ExamRepositoryInterface {
                      onSuccess: () -> Unit,
                      onFailure: (String) -> Unit
     )
+    fun getExamData(studentId: String): LiveData<List<examdata>>
 }
