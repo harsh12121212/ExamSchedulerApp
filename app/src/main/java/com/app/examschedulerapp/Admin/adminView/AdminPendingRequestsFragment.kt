@@ -11,6 +11,8 @@ import com.app.examschedulerapp.adapters.AdminPendingRequestsAdapter
 import com.app.examschedulerapp.data.DBConstants
 import com.app.examschedulerapp.data.examdata
 import com.app.examschedulerapp.databinding.FragmentAdminPendingrequestBinding
+import com.app.examschedulerapp.repository.ExamRepository
+import com.app.examschedulerapp.repository.ExamRepositoryInterface
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -21,28 +23,25 @@ import com.google.firebase.database.ValueEventListener
 class AdminPendingRequestsFragment : Fragment() {
 
     private lateinit var binding: FragmentAdminPendingrequestBinding
-    private lateinit var user: FirebaseAuth
-    var list: ArrayList<examdata> = ArrayList()
-
-    lateinit var AdminPendingRequestsAdapter: AdminPendingRequestsAdapter
+    private lateinit var examRepository: ExamRepositoryInterface
+    private var list: ArrayList<examdata> = ArrayList()
+    private lateinit var adminPendingRequestsAdapter: AdminPendingRequestsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-
         binding = FragmentAdminPendingrequestBinding.inflate(inflater, container, false)
 
-        user = FirebaseAuth.getInstance()
-        AdminPendingRequestsAdapter = AdminPendingRequestsAdapter(this, list) // Initialize the adapter
+        examRepository = ExamRepository()
+        adminPendingRequestsAdapter = AdminPendingRequestsAdapter(this, list, examRepository)
         binding.rvData.layoutManager = LinearLayoutManager(activity)
-        binding.rvData.adapter = AdminPendingRequestsAdapter
+        binding.rvData.adapter = adminPendingRequestsAdapter
         retrieveDataFromDatabase()
 
         return binding.root
     }
 
-    fun retrieveDataFromDatabase() {
-
+    private fun retrieveDataFromDatabase() {
         binding.progressbar.visibility = View.VISIBLE
         FirebaseDatabase.getInstance().getReference(DBConstants.APPLICATION)
             .addValueEventListener(object : ValueEventListener {
@@ -53,12 +52,10 @@ class AdminPendingRequestsFragment : Fragment() {
                         p0.children.forEach { it1 ->
                             it1.getValue(examdata::class.java)?.let {
                                 list.add(it)
-                                Log.e("TAG", "onDataChange: " + it.toString())
+                                Log.e("TAG", "onDataChange: $it")
                             }
-                            Log.e("TAG", "onDataChange: " + list.size)
-                            AdminPendingRequestsAdapter = AdminPendingRequestsAdapter(this@AdminPendingRequestsFragment, list)
-                            binding.rvData.layoutManager = LinearLayoutManager(activity)
-                            binding.rvData.adapter = AdminPendingRequestsAdapter
+                            Log.e("TAG", "onDataChange: ${list.size}")
+                            adminPendingRequestsAdapter.notifyDataSetChanged()
                         }
                     } catch (e: Exception) {
                         e.printStackTrace()

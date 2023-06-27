@@ -9,4 +9,8 @@ interface ExamRepositoryInterface {
                      onFailure: (String) -> Unit
     )
     fun getExamData(studentId: String): LiveData<List<examdata>>
+    fun getPendingExamData(callback: (List<examdata>) -> Unit)
+    fun updateStatus(item: examdata, status: String, callback: (Boolean) -> Unit)
 }
+
+
