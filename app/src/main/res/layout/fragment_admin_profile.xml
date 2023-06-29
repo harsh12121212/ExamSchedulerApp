@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Admin.adminView.AdminProfileFragment">
+    tools:context=".admin.adminView.AdminProfileFragment">
 
     <ImageView
         android:id="@+id/profileImgadmin"
@@ -16,7 +16,8 @@
         app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_adminprofile_heading"
-        app:srcCompat="@drawable/ic_adminprofile" />
+        app:srcCompat="@drawable/ic_adminprofile"
+        android:contentDescription="Admin Profile Image" />
 
     <TextView
         android:id="@+id/tv_adminprofile_heading"

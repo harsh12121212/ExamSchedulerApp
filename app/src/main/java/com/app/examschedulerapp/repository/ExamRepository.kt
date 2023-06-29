@@ -2,17 +2,15 @@ package com.app.examschedulerapp.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.app.examschedulerapp.data.examdata
-import com.google.firebase.auth.FirebaseAuth
+import com.app.examschedulerapp.data.Examdata
 import com.google.firebase.database.*
 
 /* Handles data operations related to exams, such as fetching, creating, updating,
 and deleting exams from firebase*/
 class ExamRepository : ExamRepositoryInterface {
-    private val currentUser = FirebaseAuth.getInstance().currentUser?.uid
     private val dbRef: DatabaseReference = FirebaseDatabase.getInstance().getReference("APPLICATION")
 
-    override fun saveExamData(examData: examdata, onSuccess: () -> Unit, onFailure: (String) -> Unit) {
+    override fun saveExamData(examData: Examdata, onSuccess: () -> Unit, onFailure: (String) -> Unit) {
         dbRef.push().setValue(examData)
             .addOnCompleteListener {
                 onSuccess()
@@ -22,16 +20,16 @@ class ExamRepository : ExamRepositoryInterface {
             }
     }
 
-    override fun getExamData(studentId: String): LiveData<List<examdata>> {
-        val examData = MutableLiveData<List<examdata>>()
+    override fun getExamData(studentId: String): LiveData<List<Examdata>> {
+        val examData = MutableLiveData<List<Examdata>>()
 
         dbRef.orderByChild("studentId").equalTo(studentId)
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    val list: MutableList<examdata> = mutableListOf()
+                    val list: MutableList<Examdata> = mutableListOf()
                     if (dataSnapshot.exists()) {
                         for (childSnapshot in dataSnapshot.children) {
-                            childSnapshot.getValue(examdata::class.java)?.let {
+                            childSnapshot.getValue(Examdata::class.java)?.let {
                                 list.add(it)
                                 println("TAG onDataChange: $it")
                             }
@@ -46,12 +44,12 @@ class ExamRepository : ExamRepositoryInterface {
             })
 
         return examData
-    } override fun getPendingExamData(callback: (List<examdata>) -> Unit) {
+    } override fun getPendingExamData(callback: (List<Examdata>) -> Unit) {
         dbRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val examDataList = mutableListOf<examdata>()
+                val examDataList = mutableListOf<Examdata>()
                 for (snapshot in dataSnapshot.children) {
-                    val examData = snapshot.getValue(examdata::class.java)
+                    val examData = snapshot.getValue(Examdata::class.java)
                     examData?.let {
                         examDataList.add(it)
                     }
@@ -65,14 +63,13 @@ class ExamRepository : ExamRepositoryInterface {
         })
     }
 
-    override fun updateStatus(item: examdata, status: String, callback: (Boolean) -> Unit) {
+    override fun updateStatus(item: Examdata, status: String, callback: (Boolean) -> Unit) {
         val query = dbRef.orderByChild("sf_centre").equalTo(item.sf_centre)
         query.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                var success = false
                 for (snapshot in dataSnapshot.children) {
                     val key = snapshot.key
-                    val data = snapshot.getValue(examdata::class.java)
+                    val data = snapshot.getValue(Examdata::class.java)
                     if (data != null && data == item) {
                         val updateData = HashMap<String, Any>()
                         updateData["status"] = status
@@ -81,16 +78,15 @@ class ExamRepository : ExamRepositoryInterface {
                         }
                         dbRef.child(key!!).updateChildren(updateData)
                             .addOnSuccessListener {
-                                success = true
-                                callback.invoke(success)
+                                callback.invoke(true)
                             }
                             .addOnFailureListener {
-                                callback.invoke(success)
+                                callback.invoke(true)
                             }
                         break
                     }
                 }
-                callback.invoke(success)
+                callback.invoke(false)
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
@@ -99,12 +95,12 @@ class ExamRepository : ExamRepositoryInterface {
         })
     }
 
-    override fun getExams(callback: (List<examdata>) -> Unit) {
+    override fun getExams(callback: (List<Examdata>) -> Unit) {
         dbRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val exams: MutableList<examdata> = mutableListOf()
+                val exams: MutableList<Examdata> = mutableListOf()
                 for (childSnapshot in snapshot.children) {
-                    childSnapshot.getValue(examdata::class.java)?.let {
+                    childSnapshot.getValue(Examdata::class.java)?.let {
                         exams.add(it)
                     }
                 }

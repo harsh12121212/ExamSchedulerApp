@@ -1,9 +1,9 @@
 package com.app.examschedulerapp.data
 
-import com.app.examschedulerapp.Admin.adminModel.admin
-import com.app.examschedulerapp.Student.studentModel.student
+import com.app.examschedulerapp.student.studentModel.Student
+import com.app.examschedulerapp.admin.adminmodel.Admin
 
 object LoggedInUser {
-    var student: student = student()
-    var admin: admin = admin()
+    var student: Student = Student()
+    var admin: Admin = Admin()
 }

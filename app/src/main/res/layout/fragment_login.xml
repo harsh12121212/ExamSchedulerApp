@@ -26,7 +26,8 @@
         app:layout_constraintHorizontal_bias="0.534"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.944" />
+        app:layout_constraintVertical_bias="0.944"
+        android:contentDescription="Login Icon" />
 
     <TextView
         android:id="@+id/headline_text"
@@ -152,7 +153,8 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/tv_txt"
         app:layout_constraintTop_toBottomOf="@+id/admin_register"
-        app:layout_constraintVertical_bias="0.167" />
+        app:layout_constraintVertical_bias="0.167"
+        android:focusable="true" />
 
     <ProgressBar
         android:id="@+id/progressbar"

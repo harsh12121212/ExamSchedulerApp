@@ -14,7 +14,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:contentDescription="Layout Image" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -25,7 +26,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.935" />
+        app:layout_constraintVertical_bias="0.935"
+        android:contentDescription="Home page Icon" />
 
     <TextView
         android:id="@+id/welcome_text"
@@ -56,14 +58,16 @@
         app:layout_constraintHorizontal_bias="0.522"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.576">
+        app:layout_constraintVertical_bias="0.576"
+        android:focusable="true">
 
         <ImageView
             android:id="@+id/img_admin"
             android:layout_width="127dp"
             android:layout_height="139dp"
             android:layout_margin="10dp"
-            android:src="@drawable/ic_adminprofile" />
+            android:src="@drawable/ic_adminprofile"
+            android:contentDescription="Admin Profile Image" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -92,14 +96,16 @@
         app:layout_constraintHorizontal_bias="0.89"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.577">
+        app:layout_constraintVertical_bias="0.577"
+        android:focusable="true">
 
         <ImageView
             android:id="@+id/img_student"
             android:layout_width="125dp"
             android:layout_height="142dp"
             android:layout_margin="10dp"
-            android:src="@drawable/ic_student" />
+            android:src="@drawable/ic_student"
+            android:contentDescription="@string/student_profileimg" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -146,7 +152,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cv_student"
-        app:layout_constraintVertical_bias="0.225" />
+        app:layout_constraintVertical_bias="0.225"
+        android:focusable="true" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,9 +1,9 @@
 package com.app.examschedulerapp.repository
 
 import androidx.lifecycle.MutableLiveData
-import com.app.examschedulerapp.Admin.adminModel.City
-import com.app.examschedulerapp.Admin.adminModel.admin
-import com.app.examschedulerapp.Student.studentModel.student
+import com.app.examschedulerapp.admin.adminmodel.City
+import com.app.examschedulerapp.admin.adminmodel.Admin
+import com.app.examschedulerapp.student.studentModel.Student
 import com.app.examschedulerapp.data.DBConstants
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -13,16 +13,16 @@ class UserRepository : UserRepositoryInterface {
     private val databaseReference: DatabaseReference = FirebaseDatabase.getInstance().getReference(
         DBConstants.USERS)
 
-    override fun saveStudentData(studentData: student, onCompleteListener: (Boolean) -> Unit) {
+    override fun saveStudentData(studentData: Student, onCompleteListener: (Boolean) -> Unit) {
         databaseReference.child(firebaseAuth.currentUser!!.uid).setValue(studentData)
             .addOnCompleteListener { task ->
                 onCompleteListener(task.isSuccessful)
             }
     }
-    override fun fetchStudentData(userId: String, studentData: MutableLiveData<student>) {
+    override fun fetchStudentData(userId: String, studentData: MutableLiveData<Student>) {
         databaseReference.child(userId).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val student = dataSnapshot.getValue(student::class.java)
+                val student = dataSnapshot.getValue(Student::class.java)
                 studentData.value = student!!
             }
             override fun onCancelled(error: DatabaseError) {
@@ -60,7 +60,7 @@ class UserRepository : UserRepositoryInterface {
         onSuccess: () -> Unit,
         onFailure: (String) -> Unit
     ) {
-        val adminData = admin(
+        val adminData = Admin(
             name,
             email,
             city,
@@ -125,10 +125,10 @@ class UserRepository : UserRepositoryInterface {
             }
         }
     }
-    override fun fetchAdminData(userId: String, adminData: MutableLiveData<admin>) {
+    override fun fetchAdminData(userId: String, adminData: MutableLiveData<Admin>) {
         databaseReference.child(userId).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val admin = dataSnapshot.getValue(admin::class.java)
+                val admin = dataSnapshot.getValue(Admin::class.java)
                 adminData.value = admin!!
             }
             override fun onCancelled(error: DatabaseError) {

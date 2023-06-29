@@ -23,7 +23,8 @@
             android:layout_marginTop="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/cv_icon" />
+            app:srcCompat="@drawable/cv_icon"
+            android:contentDescription="cardview_icon" />
 
         <TextView
             android:id="@+id/cv_studname"

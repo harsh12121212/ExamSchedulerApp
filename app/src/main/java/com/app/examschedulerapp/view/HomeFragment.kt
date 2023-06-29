@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.app.examschedulerapp.R
-import com.app.examschedulerapp.ViewModel.HomeViewModel
+import com.app.examschedulerapp.viewmodel.HomeViewModel
 import com.app.examschedulerapp.databinding.FragmentHomeBinding
 
 //Fragment to give options of registeration and login to the user
@@ -20,7 +20,7 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }

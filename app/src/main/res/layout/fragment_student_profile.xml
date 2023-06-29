@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".Student.studentView.StudentProfileFragment">
+    tools:context=".student.studentView.StudentProfileFragment">
 
 
     <include
@@ -28,7 +28,8 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_studentprofile_heading"
-        app:srcCompat="@drawable/ic_student" />
+        app:srcCompat="@drawable/ic_student"
+        android:contentDescription="@string/student_profileimg" />
 
     <TextView
         android:id="@+id/tv_studentprofile_heading"

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/studentRegisterFragment"
-        android:name="com.app.examschedulerapp.Student.studentView.StudentRegisterFragment"
+        android:name="com.app.examschedulerapp.student.studentView.StudentRegisterFragment"
         android:label="fragment_student_register"
         tools:layout="@layout/fragment_student_register">
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/adminRegisterFragment"
-        android:name="com.app.examschedulerapp.Admin.adminView.AdminRegisterFragment"
+        android:name="com.app.examschedulerapp.admin.adminView.AdminRegisterFragment"
         android:label="fragment_admin_register"
         tools:layout="@layout/fragment_admin_register">
         <action
@@ -59,7 +59,7 @@
     </fragment>
     <fragment
         android:id="@+id/StudentExamSeatBooking"
-        android:name="com.app.examschedulerapp.Student.studentView.StudentExamSeatBookingFragment"
+        android:name="com.app.examschedulerapp.student.studentView.StudentExamSeatBookingFragment"
         android:label="fragment_first"
         tools:layout="@layout/student_exam_seat_booking">
         <action
@@ -71,7 +71,7 @@
     </fragment>
     <fragment
         android:id="@+id/adminDasboardFragment"
-        android:name="com.app.examschedulerapp.Admin.adminView.AdminPendingRequestsFragment"
+        android:name="com.app.examschedulerapp.admin.adminView.AdminPendingRequestsFragment"
         android:label="fragment_admin"
         tools:layout="@layout/fragment_admin_pendingrequest">
         <action
@@ -80,7 +80,7 @@
     </fragment>
     <fragment
         android:id="@+id/studentProfileFragment"
-        android:name="com.app.examschedulerapp.Student.studentView.StudentProfileFragment"
+        android:name="com.app.examschedulerapp.student.studentView.StudentProfileFragment"
         android:label="fragment_student_profile"
         tools:layout="@layout/fragment_student_profile" />
 </navigation>

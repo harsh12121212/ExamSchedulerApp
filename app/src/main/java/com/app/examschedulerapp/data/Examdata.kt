@@ -1,6 +1,6 @@
 package com.app.examschedulerapp.data
 
-data class examdata(
+data class Examdata(
     var sf_city: String? = null,
     var sf_centre: String? = null,
     var sf_slot: String? = null,

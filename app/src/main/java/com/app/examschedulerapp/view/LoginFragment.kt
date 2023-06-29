@@ -8,10 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.app.examschedulerapp.Admin.adminView.AdminMainActivity
+import com.app.examschedulerapp.admin.adminView.AdminMainActivity
 import com.app.examschedulerapp.R
-import com.app.examschedulerapp.Student.studentView.StudentMainActivity
-import com.app.examschedulerapp.ViewModel.LoginViewModel
+import com.app.examschedulerapp.student.studentView.StudentMainActivity
+import com.app.examschedulerapp.viewmodel.LoginViewModel
 import com.app.examschedulerapp.data.DBConstants
 import com.app.examschedulerapp.data.LoggedInUser
 import com.app.examschedulerapp.databinding.FragmentLoginBinding
@@ -25,7 +25,7 @@ class LoginFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
     }
