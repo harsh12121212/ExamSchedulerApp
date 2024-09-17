@@ -40,7 +40,7 @@
         android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0">
@@ -57,7 +57,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="60sp"
                 android:layout_marginBottom="10sp"
-
                 android:textColorHint="@color/purple_200"
                 app:startIconDrawable="@drawable/ic_profile"
                 app:startIconTint="@color/purple_700">
