@@ -1,6 +1,5 @@
 package com.app.examschedulerapp
 
-import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
@@ -13,6 +12,8 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
+import com.app.examschedulerapp.data.DBConstants.ADMIN
 import com.app.examschedulerapp.data.DBConstants.STUDENT
 import com.app.examschedulerapp.data.DBConstants.USERS
 import com.app.examschedulerapp.data.student
@@ -48,13 +49,12 @@ class StudentRegisterFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         // Inflate the layout for this fragment
         binding = FragmentStudentRegisterBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
@@ -97,6 +97,7 @@ class StudentRegisterFragment : Fragment() {
         binding.etStudDob.setOnClickListener {
             val dob = DatePickerDialog(
                 requireContext(),
+                //date picking
                 { datePicker, mYear, mMonth, mDay ->
                     binding.etStudDob.setText("" + mDay + "/" + mMonth + "/" + mYear)
                 },
