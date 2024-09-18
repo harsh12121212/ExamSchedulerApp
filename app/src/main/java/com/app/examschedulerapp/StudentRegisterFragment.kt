@@ -26,8 +26,8 @@ const val INVALID_DATA = "Please enter valid data"
 
 class StudentRegisterFragment : Fragment() {
 
-    var citylist = arrayOf("Select City", "Banglore", "Hyderabad", "Chennai")
-    var techlist = arrayOf("Select Technology Choice", "Kotlin", "Java", "Dart")
+    private var citylist = arrayOf("Select City", "Banglore", "Hyderabad", "Chennai")
+    private var techlist = arrayOf("Select Technology Choice", "Kotlin", "Java", "Dart")
 
     private lateinit var binding: FragmentStudentRegisterBinding
     private lateinit var firebaseAuth: FirebaseAuth
@@ -114,7 +114,7 @@ class StudentRegisterFragment : Fragment() {
         binding.etStudExamdate.setOnClickListener {
             val exmdate = DatePickerDialog(
                 requireContext(),
-                DatePickerDialog.OnDateSetListener { datePicker, mYear, mMonth, mDay ->
+               { datePicker, mYear, mMonth, mDay ->
                     binding.etStudExamdate.setText("" + mDay + "/" + mMonth + "/" + mYear)
                 },
                 year,
