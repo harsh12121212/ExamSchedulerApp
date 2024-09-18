@@ -18,7 +18,7 @@ class FirstFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentFirstBinding.inflate(inflater, container, false)
         user = FirebaseAuth.getInstance()
@@ -40,7 +40,7 @@ class FirstFragment : Fragment() {
                     DialogInterface.OnClickListener { dialog, which ->
                         when (which) {
                             DialogInterface.BUTTON_POSITIVE -> {
-                                user.signOut();
+                                user.signOut()
                                 showSnackBar( "Successfully Logging out! ")
                                 findNavController().navigate(R.id.action_firstFragment_to_loginFragment)
                             }

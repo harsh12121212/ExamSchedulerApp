@@ -30,7 +30,7 @@ class AdminDashboardFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = AdminDashboardBinding.inflate(inflater, container, false)
         setHasOptionsMenu(true)
@@ -56,7 +56,7 @@ class AdminDashboardFragment : Fragment() {
                         p0.children.forEach { it1 ->
                             it1.getValue(examdata::class.java)?.let {
                                 list.add(it)
-                                Log.e("TAG", "onDataChange: " + it.toString())
+                                Log.e("TAG", "onDataChange: $it")
                             }
                             Log.e("TAG", "onDataChange: " + list.size)
                             userAdapter = UserAdapter(this@AdminDashboardFragment, list)

@@ -25,7 +25,7 @@ import com.google.firebase.database.FirebaseDatabase
 
 class AdminRegisterFragment : Fragment() {
 
-    var citylist = arrayOf("Select City", "Banglore", "Hyderabad", "Chennai")
+    private var citylist = arrayOf("Select City", "Banglore", "Hyderabad", "Chennai")
 
     private lateinit var binding: FragmentAdminRegisterBinding
     private lateinit var firebaseAuth: FirebaseAuth
@@ -41,7 +41,7 @@ class AdminRegisterFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentAdminRegisterBinding.inflate(inflater, container, false)
         return binding.root
@@ -145,23 +145,28 @@ class AdminRegisterFragment : Fragment() {
             }.addOnFailureListener { err ->
                 makeText(activity, "Error${err.message}", Toast.LENGTH_LONG).show()
             }
-            if (city == "Banglore") {
-                FirebaseDatabase.getInstance().getReference("CenterData").child("Banglore").child(centre)
-                    .setValue(centreData).addOnCompleteListener {
-                        Log.d("Centredata", "Data is Saved!!!")
-                    }
-            } else if (city == "Chennai") {
-                FirebaseDatabase.getInstance().getReference("CenterData").child("Chennai").child(centre)
-                    .setValue(centreData).addOnCompleteListener {
-                        Log.d("Centredata", "Data is Saved!!!")
-                    }
-            } else if (city == "Hyderabad") {
-                FirebaseDatabase.getInstance().getReference("CenterData").child("Hyderabad").child(centre)
-                    .setValue(centreData).addOnCompleteListener {
-                        Log.d("Centredata", "Data is Saved!!!")
-                    }
-            } else {
-                showSnackBar("ERROR!!!")
+            when (city) {
+                "Banglore" -> {
+                    FirebaseDatabase.getInstance().getReference("CenterData").child("Banglore").child(centre)
+                        .setValue(centreData).addOnCompleteListener {
+                            Log.d("CentreData", "Data is Saved!!!")
+                        }
+                }
+                "Chennai" -> {
+                    FirebaseDatabase.getInstance().getReference("CenterData").child("Chennai").child(centre)
+                        .setValue(centreData).addOnCompleteListener {
+                            Log.d("CentreData", "Data is Saved!!!")
+                        }
+                }
+                "Hyderabad" -> {
+                    FirebaseDatabase.getInstance().getReference("CenterData").child("Hyderabad").child(centre)
+                        .setValue(centreData).addOnCompleteListener {
+                            Log.d("CentreData", "Data is Saved!!!")
+                        }
+                }
+                else -> {
+                    showSnackBar("ERROR!!!")
+                }
             }
         }
     }
