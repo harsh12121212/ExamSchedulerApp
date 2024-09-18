@@ -44,7 +44,7 @@ class AdminDashboardFragment : Fragment() {
         return binding.root
     }
 
-    fun retrieveDataFromDatabase() {
+    private fun retrieveDataFromDatabase() {
 
         binding.progressbar.visibility = View.VISIBLE
         FirebaseDatabase.getInstance().getReference(DBConstants.APPLICATION)

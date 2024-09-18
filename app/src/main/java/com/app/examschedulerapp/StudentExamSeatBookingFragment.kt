@@ -30,12 +30,12 @@ class StudentExamSeatBookingFragment : Fragment() {
     var citylist = arrayOf("Select City", "Banglore", "Hyderabad", "Chennai")
 
     private lateinit var dbRef: DatabaseReference
-    private var stud_city = ""
-    private var stud_centre = ""
-    private var stud_slot = ""
-    private var stud_examdate = ""
+    private var studCity = ""
+    private var studCentre = ""
+    private var studSlot = ""
+    private var studExamdate = ""
     private var selectedCity: String = ""
-    private var countid = 0
+    private var countId = 0
     val banglorecentres: MutableList<String> = ArrayList()
     val hyderabadcentres: MutableList<String> = ArrayList()
     val chennaicentres: MutableList<String> = ArrayList()
@@ -175,8 +175,8 @@ class StudentExamSeatBookingFragment : Fragment() {
         dbRef.orderByChild("studentId").equalTo(LoggedInUser.student.uid)
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    countid = dataSnapshot.childrenCount.toInt()
-                    if (countid >= 2) {
+                    countId = dataSnapshot.childrenCount.toInt()
+                    if (countId >= 2) {
                         showSnackBar("You have already booked a seat twice.")
                     } else {
                         checkCityAvailability()
@@ -207,25 +207,25 @@ class StudentExamSeatBookingFragment : Fragment() {
     }
 
     private fun saveSeatData() {
-        stud_city = binding.spCity.selectedItem.toString().trim()
-        stud_centre = binding.spCenter.selectedItem.toString().trim()
-        stud_slot = binding.spSlot.selectedItem.toString().trim()
-        stud_examdate = binding.etStudExamdate.text.toString().trim()
+        studCity = binding.spCity.selectedItem.toString().trim()
+        studCentre = binding.spCenter.selectedItem.toString().trim()
+        studSlot = binding.spSlot.selectedItem.toString().trim()
+        studExamdate = binding.etStudExamdate.text.toString().trim()
 
-        if (stud_examdate.isEmpty()) {
+        if (studExamdate.isEmpty()) {
             showSnackBar("Enter date please")
         } else {
             binding.progressbar.visibility = View.VISIBLE
             dbRef.push().setValue(
                 examdata(
-                    stud_city,
-                    stud_centre,
-                    stud_slot,
-                    stud_examdate,
+                    studCity,
+                    studCentre,
+                    studSlot,
+                    studExamdate,
                     studentName = LoggedInUser.student.name.orEmpty(),
                     studentEmailId = LoggedInUser.student.email.orEmpty(),
                     studentId = LoggedInUser.student.uid.orEmpty(),
-                    countid = countid + 1
+                    countid = countId + 1
                 )
             ).addOnCompleteListener {
                 binding.progressbar.visibility = View.GONE
