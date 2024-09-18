@@ -102,13 +102,13 @@ class StudentRegisterFragment : Fragment() {
             val dob = DatePickerDialog(
                 requireContext(),
                 { datePicker, mYear, mMonth, mDay ->
-                    binding.etStudDob.setText("" + mDay + "/" + mMonth + "/" + mYear)
+                    binding.etStudDob.setText("$mDay/$mMonth/$mYear")
                 },
                 year,
                 month,
                 day
             )
-            dob.getDatePicker().setMaxDate(System.currentTimeMillis() - 1000)
+            dob.datePicker.maxDate = System.currentTimeMillis() - 1000
             //show dialogue
             dob.show()
         }
@@ -117,13 +117,13 @@ class StudentRegisterFragment : Fragment() {
             val exmdate = DatePickerDialog(
                 requireContext(),
                { datePicker, mYear, mMonth, mDay ->
-                    binding.etStudExamdate.setText("" + mDay + "/" + mMonth + "/" + mYear)
+                    binding.etStudExamdate.setText("$mDay/$mMonth/$mYear")
                 },
                 year,
                 month,
                 day
             )
-            exmdate.getDatePicker().setMinDate(System.currentTimeMillis() - 1000)
+            exmdate.datePicker.minDate = System.currentTimeMillis() - 1000
             //show dialogue
             exmdate.show()
         }
