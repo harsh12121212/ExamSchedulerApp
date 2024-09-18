@@ -27,8 +27,8 @@ const val INVALID_DATA = "Please enter valid data"
 
 class StudentRegisterFragment : Fragment() {
 
-    var citylist = arrayOf("Select City", "Banglore", "Hyderabad", "Chennai")
-    var techlist = arrayOf("Select Technology Choice", "Kotlin", "Java", "Dart")
+    private var citylist = arrayOf("Select City", "Banglore", "Hyderabad", "Chennai")
+    private var techlist = arrayOf("Select Technology Choice", "Kotlin", "Java", "Dart")
 
     private lateinit var binding: FragmentStudentRegisterBinding
     private lateinit var firebaseAuth: FirebaseAuth
@@ -56,13 +56,9 @@ class StudentRegisterFragment : Fragment() {
 
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         super.onViewCreated(view, savedInstanceState)
-
         firebaseAuth = FirebaseAuth.getInstance()
-
         dbRef = FirebaseDatabase.getInstance().getReference(USERS)
-
         //Location spinner
         val locarrayAdapter = activity?.let { ArrayAdapter(it, R.layout.spinnerlayout, citylist) }
         binding.etStudLoc.setSelection(0)
@@ -112,7 +108,7 @@ class StudentRegisterFragment : Fragment() {
         binding.etStudExamdate.setOnClickListener {
             val exmdate = DatePickerDialog(
                 requireContext(),
-                DatePickerDialog.OnDateSetListener { datePicker, mYear, mMonth, mDay ->
+                { datePicker, mYear, mMonth, mDay ->
                     binding.etStudExamdate.setText("" + mDay + "/" + mMonth + "/" + mYear)
                 },
                 year,
@@ -173,17 +169,17 @@ class StudentRegisterFragment : Fragment() {
 
     private fun firebaseCreateAccount(email: String, password: String) {
         firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
-                if (it.isSuccessful) {
-                    Toast.makeText(activity, "Account created successfully", Toast.LENGTH_LONG).show()
-                    saveData()
-                } else {
-                    Toast.makeText(
-                        activity,
-                        "Login failed due to ${it.exception.toString()}",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
+            if (it.isSuccessful) {
+                Toast.makeText(activity, "Account created successfully", Toast.LENGTH_LONG).show()
+                saveData()
+            } else {
+                Toast.makeText(
+                    activity,
+                    "Login failed due to ${it.exception.toString()}",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
+        }
     }
 
     private fun saveData() {
@@ -198,7 +194,7 @@ class StudentRegisterFragment : Fragment() {
             dbRef.child(it).setValue(studentData).addOnCompleteListener {
                 binding.progressbar.visibility = View.GONE
                 Toast.makeText(activity, "LoggedIn as $email", Toast.LENGTH_SHORT).show()
-                val i = Intent(activity, StudentMainActivity :: class.java )
+                val i = Intent(activity, StudentMainActivity::class.java)
                 startActivity(i)
             }.addOnFailureListener { err ->
                 Toast.makeText(activity, "Error${err.message}", Toast.LENGTH_LONG).show()
