@@ -62,7 +62,11 @@ class StudentRegisterFragment : Fragment() {
         dbRef = FirebaseDatabase.getInstance().getReference(USERS)
 
         //Location spinner
-        val localArrayAdapter = activity?.let { ArrayAdapter(it, R.layout.spinnerlayout, citylist) }
+        val localArrayAdapter = activity?.let {
+            ArrayAdapter(it,
+                R.layout.spinnerlayout,
+                citylist)
+        }
         binding.etStudLoc.setSelection(0)
         binding.etStudLoc.adapter = localArrayAdapter
         binding.etStudLoc.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -74,9 +78,9 @@ class StudentRegisterFragment : Fragment() {
         }
 
         //Technology choice spinner
-        val techarrayAdapter = activity?.let { ArrayAdapter(it, R.layout.spinnerlayout, techlist) }
+        val techArrayAdapter = activity?.let { ArrayAdapter(it, R.layout.spinnerlayout, techlist) }
         binding.etStudTechchoice.setSelection(0)
-        binding.etStudTechchoice.adapter = techarrayAdapter
+        binding.etStudTechchoice.adapter = techArrayAdapter
         binding.etStudTechchoice.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
