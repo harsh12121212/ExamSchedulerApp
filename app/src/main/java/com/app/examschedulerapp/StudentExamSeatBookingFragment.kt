@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.app.examschedulerapp.data.City
 import com.app.examschedulerapp.data.DBConstants
 import com.app.examschedulerapp.data.DBConstants.APPLICATION
 import com.app.examschedulerapp.data.LoggedInUser
@@ -171,7 +170,6 @@ class StudentExamSeatBookingFragment : Fragment() {
 
     private fun saveData() {
         dbRef = FirebaseDatabase.getInstance().getReference(DBConstants.APPLICATION)
-        val currentuser = FirebaseAuth.getInstance().currentUser?.uid
 
         dbRef = FirebaseDatabase.getInstance().getReference(APPLICATION)
         dbRef.orderByChild("studentId").equalTo(LoggedInUser.student.uid)
