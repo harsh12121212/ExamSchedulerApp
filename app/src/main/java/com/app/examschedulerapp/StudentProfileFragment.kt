@@ -1,6 +1,5 @@
 package com.app.examschedulerapp
 
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,16 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import com.app.examschedulerapp.data.student
 import com.app.examschedulerapp.databinding.FragmentStudentProfileBinding
-import com.app.examschedulerapp.databinding.FragmentStudentRegisterBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import com.google.firebase.database.R
 
 class StudentProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentStudentProfileBinding
-    lateinit var database: DatabaseReference
-    lateinit var auth: FirebaseAuth
+    var database: DatabaseReference? = null
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,7 +25,7 @@ class StudentProfileFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
 
         database = FirebaseDatabase.getInstance().reference
-        fun currentUserReference(): DatabaseReference = database.child("Users").child(auth.currentUser!!.uid)
+        fun currentUserReference(): DatabaseReference = database!!.child("Users").child(auth.currentUser!!.uid)
         currentUserReference().addValueEventListener(object: ValueEventListener{
 
             override fun onDataChange(dataSnapshot: DataSnapshot){
