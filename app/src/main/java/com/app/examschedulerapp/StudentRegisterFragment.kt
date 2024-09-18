@@ -1,6 +1,5 @@
 package com.app.examschedulerapp
 
-import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
@@ -54,7 +53,6 @@ class StudentRegisterFragment : Fragment() {
         return binding.root
     }
 
-    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
@@ -64,9 +62,9 @@ class StudentRegisterFragment : Fragment() {
         dbRef = FirebaseDatabase.getInstance().getReference(USERS)
 
         //Location spinner
-        val locarrayAdapter = activity?.let { ArrayAdapter(it, R.layout.spinnerlayout, citylist) }
+        val localArrayAdapter = activity?.let { ArrayAdapter(it, R.layout.spinnerlayout, citylist) }
         binding.etStudLoc.setSelection(0)
-        binding.etStudLoc.adapter = locarrayAdapter
+        binding.etStudLoc.adapter = localArrayAdapter
         binding.etStudLoc.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
             }
