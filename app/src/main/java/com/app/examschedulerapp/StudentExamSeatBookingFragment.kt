@@ -171,7 +171,6 @@ class StudentExamSeatBookingFragment : Fragment() {
 
     private fun saveData() {
         dbRef = FirebaseDatabase.getInstance().getReference(DBConstants.APPLICATION)
-        val currentuser = FirebaseAuth.getInstance().currentUser?.uid
 
         dbRef = FirebaseDatabase.getInstance().getReference(APPLICATION)
         dbRef.orderByChild("studentId").equalTo(LoggedInUser.student.uid)
