@@ -26,8 +26,8 @@ class StudentExamSeatBookingFragment : Fragment() {
     private lateinit var binding: StudentExamSeatBookingBinding
     private lateinit var user: FirebaseAuth
 
-    var slotlist = arrayOf("Select Slot", "Slot 1", "Slot 2")
-    var citylist = arrayOf("Select City", "Banglore", "Hyderabad", "Chennai")
+    private var slotlist = arrayOf("Select Slot", "Slot 1", "Slot 2")
+    private var citylist = arrayOf("Select City", "Banglore", "Hyderabad", "Chennai")
 
     private lateinit var dbRef: DatabaseReference
     private var studCity = ""
@@ -67,7 +67,7 @@ class StudentExamSeatBookingFragment : Fragment() {
                     binding.etStudExamdate.setText("$mDay/$mMonth/$mYear")
                 }, year, month, day
             )
-            exmdt.getDatePicker().setMinDate(System.currentTimeMillis() - 1000)
+            exmdt.datePicker.minDate = System.currentTimeMillis() - 1000
             //show dialogue
             exmdt.show()
         }
@@ -81,7 +81,7 @@ class StudentExamSeatBookingFragment : Fragment() {
             .addValueEventListener(object : ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {
                 for (ds in p0.children) {
-                    val key = ds.getKey()
+                    val key = ds.key
                     if (key != null) {
                         banglorecentres.add(key)
                     }
@@ -96,7 +96,7 @@ class StudentExamSeatBookingFragment : Fragment() {
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(p0: DataSnapshot) {
                     for (ds in p0.children) {
-                        val key = ds.getKey()
+                        val key = ds.key
                         if (key != null) {
                             hyderabadcentres.add(key)
                         }
@@ -111,7 +111,7 @@ class StudentExamSeatBookingFragment : Fragment() {
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(p0: DataSnapshot) {
                     for (ds in p0.children) {
-                        val key = ds.getKey()
+                        val key = ds.key
                         if (key != null) {
                             chennaicentres.add(key)
                         }

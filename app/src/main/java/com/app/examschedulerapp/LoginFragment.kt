@@ -70,7 +70,7 @@ class LoginFragment : Fragment() {
         }
     }
 
-    fun checkForUserType() {
+    private fun checkForUserType() {
         binding.progressbar.visibility = View.VISIBLE
         FirebaseAuth.getInstance().currentUser?.uid?.let {
             FirebaseDatabase.getInstance().getReference(
